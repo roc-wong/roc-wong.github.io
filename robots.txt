@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Allow: /blog/
+Allow: /about/
+Allow: /archives/
+Allow: /categories/
+Allow: /about/
+Allow: /tags/
+Allow: /page/
+
+Disallow: /vendors/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+
+Sitemap: https://roc-wong.github.io/sitemap.xml
+Sitemap: https://roc-wong.github.io/baidusitemap.xml
