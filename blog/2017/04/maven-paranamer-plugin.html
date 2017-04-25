@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="roc blog,roc的博客,fly high的博客,我要飞得更高" />
+  <meta name="keywords" content="maven paranamer plugin, 反射获取java方法参数名称" />
 
 
 
@@ -92,18 +92,16 @@
 
 
 
-<meta name="description" content="2017，blog搬家~">
+<meta name="description" content="使用maven paranamer plugin获取java方法中的参数名称">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://roc-wong.github.io/blog/2017/02/hello-world.html">
+<meta property="og:title" content="maven-paranamer-plugin">
+<meta property="og:url" content="https://roc-wong.github.io/blog/2017/04/maven-paranamer-plugin.html">
 <meta property="og:site_name" content="fly high">
-<meta property="og:description" content="2017，blog搬家~">
-<meta property="og:image" content="http://olml6iu96.bkt.clouddn.com/hexo/xiangxuehai-suzhou-min.jpg">
-<meta property="og:updated_time" content="2017-02-24T12:23:43.000Z">
+<meta property="og:description" content="使用maven paranamer plugin获取java方法中的参数名称">
+<meta property="og:updated_time" content="2017-04-25T14:06:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="2017，blog搬家~">
-<meta name="twitter:image" content="http://olml6iu96.bkt.clouddn.com/hexo/xiangxuehai-suzhou-min.jpg">
+<meta name="twitter:title" content="maven-paranamer-plugin">
+<meta name="twitter:description" content="使用maven paranamer plugin获取java方法中的参数名称">
 
 
 
@@ -131,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://roc-wong.github.io/blog/2017/02/hello-world.html"/>
+  <link rel="canonical" href="https://roc-wong.github.io/blog/2017/04/maven-paranamer-plugin.html"/>
 
 
 
 
 
-  <title> Hello World | fly high </title>
+  <title> maven-paranamer-plugin | fly high </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -327,7 +325,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/02/hello-world.html">
+  <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/04/maven-paranamer-plugin.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="roc">
@@ -351,7 +349,7 @@
             
             
               
-                Hello World
+                maven-paranamer-plugin
               
             
           </h2>
@@ -366,8 +364,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-18T00:19:47+08:00">
-                2017-02-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T21:16:55+08:00">
+                2017-04-25
               </time>
             
 
@@ -377,6 +375,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Maven/" itemprop="url" rel="index">
+                    <span itemprop="name">Maven</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -385,8 +405,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/blog/2017/02/hello-world.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="blog/2017/02/hello-world.html" itemprop="commentCount"></span>
+                <a href="/blog/2017/04/maven-paranamer-plugin.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="blog/2017/04/maven-paranamer-plugin.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -394,7 +414,7 @@
 
           
           
-             <span id="/blog/2017/02/hello-world.html" class="leancloud_visitors" data-flag-title="Hello World">
+             <span id="/blog/2017/04/maven-paranamer-plugin.html" class="leancloud_visitors" data-flag-title="maven-paranamer-plugin">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -411,6 +431,10 @@
           
 
           
+              <div class="post-description">
+                  使用maven paranamer plugin获取java方法中的参数名称
+              </div>
+          
 
         </div>
       </header>
@@ -423,10 +447,24 @@
       
 
       
-        <p>2017，blog搬家~</p>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=29750099&auto=0&height=66"></iframe>
-
-<p><img src="http://olml6iu96.bkt.clouddn.com/hexo/xiangxuehai-suzhou-min.jpg" alt="苏州香雪海"></p>
+        <h2 id="What-is-it"><a href="#What-is-it" class="headerlink" title="What is it?"></a>What is it?</h2><p>It is a library that allows the parameter names of non-private methods and constructors to be accessed at runtime. Normally this information is dropped by the compiler. In effect, methods like doSometing(mypkg.Person toMe) currently look like doSomething(mypackage.Person ???) to people using Java’s reflection to inspect methods.</p>
+<p>项目主页：<a href="https://github.com/paul-hammant/paranamer" target="_blank" rel="external">https://github.com/paul-hammant/paranamer</a></p>
+<a id="more"></a>
+<h2 id="如何在运行时获取java方法参数名称"><a href="#如何在运行时获取java方法参数名称" class="headerlink" title="如何在运行时获取java方法参数名称?"></a>如何在运行时获取java方法参数名称?</h2><ol>
+<li>由于jdk的反射方式，未提供获取参数名的方法</li>
+<li>Java的字节码文件默认不存储参数名称。在使用javac编译时，如果开启-g:{vars}选项，可以增加Local variable debugging information。对java方法，参数实际是按照局部变量来存储的，所以可以获取参数名称；但对于java接口中的方法声明，这种方法就无法获取参数名称。</li>
+</ol>
+<p>Paranamer专门用来解决获取参数名的问题。其原理是在编译阶段，修改.class文件，在类或接口的字节码文件中增加一个字符串常量，这个常量保存了所有的方法声明信息，包括方法名、参数类型、参数名称。这样在运行时，class loader加载类文件以后，使用Paranamer的api去读取这个字符串，就可以获取参数名称。加上java反射，实际上可以把源代码重现出来。</p>
+<p>这个工具可以用来实现代码生成器。其缺点在于，它需要修改源项目的build步骤。据其项目主页说明，Java 8已经加入存储参数名称的功能。</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// MySomethingOrOther.java**</span></div><div class="line"><span class="function"><span class="keyword">Method</span> <span class="title">method</span> = <span class="title">Foo</span>.<span class="title">class</span>.<span class="title">getMethod</span><span class="params">(...)</span>;</span></div><div class="line"></div><div class="line">Paranamer paranamer = <span class="keyword">new</span> CachingParanamer();</div><div class="line"></div><div class="line">String[] parameterNames = paranamer.lookupParameterNames(<span class="function"><span class="keyword">method</span>) // <span class="title">throws</span> <span class="title">ParameterNamesNotFoundException</span> <span class="title">if</span> <span class="title">not</span> <span class="title">found</span></span></div><div class="line"></div><div class="line">// <span class="title">or</span>:</div><div class="line"></div><div class="line">parameterNames = paranamer.lookupParameterNames(<span class="function"><span class="keyword">method</span>, <span class="title">false</span>) // <span class="title">will</span> <span class="title">return</span> <span class="title">null</span> <span class="title">if</span> <span class="title">not</span> <span class="title">found</span></span></div></pre></td></tr></table></figure>
+<h2 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h2><p>需求：通过java的反射获取method，使用paranamer获取method的参数名称。<br>诡异之处：使用Paranamer paranamer = new CachingParanamer()l.ookupParameterNames(method);无法正常获取方法的变量名称。</p>
+<p>一个简单的java类，<strong>请注意使用了import .* 的方式</strong></p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">package hbec.commons.services.stock.controller;</div><div class="line"></div><div class="line"><span class="keyword">import</span> hbec.commons.domain.stock.condition.dto.*;</div><div class="line"><span class="keyword">import</span> hbec.commons.domain.stock.vo.*;</div><div class="line"><span class="keyword">import</span> hbec.exception.portal.HbecPortalStockBizException;</div><div class="line"><span class="keyword">import</span> hbec.platform.commons.annotations.HbecService;</div><div class="line"><span class="keyword">import</span> hbec.platform.commons.exceptions.HbecDbServiceException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.validation.constraints.NotNull;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line">/**</div><div class="line"> * <span class="meta">@author</span> roc Jul <span class="number">4</span>, <span class="number">2016</span></div><div class="line"> *</div><div class="line"> */</div><div class="line">public interface IConditionTradeController &#123;</div><div class="line"></div><div class="line">	ConditionSaveResult save(<span class="built_in">Integer</span> userId, <span class="meta">@NotNull</span> ConditionTradeDto conditionTradeDto) ;</div><div class="line"></div><div class="line">	ConditionSaveResult saveTurnPoint(<span class="built_in">Integer</span> userId, <span class="meta">@NotNull</span> ConditionTradeTurnPointDto conditionTradeDto) ;</div><div class="line"></div><div class="line">	ConditionSaveResult saveBatching(<span class="built_in">Integer</span> userId, <span class="meta">@NotNull</span> ConditionTradeBatchingDto conditionTradeDto) ;</div><div class="line"></div><div class="line">	ConditionSaveResult saveGrid(<span class="built_in">Integer</span> userId, <span class="meta">@NotNull</span> GridTradeDto conditionTradeDto) ;</div><div class="line"></div><div class="line">	ConditionSaveResult saveProfit(<span class="built_in">Integer</span> userId, ProfitConditionTradeDto profitConditionTradeDto) ;</div><div class="line"></div><div class="line">	<span class="built_in">Integer</span> delete(<span class="built_in">Integer</span> userId, <span class="meta">@NotNull</span> <span class="built_in">Integer</span> warnId) ;</div><div class="line"></div><div class="line">	<span class="built_in">Integer</span> pause(<span class="built_in">Integer</span> userId, <span class="meta">@NotNull</span> <span class="built_in">Integer</span> warnId) ;</div><div class="line"></div><div class="line">	<span class="built_in">Integer</span> resume(<span class="built_in">Integer</span> userId, <span class="meta">@NotNull</span> <span class="built_in">Integer</span> warnId) ;</div><div class="line"></div><div class="line">	PageVo&lt;ConditionTradeMarketVO&gt; findMonitorPageWithMarket(<span class="built_in">Integer</span> userId, <span class="built_in">String</span> code, ConditionPageVo&lt;ConditionTradeMarketVO&gt; pager) ;</div><div class="line"></div><div class="line">	ConditionTradeDetailVo detail(<span class="meta">@NotNull</span> <span class="built_in">Integer</span> userId, <span class="meta">@NotNull</span> <span class="built_in">Integer</span> warnId) ;</div><div class="line"></div><div class="line">	PageVo&lt;ConditionTradeHistoryVo&gt; queryHistory(<span class="meta">@NotNull</span> <span class="built_in">Integer</span> userId, <span class="built_in">String</span> stockCode, PageVo&lt;ConditionTradeHistoryVo&gt; pager) ;</div><div class="line"></div><div class="line">	ConditionTradeDetailVo detailWithMarket(<span class="built_in">Integer</span> userId, <span class="built_in">Integer</span> warnId) ;</div><div class="line"></div><div class="line">	List&lt;EntrustVO&gt; queryEntrustRecord(<span class="built_in">Integer</span> userId, <span class="built_in">Integer</span> warnId) ;</div><div class="line"></div><div class="line">	List&lt;ConditionInfoVO&gt; queryEntrustResult(<span class="built_in">Integer</span> userId, <span class="built_in">String</span> stockCode, <span class="built_in">String</span> historyIds) ;</div><div class="line"></div><div class="line">	PageCursorVo&lt;ConditionInfoVO&gt; queryEntrustedResult(<span class="built_in">Integer</span> userId, <span class="built_in">String</span> stockCode, <span class="built_in">Integer</span> warnId, <span class="built_in">Integer</span> cursor, <span class="built_in">Integer</span> pageSize) ;</div><div class="line"></div><div class="line">	CountTradeHistoryVo countEntrustedResult(<span class="built_in">Integer</span> userId, <span class="built_in">String</span> stockCode, <span class="built_in">Integer</span> warnId) ;</div><div class="line"></div><div class="line">	int markAsRead(<span class="built_in">Integer</span> userId, <span class="built_in">String</span> stockCode, <span class="built_in">Integer</span> warnId) ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用paranamer-maven-plugin编译之后如下：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public static final String __PARANAMER_DATA = <span class="string">"countConditionNum java.lang.Integer userId <span class="subst">\n</span>countEntrustedResult java.lang.Integer,java.lang.String,java.lang.Integer userId,stockCode,warnId <span class="subst">\n</span>delete java.lang.Integer,java.lang.Integer userId,warnId <span class="subst">\n</span>detail java.lang.Integer,java.lang.Integer userId,warnId <span class="subst">\n</span>detailWithMarket java.lang.Integer,java.lang.Integer userId,warnId <span class="subst">\n</span>entrustManual java.lang.Integer,java.lang.Integer,EntrustDto userId,warnId,entrustDto <span class="subst">\n</span>findCurrentEntrust java.lang.Integer,java.lang.String,PageVo userId,stockCode,pager <span class="subst">\n</span>findMonitorPageWithMarket java.lang.Integer,java.lang.String,ConditionPageVo userId,code,pager <span class="subst">\n</span>findPage java.lang.Integer,java.lang.String,ConditionPageVo userId,strategyState,pager <span class="subst">\n</span>findTriggeredPage java.lang.Integer,java.lang.Integer,PageVo userId,handled,pager <span class="subst">\n</span>markAsRead java.lang.Integer,java.lang.String,java.lang.Integer userId,stockCode,warnId <span class="subst">\n</span>pause java.lang.Integer,java.lang.Integer userId,warnId <span class="subst">\n</span>queryEntrustRecord java.lang.Integer,java.lang.Integer userId,warnId <span class="subst">\n</span>queryEntrustResult java.lang.Integer,java.lang.String,java.lang.String userId,stockCode,historyIds <span class="subst">\n</span>queryEntrustedResult java.lang.Integer,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Integer userId,stockCode,warnId,cursor,pageSize <span class="subst">\n</span>queryHistory java.lang.Integer,java.lang.String,PageVo userId,stockCode,pager <span class="subst">\n</span>resume java.lang.Integer,java.lang.Integer userId,warnId <span class="subst">\n</span>save java.lang.Integer,ConditionTradeDto userId,conditionTradeDto <span class="subst">\n</span>saveBatching java.lang.Integer,ConditionTradeBatchingDto userId,conditionTradeDto <span class="subst">\n</span>saveGrid java.lang.Integer,GridTradeDto userId,conditionTradeDto <span class="subst">\n</span>saveNewShares java.lang.Integer,NewSharesDto userId,newSharesDto <span class="subst">\n</span>saveProfit java.lang.Integer,ProfitConditionTradeDto userId,profitConditionTradeDto <span class="subst">\n</span>saveTurnPoint java.lang.Integer,ConditionTradeTurnPointDto userId,conditionTradeDto <span class="subst">\n</span>saveVipBatching java.lang.Integer,ConditionTradeBatchingDto userId,conditionTradeDto <span class="subst">\n</span>"</span>;</div></pre></td></tr></table></figure>
+<p>仔细观察可以发现生成的__PARANAMER_DATA常量中，并未包含对象类型变量的具体package路径，此时使用new CachingParanamer()l.ookupParameterNames(method)无法正常获取方法的变量名称。</p>
+<p>去掉import .* 的方式之后，再次编译，常量中包含了对象类型变量具体的package路径，此时可成功获取方法的变量名称。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public static final String __PARANAMER_DATA = <span class="string">"countConditionNum java.lang.Integer userId <span class="subst">\n</span>countEntrustedResult java.lang.Integer,java.lang.String,java.lang.Integer userId,stockCode,warnId <span class="subst">\n</span>delete java.lang.Integer,java.lang.Integer userId,warnId <span class="subst">\n</span>detail java.lang.Integer,java.lang.Integer userId,warnId <span class="subst">\n</span>detailWithMarket java.lang.Integer,java.lang.Integer userId,warnId <span class="subst">\n</span>entrustManual java.lang.Integer,java.lang.Integer,hbec.commons.domain.stock.dto.EntrustDto userId,warnId,entrustDto <span class="subst">\n</span>findCurrentEntrust java.lang.Integer,java.lang.String,hbec.commons.domain.stock.vo.PageVo userId,stockCode,pager <span class="subst">\n</span>findMonitorPageWithMarket java.lang.Integer,java.lang.String,hbec.commons.domain.stock.vo.ConditionPageVo userId,code,pager <span class="subst">\n</span>findPage java.lang.Integer,java.lang.String,hbec.commons.domain.stock.vo.ConditionPageVo userId,strategyState,pager <span class="subst">\n</span>findTriggeredPage java.lang.Integer,java.lang.Integer,hbec.commons.domain.stock.vo.PageVo userId,handled,pager <span class="subst">\n</span>markAsRead java.lang.Integer,java.lang.String,java.lang.Integer userId,stockCode,warnId <span class="subst">\n</span>pause java.lang.Integer,java.lang.Integer userId,warnId <span class="subst">\n</span>queryEntrustRecord java.lang.Integer,java.lang.Integer userId,warnId <span class="subst">\n</span>queryEntrustResult java.lang.Integer,java.lang.String,java.lang.String userId,stockCode,historyIds <span class="subst">\n</span>queryEntrustedResult java.lang.Integer,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Integer userId,stockCode,warnId,cursor,pageSize <span class="subst">\n</span>queryHistory java.lang.Integer,java.lang.String,hbec.commons.domain.stock.vo.PageVo userId,stockCode,pager <span class="subst">\n</span>resume java.lang.Integer,java.lang.Integer userId,warnId <span class="subst">\n</span>save java.lang.Integer,hbec.commons.domain.stock.dto.ConditionTradeDto userId,conditionTradeDto <span class="subst">\n</span>saveBatching java.lang.Integer,hbec.commons.domain.stock.dto.ConditionTradeBatchingDto userId,conditionTradeDto <span class="subst">\n</span>saveGrid java.lang.Integer,hbec.commons.domain.stock.dto.GridTradeDto userId,conditionTradeDto <span class="subst">\n</span>saveNewShares java.lang.Integer,hbec.commons.domain.stock.dto.NewSharesDto userId,newSharesDto <span class="subst">\n</span>saveProfit java.lang.Integer,hbec.commons.domain.stock.condition.dto.ProfitConditionTradeDto userId,profitConditionTradeDto <span class="subst">\n</span>saveTurnPoint java.lang.Integer,hbec.commons.domain.stock.dto.ConditionTradeTurnPointDto userId,conditionTradeDto <span class="subst">\n</span>saveVipBatching java.lang.Integer,hbec.commons.domain.stock.dto.ConditionTradeBatchingDto userId,conditionTradeDto <span class="subst">\n</span>"</span>;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -469,6 +507,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Maven/" rel="tag"># Maven</a>
+          
+            <a href="/tags/maven-paranamer-plugin/" rel="tag"># maven paranamer plugin</a>
+          
+        </div>
+      
 
       
         
@@ -478,14 +524,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/blog/2017/03/Shell脚本调试技术.html" rel="next" title="Shell脚本调试技术">
+                <i class="fa fa-chevron-left"></i> Shell脚本调试技术
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2017/02/hexo-mouse-follow-up-special-effects.html" rel="prev" title="hexo mouse follow up special effects">
-                hexo mouse follow up special effects <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2017/04/maven-war-plugin.html" rel="prev" title="maven-war-plugin">
+                maven-war-plugin <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -518,8 +568,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="blog/2017/02/hello-world.html"
-           data-title="Hello World" data-url="https://roc-wong.github.io/blog/2017/02/hello-world.html">
+      <div class="ds-thread" data-thread-key="blog/2017/04/maven-paranamer-plugin.html"
+           data-title="maven-paranamer-plugin" data-url="https://roc-wong.github.io/blog/2017/04/maven-paranamer-plugin.html">
       </div>
     
   </div>
@@ -543,8 +593,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png"
@@ -640,6 +699,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-it"><span class="nav-number">1.</span> <span class="nav-text">What is it?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在运行时获取java方法参数名称"><span class="nav-number">2.</span> <span class="nav-text">如何在运行时获取java方法参数名称?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#踩过的坑"><span class="nav-number">3.</span> <span class="nav-text">踩过的坑</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
