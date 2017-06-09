@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://roc-wong.github.io/"/>
-  <updated>2017-04-25T15:35:41.000Z</updated>
+  <updated>2017-06-09T12:24:04.000Z</updated>
   <id>https://roc-wong.github.io/</id>
   
   <author>
@@ -14,6 +14,51 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>腹肌锻炼</title>
+    <link href="https://roc-wong.github.io/blog/2017/06/abs-exercises.html"/>
+    <id>https://roc-wong.github.io/blog/2017/06/abs-exercises.html</id>
+    <published>2017-06-09T11:54:08.000Z</published>
+    <updated>2017-06-09T12:24:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>健身是一个循序渐进的过程，不要想一天就成为你心中的那个偶像，需要持久坚持和努力。腹肌训练更是如此，想要减脂塑形、梦想拥有完美身材的男女，不妨一起来试练下面一组动作，提示各位要按照顺序完成训练量。</p>
+<a id="more"></a>
+<p>动作一、60个开合跳，连续进行；</p>
+<p><img src="http://p3.pstatp.com/large/52e0008ccb2085c2c0b" alt=""></p>
+<p>动作二、40个仰卧交替收膝，动作要到位；</p>
+<p><img src="http://p3.pstatp.com/large/52e0008ccb0f1ac2a38" alt=""></p>
+<p>动作三、10~15个仰卧起坐；</p>
+<p><img src="http://p3.pstatp.com/large/52d0008cd209da95902" alt=""></p>
+<p>动作四、看到Z没有，20个凳(Z)上反屈伸；</p>
+<p><img src="http://p1.pstatp.com/large/52e0008ccb14d565f3c" alt=""></p>
+<p>动作五、按照下方示范动作，左右各20个侧步蹲；</p>
+<p><img src="http://p1.pstatp.com/large/5b100007798d8ceeb44" alt=""></p>
+<p>动作六、同动作三，俯卧撑10~15个；</p>
+<p><img src="http://p3.pstatp.com/large/5b100007799ddf0815e" alt=""></p>
+<p>动作七、有没有经常见到这个动作呢？仰卧举腿20个；</p>
+<p><img src="http://p9.pstatp.com/large/5b10000779a9f79ffda" alt=""></p>
+<p>动作八、30个高抬腿走起 ；</p>
+<p><img src="http://p3.pstatp.com/large/52d0008cd211e4c9755" alt=""></p>
+<p>动作九、深蹲跳 10个就够了；</p>
+<p><img src="http://p3.pstatp.com/large/5b10000779b4ab8800a" alt=""></p>
+<p>动作十、平板支撑60秒！哦，一分钟 ；</p>
+<p><img src="http://p1.pstatp.com/large/52c0008ca6fd187a7c4" alt=""></p>
+<p>附带视频一个：<a href="http://www.toutiao.com/i6263916207875817985/" target="_blank" rel="external">click me</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;健身是一个循序渐进的过程，不要想一天就成为你心中的那个偶像，需要持久坚持和努力。腹肌训练更是如此，想要减脂塑形、梦想拥有完美身材的男女，不妨一起来试练下面一组动作，提示各位要按照顺序完成训练量。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="健身" scheme="https://roc-wong.github.io/categories/%E5%81%A5%E8%BA%AB/"/>
+    
+    
+      <category term="健身 腹肌" scheme="https://roc-wong.github.io/tags/%E5%81%A5%E8%BA%AB-%E8%85%B9%E8%82%8C/"/>
+    
+  </entry>
   
   <entry>
     <title>maven-war-plugin</title>
@@ -2572,43 +2617,6 @@ _   底线
     
     
       <category term="RabbitMQ" scheme="https://roc-wong.github.io/tags/RabbitMQ/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hexo mouse follow up special effects</title>
-    <link href="https://roc-wong.github.io/blog/2017/02/hexo-mouse-follow-up-special-effects.html"/>
-    <id>https://roc-wong.github.io/blog/2017/02/hexo-mouse-follow-up-special-effects.html</id>
-    <published>2017-02-20T15:00:57.000Z</published>
-    <updated>2017-03-10T15:18:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>一个基于canvas绘制的网页背景效果。</p>
-<p>canvas-nest.js is a nest backgroud of website draw on canvas use javascript, do not depend on jQuery.</p>
-<a id="more"></a>
-<p>WordPress插件: <a href="https://github.com/aTool-org/canvas-nest-for-wp" target="_blank" rel="external">https://github.com/aTool-org/canvas-nest-for-wp</a><br>github: <a href="https://github.com/hustcc/canvas-nest.js" target="_blank" rel="external">https://github.com/hustcc/canvas-nest.js</a></p>
-<p>效果如图</p>
-<p><img src="http://olml6iu96.bkt.clouddn.com/hexo/canvas-nest.png" alt="canvas nest"></p>
-<p><strong>使用方法</strong></p>
-<p>打开next/layout/_layout.swig 文件，</p>
-<p>将下面的代码插入到 <body> 和 </body> 之间.</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>强烈建议在 &lt;/body&gt;标签上方. 例如下面的代码结构:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    ...</div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    ...</div><div class="line">    ...</div><div class="line">    ...</div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>请注意不要将代码置于&lt;head&gt; &lt;/head&gt;里面.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      canvas-nest.js基于canvas绘制的网页背景效果
-    
-    </summary>
-    
-      <category term="Hexo" scheme="https://roc-wong.github.io/categories/Hexo/"/>
-    
-    
-      <category term="Hexo" scheme="https://roc-wong.github.io/tags/Hexo/"/>
-    
-      <category term="Github" scheme="https://roc-wong.github.io/tags/Github/"/>
     
   </entry>
   
