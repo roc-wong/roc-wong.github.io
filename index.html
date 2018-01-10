@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,16 +10,30 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<meta name="baidu-site-verification" content="OlKF0SsMSx" />
 
 
   <meta name="google-site-verification" content="lQaW1XXg0qmIeHa2Or2-cQGRIUAZOA7CobMcsBYoPRc" />
+
 
 
 
@@ -40,44 +54,35 @@
 
 
 
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
 
 
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="roc blog,roc的博客,fly high的博客,我要飞得更高" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
 
 
 
+
+
+  <meta name="keywords" content="roc's blog,roc的博客,roc wong的博客,fly high的博客" />
+
+
+
+
+  
 
 
   <link rel="alternate" href="/atom.xml" title="fly high" type="application/atom+xml" />
@@ -85,22 +90,30 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
 
 
+<meta name="description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
 
-
-
-
-<meta name="description" content="roc博客">
+个人简介
+目前就职于上海，华宝证券，从事java开发。
+喜欢运动，篮球、羽毛球、夜跑爱好">
 <meta property="og:type" content="website">
-<meta property="og:title" content="fly high">
-<meta property="og:url" content="https://roc-wong.github.io/index.html">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://roc-wong.github.io/about/index.html">
 <meta property="og:site_name" content="fly high">
-<meta property="og:description" content="roc博客">
+<meta property="og:description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
+
+个人简介
+目前就职于上海，华宝证券，从事java开发。
+喜欢运动，篮球、羽毛球、夜跑爱好">
+<meta property="og:updated_time" content="2017-03-11T16:09:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fly high">
-<meta name="twitter:description" content="roc博客">
+<meta name="twitter:title" content="about">
+<meta name="twitter:description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
+
+个人简介
+目前就职于上海，华宝证券，从事java开发。
+喜欢运动，篮球、羽毛球、夜跑爱好">
 
 
 
@@ -109,9 +122,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    fastclick: true,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -128,17 +145,13 @@
 
 
 
-  <link rel="canonical" href="https://roc-wong.github.io/"/>
+  <link rel="canonical" href="https://roc-wong.github.io/about/"/>
 
 
 
 
 
-  <title> fly high - roc博客 </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>fly high</title>
   
 
 
@@ -167,24 +180,23 @@
 
 
 
+</head>
 
-
-
-
-
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
+    
+
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+      <div class="header-inner"> <div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
@@ -196,7 +208,7 @@
       </a>
     </div>
       
-        <h1 class="site-subtitle" itemprop="description">我要飞得更高-九万里风鹏正举</h1>
+        <p class="site-subtitle">我要飞得更高-九万里风鹏正举</p>
       
   </div>
 
@@ -221,47 +233,109 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              首页
             
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
+
           </a>
         </li>
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            关于
+
+            
+              关于
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+
+            
+              标签
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+
+            
+              分类
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+
+            
+              归档
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+
+            
+              日程表
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+
+            
+              站点地图
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+
+            
+              公益404
+            
+
           </a>
         </li>
       
@@ -284,7 +358,7 @@
   
     <div class="site-search">
       
-  <div class="popup local-search-popup">
+  <div class="popup search-popup local-search-popup">
   <div class="local-search-header clearfix">
     <span class="search-icon">
       <i class="fa fa-search"></i>
@@ -293,7 +367,9 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -325,38 +401,33 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/08/NotePad-regular-expression.html">
+  
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="roc">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
-  </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/08/NotePad-regular-expression.html">
 
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="fly high">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="fly high" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/08/NotePad-regular-expression.html" itemprop="url">
-                  Notepad++-regular-expression
-                </a>
-              
-            
-          </h2>
+                <a class="post-title-link" href="/blog/2017/08/NotePad-regular-expression.html" itemprop="url">Notepad++-regular-expression</a></h1>
         
 
         <div class="post-meta">
@@ -368,9 +439,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-04T20:26:41+08:00">
-                2017-08-04
-              </time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-04T20:26:41+08:00">2017-08-04</time>
             
 
             
@@ -404,16 +473,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2017/08/NotePad-regular-expression.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="blog/2017/08/NotePad-regular-expression.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -424,7 +483,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数 </span>
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -433,48 +492,16 @@
           
 
           
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">字数统计</span>
-                  
-                    <span title="字数统计" }}">
-                      1,344 字
-                    </span>
-              
 
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">阅读时长</span>
-                  
-                    <span title="阅读时长" }}">
-                      5 分钟
-                    </span>
-              
-            </div>
-          
-
-          
-              <div class="post-description">
-                  Notepad++ regular expression 正则表达式
-              </div>
           
 
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -482,14 +509,10 @@
 
       
         
-          <blockquote>
-<p>低头前行了这么久，我只是在找一个抬头的机会</p>
-</blockquote>
-<p>Notepad++ 正则表达式用法归档</p>
-<p>注意: 不支持多行表达式 (involving \n, \r, etc).</p>
+          Notepad++ regular expression 正则表达式
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/08/NotePad-regular-expression.html#more" rel="contents">
+            <a class="btn" href="/blog/2017/08/NotePad-regular-expression.html">
               阅读全文 &raquo;
             </a>
           </div>
@@ -497,15 +520,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
+    
 
     <footer class="post-footer">
       
@@ -519,6 +542,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -531,38 +558,33 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/08/svn-sqliteS10-disk-IO-error.html">
+  
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="roc">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
-  </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/08/svn-sqliteS10-disk-IO-error.html">
 
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="fly high">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="fly high" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/08/svn-sqliteS10-disk-IO-error.html" itemprop="url">
-                  svn-sqliteS10-disk-IO-error
-                </a>
-              
-            
-          </h2>
+                <a class="post-title-link" href="/blog/2017/08/svn-sqliteS10-disk-IO-error.html" itemprop="url">svn-sqliteS10-disk-IO-error</a></h1>
         
 
         <div class="post-meta">
@@ -574,9 +596,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-04T20:23:50+08:00">
-                2017-08-04
-              </time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-04T20:23:50+08:00">2017-08-04</time>
             
 
             
@@ -610,16 +630,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2017/08/svn-sqliteS10-disk-IO-error.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="blog/2017/08/svn-sqliteS10-disk-IO-error.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -630,7 +640,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数 </span>
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -639,48 +649,16 @@
           
 
           
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">字数统计</span>
-                  
-                    <span title="字数统计" }}">
-                      203 字
-                    </span>
-              
 
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">阅读时长</span>
-                  
-                    <span title="阅读时长" }}">
-                      1 分钟
-                    </span>
-              
-            </div>
-          
-
-          
-              <div class="post-description">
-                  svn E200030 sqlite[S10] disk I/O error
-              </div>
           
 
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -688,13 +666,10 @@
 
       
         
-          <blockquote>
-<p>低头前行，莫问前程。</p>
-</blockquote>
-<p>在使用svn提交项目时，遇到报错：svn: E200030: sqlite[S10]: disk I/O error</p>
+          svn E200030 sqlite[S10] disk I/O error
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/08/svn-sqliteS10-disk-IO-error.html#more" rel="contents">
+            <a class="btn" href="/blog/2017/08/svn-sqliteS10-disk-IO-error.html">
               阅读全文 &raquo;
             </a>
           </div>
@@ -702,15 +677,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
+    
 
     <footer class="post-footer">
       
@@ -724,6 +699,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -736,38 +715,33 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/07/deadlock-found-when-trying-to-get-lock.html">
+  
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="roc">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
-  </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/07/deadlock-found-when-trying-to-get-lock.html">
 
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="fly high">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="fly high" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/07/deadlock-found-when-trying-to-get-lock.html" itemprop="url">
-                  deadlock-found-when-trying-to-get-lock
-                </a>
-              
-            
-          </h2>
+                <a class="post-title-link" href="/blog/2017/07/deadlock-found-when-trying-to-get-lock.html" itemprop="url">deadlock-found-when-trying-to-get-lock</a></h1>
         
 
         <div class="post-meta">
@@ -779,9 +753,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-24T12:33:22+08:00">
-                2017-07-24
-              </time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-24T12:33:22+08:00">2017-07-24</time>
             
 
             
@@ -815,16 +787,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2017/07/deadlock-found-when-trying-to-get-lock.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="blog/2017/07/deadlock-found-when-trying-to-get-lock.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -835,7 +797,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数 </span>
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -844,48 +806,16 @@
           
 
           
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">字数统计</span>
-                  
-                    <span title="字数统计" }}">
-                      4,394 字
-                    </span>
-              
 
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">阅读时长</span>
-                  
-                    <span title="阅读时长" }}">
-                      25 分钟
-                    </span>
-              
-            </div>
-          
-
-          
-              <div class="post-description">
-                  Deadlock found when trying to get lock; try restarting transaction
-              </div>
           
 
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -893,12 +823,10 @@
 
       
         
-          <p>mysql锁机制分为表级锁和行级锁：</p>
-<p>共享锁又称为读锁，简称S锁，顾名思义，共享锁就是多个事务对于同一数据可以共享一把锁，都能访问到数据，但是只能读不能修改。</p>
-<p>排他锁又称为写锁，简称X锁，顾名思义，排他锁就是不能与其他所并存，如一个事务获取了一个数据行的排他锁，其他事务就不能再获取该行的其他锁，包括共享锁和排他锁，但是获取排他锁的事务是可以对数据就行读取和修改。</p>
+          Deadlock found when trying to get lock; try restarting transaction
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/07/deadlock-found-when-trying-to-get-lock.html#more" rel="contents">
+            <a class="btn" href="/blog/2017/07/deadlock-found-when-trying-to-get-lock.html">
               阅读全文 &raquo;
             </a>
           </div>
@@ -906,15 +834,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
+    
 
     <footer class="post-footer">
       
@@ -928,6 +856,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -940,38 +872,33 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/07/micro-services.html">
+  
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="roc">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
-  </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/07/micro-services.html">
 
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="fly high">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="fly high" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/07/micro-services.html" itemprop="url">
-                  micro-services
-                </a>
-              
-            
-          </h2>
+                <a class="post-title-link" href="/blog/2017/07/micro-services.html" itemprop="url">micro-services</a></h1>
         
 
         <div class="post-meta">
@@ -983,9 +910,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-21T20:11:00+08:00">
-                2017-07-21
-              </time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-21T20:11:00+08:00">2017-07-21</time>
             
 
             
@@ -1019,16 +944,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2017/07/micro-services.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="blog/2017/07/micro-services.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1039,7 +954,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数 </span>
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -1048,48 +963,16 @@
           
 
           
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">字数统计</span>
-                  
-                    <span title="字数统计" }}">
-                      5,317 字
-                    </span>
-              
 
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">阅读时长</span>
-                  
-                    <span title="阅读时长" }}">
-                      18 分钟
-                    </span>
-              
-            </div>
-          
-
-          
-              <div class="post-description">
-                  微服务的目的是有效的拆分应用，实现敏捷开发和部署 。
-              </div>
           
 
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1097,10 +980,10 @@
 
       
         
-          <p>微服务是一种架构风格，一个大型复杂软件应用由一个或多个微服务组成。系统中的各个微服务可被独立部署，各个微服务之间是松耦合的。每个微服务仅关注于完成一件任务并很好地完成该任务。在所有情况下，每个任务代表着一个小的业务能力。</p>
+          微服务的目的是有效的拆分应用，实现敏捷开发和部署 。
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/07/micro-services.html#more" rel="contents">
+            <a class="btn" href="/blog/2017/07/micro-services.html">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1108,15 +991,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
+    
 
     <footer class="post-footer">
       
@@ -1130,6 +1013,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1142,38 +1029,33 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/06/abs-exercises.html">
+  
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="roc">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
-  </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/06/abs-exercises.html">
 
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="fly high">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="fly high" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/06/abs-exercises.html" itemprop="url">
-                  腹肌锻炼
-                </a>
-              
-            
-          </h2>
+                <a class="post-title-link" href="/blog/2017/06/abs-exercises.html" itemprop="url">腹肌锻炼</a></h1>
         
 
         <div class="post-meta">
@@ -1185,9 +1067,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-09T19:54:08+08:00">
-                2017-06-09
-              </time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-09T19:54:08+08:00">2017-06-09</time>
             
 
             
@@ -1221,16 +1101,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2017/06/abs-exercises.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="blog/2017/06/abs-exercises.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1241,7 +1111,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数 </span>
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -1250,36 +1120,6 @@
           
 
           
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">字数统计</span>
-                  
-                    <span title="字数统计" }}">
-                      238 字
-                    </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">阅读时长</span>
-                  
-                    <span title="阅读时长" }}">
-                      1 分钟
-                    </span>
-              
-            </div>
-          
 
           
 
@@ -1287,7 +1127,9 @@
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1306,15 +1148,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
+    
 
     <footer class="post-footer">
       
@@ -1328,6 +1170,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1340,38 +1186,33 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/04/maven-war-plugin.html">
+  
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="roc">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
-  </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/04/maven-war-plugin.html">
 
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="fly high">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="fly high" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/04/maven-war-plugin.html" itemprop="url">
-                  maven-war-plugin
-                </a>
-              
-            
-          </h2>
+                <a class="post-title-link" href="/blog/2017/04/maven-war-plugin.html" itemprop="url">maven-war-plugin</a></h1>
         
 
         <div class="post-meta">
@@ -1383,9 +1224,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T22:06:59+08:00">
-                2017-04-25
-              </time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T22:06:59+08:00">2017-04-25</time>
             
 
             
@@ -1418,16 +1257,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2017/04/maven-war-plugin.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="blog/2017/04/maven-war-plugin.html" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1439,7 +1268,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数 </span>
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -1448,48 +1277,16 @@
           
 
           
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">字数统计</span>
-                  
-                    <span title="字数统计" }}">
-                      1,873 字
-                    </span>
-              
 
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">阅读时长</span>
-                  
-                    <span title="阅读时长" }}">
-                      9 分钟
-                    </span>
-              
-            </div>
-          
-
-          
-              <div class="post-description">
-                  maven war plugin
-              </div>
           
 
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1497,11 +1294,10 @@
 
       
         
-          <h2 id="Apache-Maven-WAR-Plugin"><a href="#Apache-Maven-WAR-Plugin" class="headerlink" title="Apache Maven WAR Plugin"></a>Apache Maven WAR Plugin</h2><p>The WAR Plugin is responsible for collecting all artifact dependencies, classes and resources of the web application and packaging them into a web application archive.</p>
-<p>“打包“这个词听起来比较土，比较正式的说法应该是”构建项目软件包“，具体说就是将项目中的各种文件，比如源代码、编译生成的字节码、配置文件、文档，按照规范的格式生成归档，最常见的当然就是JAR包和WAR包了，复杂点的例子是Maven官方下载页面的分发包，它有自定义的格式，方便用户直接解压后就在命令行使用。作为一款”打包工具“，Maven自然有义务帮助用户创建各种各样的包，规范的JAR包和WAR包自然不再话下，略微复杂的自定义打包格式也必须支持，本文就介绍一些常用的打包案例以及相关的实现方式，除了前面提到的一些包以外，你还能看到如何生成源码包、Javadoc包、以及从命令行可直接运行的CLI包。</p>
+          maven war plugin
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/04/maven-war-plugin.html#more" rel="contents">
+            <a class="btn" href="/blog/2017/04/maven-war-plugin.html">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1509,15 +1305,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
+    
 
     <footer class="post-footer">
       
@@ -1531,6 +1327,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1543,38 +1343,33 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/04/maven-paranamer-plugin.html">
+  
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="roc">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
-  </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/04/maven-paranamer-plugin.html">
 
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="fly high">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="fly high" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/04/maven-paranamer-plugin.html" itemprop="url">
-                  maven-paranamer-plugin
-                </a>
-              
-            
-          </h2>
+                <a class="post-title-link" href="/blog/2017/04/maven-paranamer-plugin.html" itemprop="url">maven-paranamer-plugin</a></h1>
         
 
         <div class="post-meta">
@@ -1586,9 +1381,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T21:16:55+08:00">
-                2017-04-25
-              </time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T21:16:55+08:00">2017-04-25</time>
             
 
             
@@ -1622,16 +1415,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2017/04/maven-paranamer-plugin.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="blog/2017/04/maven-paranamer-plugin.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1642,7 +1425,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数 </span>
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -1651,48 +1434,16 @@
           
 
           
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">字数统计</span>
-                  
-                    <span title="字数统计" }}">
-                      1,327 字
-                    </span>
-              
 
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">阅读时长</span>
-                  
-                    <span title="阅读时长" }}">
-                      7 分钟
-                    </span>
-              
-            </div>
-          
-
-          
-              <div class="post-description">
-                  使用maven paranamer plugin获取java方法中的参数名称
-              </div>
           
 
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1700,11 +1451,10 @@
 
       
         
-          <h2 id="What-is-it"><a href="#What-is-it" class="headerlink" title="What is it?"></a>What is it?</h2><p>It is a library that allows the parameter names of non-private methods and constructors to be accessed at runtime. Normally this information is dropped by the compiler. In effect, methods like doSometing(mypkg.Person toMe) currently look like doSomething(mypackage.Person ???) to people using Java’s reflection to inspect methods.</p>
-<p>项目主页：<a href="https://github.com/paul-hammant/paranamer">https://github.com/paul-hammant/paranamer</a></p>
+          使用maven paranamer plugin获取java方法中的参数名称
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/04/maven-paranamer-plugin.html#more" rel="contents">
+            <a class="btn" href="/blog/2017/04/maven-paranamer-plugin.html">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1712,15 +1462,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
+    
 
     <footer class="post-footer">
       
@@ -1734,6 +1484,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1746,38 +1500,33 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/03/Shell脚本调试技术.html">
+  
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="roc">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
-  </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/03/Shell脚本调试技术.html">
 
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="fly high">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="fly high" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/03/Shell脚本调试技术.html" itemprop="url">
-                  Shell脚本调试技术
-                </a>
-              
-            
-          </h2>
+                <a class="post-title-link" href="/blog/2017/03/Shell脚本调试技术.html" itemprop="url">Shell脚本调试技术</a></h1>
         
 
         <div class="post-meta">
@@ -1789,9 +1538,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T22:13:40+08:00">
-                2017-03-26
-              </time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T22:13:40+08:00">2017-03-26</time>
             
 
             
@@ -1824,16 +1571,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2017/03/Shell脚本调试技术.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="blog/2017/03/Shell脚本调试技术.html" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1845,7 +1582,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数 </span>
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -1854,48 +1591,16 @@
           
 
           
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">字数统计</span>
-                  
-                    <span title="字数统计" }}">
-                      4,818 字
-                    </span>
-              
 
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">阅读时长</span>
-                  
-                    <span title="阅读时长" }}">
-                      18 分钟
-                    </span>
-              
-            </div>
-          
-
-          
-              <div class="post-description">
-                  Shell脚本调试技术
-              </div>
           
 
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1903,10 +1608,10 @@
 
       
         
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>shell编程在unix/linux世界中使用得非常广泛，熟练掌握shell编程也是成为一名优秀的unix/linux开发者和系统管理员的必经之路。脚本调试的主要工作就是发现引发脚本错误的原因以及在脚本源代码中定位发生错误的行，常用的手段包括分析输出的错误信息，通过在脚本中加入调试语句，输出调试信息来辅助诊断错误，利用调试工具等。但与其它高级语言相比，shell解释器缺乏相应的调试机制和调试工具的支持，其输出的错误信息又往往很不明确，初学者在调试脚本时，除了知道用echo语句输出一些信息外，别无它法，而仅仅依赖于大量的加入echo语句来诊断错误，确实令人不胜其繁，故常见初学者抱怨shell脚本太难调试了。本文将系统地介绍一些重要的shell脚本调试技术，希望能对shell的初学者有所裨益。</p>
+          Shell脚本调试技术
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/03/Shell脚本调试技术.html#more" rel="contents">
+            <a class="btn" href="/blog/2017/03/Shell脚本调试技术.html">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1914,15 +1619,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
+    
 
     <footer class="post-footer">
       
@@ -1936,6 +1641,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1948,38 +1657,33 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/03/shell-函数返回字符串的方法.html">
+  
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="roc">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
-  </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/03/shell-函数返回字符串的方法.html">
 
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="fly high">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="fly high" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/03/shell-函数返回字符串的方法.html" itemprop="url">
-                  shell 函数返回字符串的方法
-                </a>
-              
-            
-          </h2>
+                <a class="post-title-link" href="/blog/2017/03/shell-函数返回字符串的方法.html" itemprop="url">shell 函数返回字符串的方法</a></h1>
         
 
         <div class="post-meta">
@@ -1991,9 +1695,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T21:53:37+08:00">
-                2017-03-26
-              </time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T21:53:37+08:00">2017-03-26</time>
             
 
             
@@ -2026,16 +1728,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2017/03/shell-函数返回字符串的方法.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="blog/2017/03/shell-函数返回字符串的方法.html" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -2047,7 +1739,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数 </span>
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -2056,48 +1748,16 @@
           
 
           
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">字数统计</span>
-                  
-                    <span title="字数统计" }}">
-                      576 字
-                    </span>
-              
 
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">阅读时长</span>
-                  
-                    <span title="阅读时长" }}">
-                      2 分钟
-                    </span>
-              
-            </div>
-          
-
-          
-              <div class="post-description">
-                  shell函数返回字符串
-              </div>
           
 
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -2105,10 +1765,10 @@
 
       
         
-          <p>shell的函数只能返回整数值，如果想让函数返回字符串，一般有两种方法：将返回值赋值给一个字符串变量、输出返回值，在函数调用处为变量赋值。</p>
+          shell函数返回字符串
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/03/shell-函数返回字符串的方法.html#more" rel="contents">
+            <a class="btn" href="/blog/2017/03/shell-函数返回字符串的方法.html">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2116,15 +1776,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
+    
 
     <footer class="post-footer">
       
@@ -2138,6 +1798,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -2150,38 +1814,33 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/03/shell-文件包含.html">
+  
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="roc">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
-  </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/03/shell-文件包含.html">
 
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="fly high">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="fly high" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/03/shell-文件包含.html" itemprop="url">
-                  shell 文件包含
-                </a>
-              
-            
-          </h2>
+                <a class="post-title-link" href="/blog/2017/03/shell-文件包含.html" itemprop="url">shell 文件包含</a></h1>
         
 
         <div class="post-meta">
@@ -2193,9 +1852,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T21:46:15+08:00">
-                2017-03-26
-              </time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T21:46:15+08:00">2017-03-26</time>
             
 
             
@@ -2229,16 +1886,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2017/03/shell-文件包含.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="blog/2017/03/shell-文件包含.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -2249,7 +1896,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">阅读次数 </span>
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -2258,48 +1905,16 @@
           
 
           
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">字数统计</span>
-                  
-                    <span title="字数统计" }}">
-                      120 字
-                    </span>
-              
 
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                  
-                    <span class="post-meta-item-text">阅读时长</span>
-                  
-                    <span title="阅读时长" }}">
-                      1 分钟
-                    </span>
-              
-            </div>
-          
-
-          
-              <div class="post-description">
-                  Shell脚本中引用、调用另一个脚本文件的方式
-              </div>
           
 
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -2307,11 +1922,10 @@
 
       
         
-          <p>像其他语言一样，Shell 也可以包含外部脚本，将外部脚本的内容合并到当前脚本。</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>.   . ./subscript.<span class="keyword">sh</span> (常用)     </div><div class="line"><span class="number">2</span>.   <span class="keyword">source</span> ./subscript.<span class="keyword">sh</span></div></pre></td></tr></table></figure>
+          Shell脚本中引用、调用另一个脚本文件的方式
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/03/shell-文件包含.html#more" rel="contents">
+            <a class="btn" href="/blog/2017/03/shell-文件包含.html">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2319,15 +1933,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
+    
 
     <footer class="post-footer">
       
@@ -2341,6 +1955,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -2373,111 +1991,119 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png"
-               alt="roc" />
-          <p class="site-author-name" itemprop="name">roc</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-           
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">26</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">14</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">21</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/roc-wong" rel="external nofollow" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
+              <img class="site-author-image" itemprop="image"
+                src="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png"
+                alt="roc" />
             
+              <p class="site-author-name" itemprop="name">roc</p>
+              <p class="site-description motion-element" itemprop="description">roc博客</p>
+          </div>
+
           
-        </div>
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
 
-        
-        
-          <div class="cc-license motion-element" itemprop="license">
-            <a rel="external nofollow" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
-            </a>
-          </div>
-        
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
 
-        
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              Links
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
             </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.caosh.me/" title="书豪" target="_blank">书豪</a>
-                </li>
-              
-            </ul>
-          </div>
-        
+          
 
-        
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/roc-wong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:roc.fly@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
 
+          
+          
 
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.caosh.me/" title="书豪" target="_blank">书豪</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
       </section>
+
+      
 
       
 
@@ -2491,38 +2117,52 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2017 - 
-  <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">roc</span>
+
+  
+
+  
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" rel="external nofollow" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.0.0</div>
+
+
 
 
         
+
+
+
+
+
+
 
         
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
   
@@ -2537,6 +2177,11 @@
 
 
 
+  
+
+
+
+
 
 
 
@@ -2546,77 +2191,103 @@
 
 
 
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
-  
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
 
 
 
   
   
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
   
 
   
 
+  
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
 
 
 
   
 
+
   
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
     
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"roc-notes"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
     
+<!-- END LOCAL -->
+
     
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
-  
 
-
-
-
-
-
+    
 
 
 
@@ -2625,138 +2296,332 @@
 
 
   
-  
+
   <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
+    var isXml = true;
     // Search DB path;
     var search_path = "search.xml";
-    if (search_path.length == 0) {
+    if (search_path.length === 0) {
       search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
     }
     var path = "/" + search_path;
     // monitor main search box;
 
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
     }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
     // search function;
     var searchFunc = function(path, search_id, content_id) {
       'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
       $.ajax({
         url: path,
-        dataType: "xml",
+        dataType: isXml ? "xml" : "json",
         async: true,
-        success: function( xmlResponse ) {
+        success: function(res) {
           // get the contents from search data
           isfetched = true;
           $('.popup').detach().appendTo('.header-inner');
-          var datas = $( "entry", xmlResponse ).map(function() {
+          var datas = isXml ? $("entry", res).map(function() {
             return {
-              title: $( "title", this ).text(),
+              title: $("title", this).text(),
               content: $("content",this).text(),
-              url: $( "url" , this).text()
+              url: $("url" , this).text()
             };
-          }).get();
-          var $input = document.getElementById(search_id);
-          var $resultContent = document.getElementById(content_id);
-          $input.addEventListener('input', function(){
-            var matchcounts = 0;
-            var str='<ul class=\"search-result-list\">';
-            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-            $resultContent.innerHTML = "";
-            if (this.value.trim().length > 1) {
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
               // perform local searching
               datas.forEach(function(data) {
                 var isMatch = false;
-                var content_index = [];
-                var data_title = data.title.trim().toLowerCase();
-                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                var data_url = decodeURIComponent(data.url);
-                var index_title = -1;
-                var index_content = -1;
-                var first_occur = -1;
-                // only match artiles with not empty titles and contents
-                if(data_title != '') {
-                  keywords.forEach(function(keyword, i) {
-                    index_title = data_title.indexOf(keyword);
-                    index_content = data_content.indexOf(keyword);
-                    if( index_title >= 0 || index_content >= 0 ){
-                      isMatch = true;
-                      if (i == 0) {
-                        first_occur = index_content;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
                       }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
                     }
 
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
                   });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
                 }
+
                 // show search results
+
                 if (isMatch) {
-                  matchcounts += 1;
-                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                  var content = data.content.trim().replace(/<[^>]+>/g,"");
-                  if (first_occur >= 0) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
                     // cut out 100 characters
-                    var start = first_occur - 20;
-                    var end = first_occur + 80;
+                    var start = position - 20;
+                    var end = position + 80;
                     if(start < 0){
                       start = 0;
                     }
-                    if(start == 0){
-                      end = 50;
+                    if (end < position + word.length) {
+                      end = position + word.length;
                     }
                     if(end > content.length){
                       end = content.length;
                     }
-                    var match_content = content.substring(start, end);
-                    // highlight all keywords
-                    keywords.forEach(function(keyword){
-                      var regS = new RegExp(keyword, "gi");
-                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                    });
-
-                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
                   }
-                  str += "</li>";
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
                 }
-              })};
-            str += "</ul>";
-            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-            $resultContent.innerHTML = str;
-          });
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
           proceedsearch();
         }
-      });}
+      });
+    }
 
     // handle and trigger popup window;
     $('.popup-trigger').click(function(e) {
       e.stopPropagation();
-      if (isfetched == false) {
+      if (isfetched === false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
       } else {
         proceedsearch();
       };
     });
 
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
+    $('.popup-btn-close').click(onPopupClose);
     $('.popup').click(function(e){
       e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
     });
   </script>
 
 
-  
+
+
 
   
 
   
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
   <script>AV.initialize("9wG3UUpArW7udQ8Bx11ESyIV-gzGzoHsz", "h3uHORely9LqKkhIjd5zFtjy");</script>
   <script>
     function showTime(Counter) {
@@ -2863,12 +2728,14 @@
 
 
   
+
+  
 <script>
 (function(){
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
     if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
     }
     else {
         bp.src = 'http://push.zhanzhang.baidu.com/push.js';
@@ -2878,6 +2745,35 @@
 })();
 </script>
 
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
 
   
 
