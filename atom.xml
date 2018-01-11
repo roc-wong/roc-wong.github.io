@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://roc-wong.github.io/"/>
-  <updated>2018-01-11T01:47:30.469Z</updated>
+  <updated>2018-01-11T01:48:38.399Z</updated>
   <id>https://roc-wong.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://roc-wong.github.io/blog/2018/01/%E6%9E%81%E5%85%89%E6%8E%A8%E9%80%81java-sdk-V3-2-15%E5%A0%B5%E5%A1%9EBUG.html"/>
     <id>https://roc-wong.github.io/blog/2018/01/极光推送java-sdk-V3-2-15堵塞BUG.html</id>
     <published>2018-01-11T01:36:56.000Z</published>
-    <updated>2018-01-11T01:47:30.469Z</updated>
+    <updated>2018-01-11T01:48:38.399Z</updated>
     
     <content type="html"><![CDATA[<h2 id="案发现场"><a href="#案发现场" class="headerlink" title="案发现场"></a>案发现场</h2><ul>
 <li>从RabbitMQ Server端获取消息的线程运行正常，读到数据后放到本地的BlockQueue中，等待消费者线程消费。</li>
