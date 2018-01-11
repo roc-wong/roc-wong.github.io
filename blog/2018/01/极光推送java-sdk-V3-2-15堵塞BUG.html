@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="lQaW1XXg0qmIeHa2Or2-cQGRIUAZOA7CobMcsBYoPRc" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="roc's blog,roc的博客,roc wong的博客,fly high的博客" />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="fly high" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
+
+个人简介
+目前就职于上海，华宝证券，从事java开发。
+喜欢运动，篮球、羽毛球、夜跑爱好">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://roc-wong.github.io/about/index.html">
+<meta property="og:site_name" content="fly high">
+<meta property="og:description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
+
+个人简介
+目前就职于上海，华宝证券，从事java开发。
+喜欢运动，篮球、羽毛球、夜跑爱好">
+<meta property="og:updated_time" content="2017-03-11T16:09:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about">
+<meta name="twitter:description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
+
+个人简介
+目前就职于上海，华宝证券，从事java开发。
+喜欢运动，篮球、羽毛球、夜跑爱好">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://roc-wong.github.io/about/"/>
+
+
+
+
+
+  <title>极光推送java-sdk-V3.2.15堵塞BUG | fly high</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-92195689-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?72781f60d8736c40565a23a9e62eaebb";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fly high</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">九万里风鹏正举</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+
+            
+              首页
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+
+            
+              标签
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+
+            
+              分类
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+
+            
+              归档
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+
+            
+              日程表
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+
+            
+              关于
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+
+            
+              公益404
+            
+
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2018/01/极光推送java-sdk-V3-2-15堵塞BUG.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">极光推送java-sdk-V3.2.15堵塞BUG</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T09:36:56+08:00">2018-01-11</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/01/极光推送java-sdk-V3-2-15堵塞BUG.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2018/01/极光推送java-sdk-V3-2-15堵塞BUG.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/blog/2018/01/极光推送java-sdk-V3-2-15堵塞BUG.html" class="leancloud_visitors" data-flag-title="极光推送java-sdk-V3.2.15堵塞BUG">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">19k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">0:19</span>
+              
+            </div>
+          
+
+          <!--
+          
+              <div class="post-description">
+                  极光推送java-sdk-V3.2.15 CountDownLatch使用不当导致线程堵塞
+              </div>
+          
+          -->
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="案发现场"><a href="#案发现场" class="headerlink" title="案发现场"></a>案发现场</h2><ul>
+<li>从RabbitMQ Server端获取消息的线程运行正常，读到数据后放到本地的BlockQueue中，等待消费者线程消费。</li>
+<li>消费者线程堵塞，不再消费本地BlockQueue中的消息。</li>
+<li>使用jstack进行Thread Dump分析。由于自定义消费者线程名称，所以直接筛选前缀为MessageConsumer线程，结果如下：</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="string">"MessageConsumer-1"</span> prio=<span class="number">10</span> tid=<span class="number">0</span>x00007f39309f6000 nid=<span class="number">0</span>x1047 waiting on condition [<span class="number">0</span>x00007f39052d3000]</div><div class="line">   java<span class="selector-class">.lang</span><span class="selector-class">.Thread</span><span class="selector-class">.State</span>: WAITING (parking)</div><div class="line">	at sun<span class="selector-class">.misc</span><span class="selector-class">.Unsafe</span><span class="selector-class">.park</span>(Native Method)</div><div class="line">	- parking to wait <span class="keyword">for</span>  &lt;<span class="number">0</span>x00000000a4b994d0&gt; (<span class="selector-tag">a</span> java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.CountDownLatch</span><span class="variable">$Sync</span>)</div><div class="line">	at java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.locks</span><span class="selector-class">.LockSupport</span><span class="selector-class">.park</span>(LockSupport<span class="selector-class">.java</span>:<span class="number">186</span>)</div><div class="line">	at java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.locks</span><span class="selector-class">.AbstractQueuedSynchronizer</span><span class="selector-class">.parkAndCheckInterrupt</span>(AbstractQueuedSynchronizer<span class="selector-class">.java</span>:<span class="number">834</span>)</div><div class="line">	at java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.locks</span><span class="selector-class">.AbstractQueuedSynchronizer</span><span class="selector-class">.doAcquireSharedInterruptibly</span>(AbstractQueuedSynchronizer<span class="selector-class">.java</span>:<span class="number">994</span>)</div><div class="line">	at java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.locks</span><span class="selector-class">.AbstractQueuedSynchronizer</span><span class="selector-class">.acquireSharedInterruptibly</span>(AbstractQueuedSynchronizer<span class="selector-class">.java</span>:<span class="number">1303</span>)</div><div class="line">	at java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.CountDownLatch</span><span class="selector-class">.await</span>(CountDownLatch<span class="selector-class">.java</span>:<span class="number">236</span>)</div><div class="line">	at cn<span class="selector-class">.jiguang</span><span class="selector-class">.common</span><span class="selector-class">.connection</span><span class="selector-class">.NettyHttpClient</span><span class="selector-class">.sendHttpRequest</span>(NettyHttpClient<span class="selector-class">.java</span>:<span class="number">193</span>)</div><div class="line">	at cn<span class="selector-class">.jiguang</span><span class="selector-class">.common</span><span class="selector-class">.connection</span><span class="selector-class">.NettyHttpClient</span><span class="selector-class">.sendPost</span>(NettyHttpClient<span class="selector-class">.java</span>:<span class="number">134</span>)</div><div class="line">	at cn<span class="selector-class">.jpush</span><span class="selector-class">.api</span><span class="selector-class">.push</span><span class="selector-class">.PushClient</span><span class="selector-class">.sendPush</span>(PushClient<span class="selector-class">.java</span>:<span class="number">194</span>)</div><div class="line">	at cn<span class="selector-class">.jpush</span><span class="selector-class">.api</span><span class="selector-class">.JPushClient</span><span class="selector-class">.sendPush</span>(JPushClient<span class="selector-class">.java</span>:<span class="number">205</span>)</div><div class="line">	at hbec<span class="selector-class">.app</span><span class="selector-class">.platform</span><span class="selector-class">.push</span><span class="selector-class">.service</span><span class="selector-class">.impl</span><span class="selector-class">.JPushService</span><span class="selector-class">.push</span>(JPushService<span class="selector-class">.java</span>:<span class="number">66</span>)</div><div class="line">	at hbec<span class="selector-class">.app</span><span class="selector-class">.platform</span><span class="selector-class">.push</span><span class="selector-class">.service</span><span class="selector-class">.impl</span><span class="selector-class">.PushFacadeService</span><span class="selector-class">.jpush</span>(PushFacadeService<span class="selector-class">.java</span>:<span class="number">113</span>)</div><div class="line">	at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span><span class="selector-class">.invoke0</span>(Native Method)</div><div class="line">	at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span><span class="selector-class">.invoke</span>(NativeMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">57</span>)</div><div class="line">	at sun<span class="selector-class">.reflect</span><span class="selector-class">.DelegatingMethodAccessorImpl</span><span class="selector-class">.invoke</span>(DelegatingMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">43</span>)</div><div class="line">	at java<span class="selector-class">.lang</span><span class="selector-class">.reflect</span><span class="selector-class">.Method</span><span class="selector-class">.invoke</span>(Method<span class="selector-class">.java</span>:<span class="number">606</span>)</div><div class="line">	at hbec<span class="selector-class">.app</span><span class="selector-class">.mc</span><span class="selector-class">.RpcService</span><span class="selector-class">.send</span>(RpcService<span class="selector-class">.java</span>:<span class="number">38</span>)</div><div class="line">	at hbec<span class="selector-class">.app</span><span class="selector-class">.mc</span><span class="selector-class">.NotifySendService</span><span class="selector-class">.send</span>(NotifySendService<span class="selector-class">.java</span>:<span class="number">40</span>)</div><div class="line">	at hbec<span class="selector-class">.app</span><span class="selector-class">.mc</span><span class="selector-class">.NotifyService</span><span class="selector-class">.notifyPerson</span>(NotifyService<span class="selector-class">.java</span>:<span class="number">151</span>)</div><div class="line">	at hbec<span class="selector-class">.app</span><span class="selector-class">.mc</span><span class="selector-class">.NotifyService</span><span class="selector-class">.notify</span>(NotifyService<span class="selector-class">.java</span>:<span class="number">83</span>)</div><div class="line">	at hbec<span class="selector-class">.app</span><span class="selector-class">.mc</span><span class="selector-class">.rabbitmq</span><span class="selector-class">.RealTimeConsumer</span><span class="selector-class">.onMessage</span>(RealTimeConsumer<span class="selector-class">.java</span>:<span class="number">29</span>)</div><div class="line">	at org<span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.listener</span><span class="selector-class">.adapter</span><span class="selector-class">.MessageListenerAdapter</span><span class="selector-class">.onMessage</span>(MessageListenerAdapter<span class="selector-class">.java</span>:<span class="number">273</span>)</div><div class="line">	at org<span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.listener</span><span class="selector-class">.AbstractMessageListenerContainer</span><span class="selector-class">.doInvokeListener</span>(AbstractMessageListenerContainer<span class="selector-class">.java</span>:<span class="number">848</span>)</div><div class="line">	at org<span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.listener</span><span class="selector-class">.AbstractMessageListenerContainer</span><span class="selector-class">.invokeListener</span>(AbstractMessageListenerContainer<span class="selector-class">.java</span>:<span class="number">771</span>)</div><div class="line">	at org<span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.listener</span><span class="selector-class">.SimpleMessageListenerContainer</span><span class="selector-class">.access</span>$<span class="number">001</span>(SimpleMessageListenerContainer<span class="selector-class">.java</span>:<span class="number">102</span>)</div><div class="line">	at org<span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.listener</span><span class="selector-class">.SimpleMessageListenerContainer</span>$<span class="number">1</span>.invokeListener(SimpleMessageListenerContainer<span class="selector-class">.java</span>:<span class="number">198</span>)</div><div class="line">	at org<span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.listener</span><span class="selector-class">.SimpleMessageListenerContainer</span><span class="selector-class">.invokeListener</span>(SimpleMessageListenerContainer<span class="selector-class">.java</span>:<span class="number">1311</span>)</div><div class="line">	at org<span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.listener</span><span class="selector-class">.AbstractMessageListenerContainer</span><span class="selector-class">.executeListener</span>(AbstractMessageListenerContainer<span class="selector-class">.java</span>:<span class="number">752</span>)</div><div class="line">	at org<span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.listener</span><span class="selector-class">.SimpleMessageListenerContainer</span><span class="selector-class">.doReceiveAndExecute</span>(SimpleMessageListenerContainer<span class="selector-class">.java</span>:<span class="number">1254</span>)</div><div class="line">	at org<span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.listener</span><span class="selector-class">.SimpleMessageListenerContainer</span><span class="selector-class">.receiveAndExecute</span>(SimpleMessageListenerContainer<span class="selector-class">.java</span>:<span class="number">1224</span>)</div><div class="line">	at org<span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.listener</span><span class="selector-class">.SimpleMessageListenerContainer</span><span class="selector-class">.access</span>$<span class="number">1600</span>(SimpleMessageListenerContainer<span class="selector-class">.java</span>:<span class="number">102</span>)</div><div class="line">	at org<span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.listener</span><span class="selector-class">.SimpleMessageListenerContainer</span><span class="variable">$AsyncMessageProcessingConsumer</span>.run(SimpleMessageListenerContainer<span class="selector-class">.java</span>:<span class="number">1470</span>)</div><div class="line">	at java<span class="selector-class">.lang</span><span class="selector-class">.Thread</span><span class="selector-class">.run</span>(Thread<span class="selector-class">.java</span>:<span class="number">745</span>)</div><div class="line"></div><div class="line">   Locked ownable synchronizers:</div><div class="line">	- None</div><div class="line">……</div></pre></td></tr></table></figure>
+<p>从上可以发现，消费者线程大都处于WAITING状态，线程阻塞在NettyHttpClient.sendHttpRequest的CountDownLatch.await()方法。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">at java<span class="selector-class">.util</span><span class="selector-class">.concurrent</span><span class="selector-class">.CountDownLatch</span><span class="selector-class">.await</span>(CountDownLatch<span class="selector-class">.java</span>:<span class="number">236</span>)</div><div class="line">at cn<span class="selector-class">.jiguang</span><span class="selector-class">.common</span><span class="selector-class">.connection</span><span class="selector-class">.NettyHttpClient</span><span class="selector-class">.sendHttpRequest</span>(NettyHttpClient<span class="selector-class">.java</span>:<span class="number">193</span>)</div></pre></td></tr></table></figure></p>
+<p>##预测案件</p>
+<p>通过对应用中各线程运行的状态情况，推测是极光推送SDK代码BUG导致。深入源码进行问题排查：</p>
+<ul>
+<li><p>1&gt; cn.jpush.api.JPushClient.java</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function">PushResult <span class="title">sendPush</span><span class="params">(PushPayload pushPayload)</span> <span class="keyword">throws</span> APIConnectionException, APIRequestException </span>&#123;</div><div class="line">	    <span class="function"><span class="keyword">return</span> _pushClient.<span class="title">sendPush</span><span class="params">(pushPayload)</span></span>;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>2&gt; cn.jpush.api.push.PushClient.java</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public PushResult sendPush(PushPayload pushPayload) throws APIConnectionException, APIRequestException &#123;</div><div class="line">        Preconditions.checkArgument(! (null == pushPayload), <span class="string">"pushPayload should not be null"</span>);</div><div class="line">        <span class="keyword">if</span> (<span class="variable">_apnsProduction</span> &gt; <span class="number">0</span>) &#123;</div><div class="line">            pushPayload.resetOptionsApnsProduction(<span class="literal">true</span>);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable">_apnsProduction</span> == <span class="number">0</span>) &#123;</div><div class="line">            pushPayload.resetOptionsApnsProduction(<span class="literal">false</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (<span class="variable">_timeToLive</span> &gt;= <span class="number">0</span>) &#123;</div><div class="line">            pushPayload.resetOptionsTimeToLive(<span class="variable">_timeToLive</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//该版本默认使用NettyHttpClient，进入源码</span></div><div class="line">        ResponseWrapper response = <span class="variable">_httpClient</span>.sendPost(<span class="variable">_baseUrl</span> + <span class="variable">_pushPath</span>, pushPayload.<span class="built_in">toString</span>());</div><div class="line">        return BaseResult.fromResponse(response, PushResult.class);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>3&gt; cn.jiguang.common.connection.NettyHttpClient.java</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">    <span class="keyword">public</span> ResponseWrapper sendPost(<span class="keyword">String</span> url, <span class="keyword">String</span> content) throws APIConnectionException, APIRequestException &#123;</div><div class="line">        ResponseWrapper wrapper = <span class="keyword">new</span> <span class="type">ResponseWrapper</span>();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">return</span> sendHttpRequest(HttpMethod.POST, url, content);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> wrapper;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span> ResponseWrapper sendHttpRequest(HttpMethod method, <span class="keyword">String</span> url, <span class="keyword">String</span> body) throws Exception &#123;</div><div class="line">        <span class="comment">// 此处实例化CountDownLatch并传递给NettyClientInitializer, 继续跟踪  </span></div><div class="line">        CountDownLatch latch = <span class="keyword">new</span> <span class="type">CountDownLatch</span>(<span class="number">1</span>);</div><div class="line">        NettyClientInitializer initializer = <span class="keyword">new</span> <span class="type">NettyClientInitializer</span>(_sslCtx, <span class="literal">null</span>, latch);</div><div class="line">        b.handler(initializer);</div><div class="line">        ResponseWrapper wrapper = <span class="keyword">new</span> <span class="type">ResponseWrapper</span>();</div><div class="line">        URI uri = <span class="keyword">new</span> <span class="type">URI</span>(url);</div><div class="line">        <span class="keyword">String</span> scheme = uri.getScheme() == <span class="literal">null</span> ? <span class="string">"http"</span> : <span class="type">uri</span>.getScheme();</div><div class="line">        <span class="keyword">String</span> host = uri.getHost() == <span class="literal">null</span> ? <span class="string">"127.0.0.1"</span> : <span class="type">uri</span>.getHost();</div><div class="line">        int port = uri.getPort();</div><div class="line">        <span class="keyword">if</span> (port == <span class="number">-1</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="string">"http"</span>.equalsIgnoreCase(scheme)) &#123;</div><div class="line">                port = <span class="number">80</span>;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"https"</span>.equalsIgnoreCase(scheme)) &#123;</div><div class="line">                port = <span class="number">443</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            ChannelFuture connect = b.connect(host, port);</div><div class="line">            _channel = connect.sync().channel();</div><div class="line">            FullHttpRequest request;</div><div class="line">            <span class="keyword">if</span> (<span class="literal">null</span> != body) &#123;</div><div class="line">                ByteBuf byteBuf = Unpooled.copiedBuffer(body.getBytes(CharsetUtil.UTF_8));</div><div class="line">                request = <span class="keyword">new</span> <span class="type">DefaultFullHttpRequest</span>(HttpVersion.HTTP_1_1, method, uri.getRawPath(), byteBuf);</div><div class="line">                request.headers().<span class="keyword">set</span>(HttpHeaderNames.CONTENT_LENGTH, (long) byteBuf.readableBytes());</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                request = <span class="keyword">new</span> <span class="type">DefaultFullHttpRequest</span>(HTTP_1_1, method, uri.getRawPath());</div><div class="line">            &#125;</div><div class="line">            request.headers().<span class="keyword">set</span>(HttpHeaderNames.HOST, uri.getHost());</div><div class="line">            request.headers().<span class="keyword">set</span>(HttpHeaderNames.AUTHORIZATION, _authCode);</div><div class="line">            request.headers().<span class="keyword">set</span>(<span class="string">"Content-Type"</span>,<span class="string">"application/json;charset=utf-8"</span>);</div><div class="line">            connect.awaitUninterruptibly();</div><div class="line">            LOG.info(<span class="string">"Sending request. "</span> + request);</div><div class="line">            LOG.info(<span class="string">"Send body: "</span> + body);</div><div class="line">            _channel.writeAndFlush(request);</div><div class="line">            <span class="comment">//调用latch.await()后主线程阻塞，等待netty异步网络调用。如果异步线程执行后不调用countDown()，主线程将永远阻塞，此为问题主要原因。  </span></div><div class="line">            latch.await();</div><div class="line">            wrapper = initializer.getResponse();</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> wrapper;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>4&gt; cn.jiguang.common.connection.NettyClientInitializer.java</p>
+</li>
+</ul>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(SocketChannel socketChannel)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">       <span class="comment">//使用_latch创建HttpResponseHandler</span></div><div class="line">       <span class="keyword">this</span>._handler = <span class="keyword">new</span> HttpResponseHandler(_callback, _latch);</div><div class="line">       socketChannel.pipeline().addLast(_sslCtx.newHandler(socketChannel.alloc()), <span class="keyword">new</span> HttpClientCodec(), _handler);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>5&gt; cn.jiguang.common.connection.HttpResponseHandler.java<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">channelRead0</span><span class="params">(ChannelHandlerContext ctx, HttpObject msg)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">       <span class="keyword">if</span> (msg <span class="keyword">instanceof</span> HttpResponse) &#123;</div><div class="line">           HttpResponse response = (HttpResponse) msg;</div><div class="line">           status = response.status().code();</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">if</span> (msg <span class="keyword">instanceof</span> HttpContent) &#123;</div><div class="line">           HttpContent content = (HttpContent) msg;</div><div class="line">           LOG.info(content.content().toString());</div><div class="line">           <span class="keyword">if</span> (content <span class="keyword">instanceof</span> LastHttpContent) &#123;</div><div class="line">               <span class="comment">//断点跟踪发现，程序运行到该分支后，直接close，并未调用_latch.countDown(); 此为问题的主要爆发点</span></div><div class="line">               LOG.info(<span class="string">"closing connection"</span>);</div><div class="line">               ctx.close();</div><div class="line">           &#125; <span class="keyword">else</span> &#123;</div><div class="line">               String responseContent = content.content().toString(CharsetUtil.UTF_8);</div><div class="line">               _wrapper.responseCode = status;</div><div class="line">               _wrapper.responseContent = responseContent;</div><div class="line">               LOG.info(<span class="string">"Got Response code: "</span> + status + <span class="string">" content: "</span> + responseContent);</div><div class="line">               System.err.println(<span class="string">"Got Response code: "</span> + status + <span class="string">" content: "</span> + responseContent);</div><div class="line">               System.err.flush();</div><div class="line">               <span class="keyword">if</span> (<span class="keyword">null</span> != _callback) &#123;</div><div class="line">                   _callback.onSucceed(_wrapper);</div><div class="line">               &#125;</div><div class="line">               <span class="keyword">if</span> (<span class="keyword">null</span> != _latch) &#123;</div><div class="line">                   <span class="comment">//正常情况下</span></div><div class="line">                   _latch.countDown();</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="meta">@Override</span></div><div class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">exceptionCaught</span><span class="params">(ChannelHandlerContext ctx, Throwable cause)</span> </span>&#123;</div><div class="line">       LOG.<span class="keyword">error</span>(<span class="string">"error:"</span>, cause);</div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">           <span class="comment">//模拟网络异常，发现此处也存在bug，未调用_latch.countDown(); 隐藏爆发点</span></div><div class="line">           ctx.close();</div><div class="line">       &#125;<span class="keyword">catch</span> (Exception ex) &#123;</div><div class="line">           LOG.<span class="keyword">error</span>(<span class="string">"close error:"</span>, ex);</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>翻阅源码发现HttpResponseHandler.java类内部存在两个隐患：</p>
+<ul>
+<li>程序运行到if (content instanceof LastHttpContent) {……}分支后，未调用_latch.countDown();</li>
+<li>当出现网络异常时，exceptionCaught方法内部也未调用_latch.countDown();</li>
+</ul>
+<p>只要其中任意一个隐患爆发，主线程就会阻塞，进入WAITING状态。消费者线程就此堵塞，不再消费BlockQueue中的消息。</p>
+<p>##恢复现场</p>
+<ul>
+<li>Maven pom.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></div><div class="line">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>sky-framework<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.sky<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jpush-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.guava<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>guava<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- jpush --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.jpush.api<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jpush-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.15<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- utils begin --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.jpush.api<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jiguang-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.netty<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>netty-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.6.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.code.gson<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>gson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- LOGGING begin --&gt;</span></div><div class="line">        <span class="comment">&lt;!-- slf4j --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- logback --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-classic<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 代码直接调用log4j会被桥接到slf4j --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-over-slf4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 代码直接调用commons-logging会被桥接到slf4j --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jcl-over-slf4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 代码直接调用java.util.logging会被桥接到slf4j --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jul-to-slf4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- log4jdbc --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.googlecode.log4jdbc<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- LOGGING end --&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.testng<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>testng<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>测试代码</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.sky.jpush;</div><div class="line"></div><div class="line"><span class="keyword">import</span> cn.jiguang.common.ClientConfig;</div><div class="line"><span class="keyword">import</span> cn.jiguang.common.resp.APIConnectionException;</div><div class="line"><span class="keyword">import</span> cn.jiguang.common.resp.APIRequestException;</div><div class="line"><span class="keyword">import</span> cn.jpush.api.JPushClient;</div><div class="line"><span class="keyword">import</span> cn.jpush.api.<span class="keyword">push</span>.PushResult;</div><div class="line"><span class="keyword">import</span> cn.jpush.api.<span class="keyword">push</span>.model.<span class="keyword">Options</span>;</div><div class="line"><span class="keyword">import</span> cn.jpush.api.<span class="keyword">push</span>.model.Platform;</div><div class="line"><span class="keyword">import</span> cn.jpush.api.<span class="keyword">push</span>.model.PushPayload;</div><div class="line"><span class="keyword">import</span> cn.jpush.api.<span class="keyword">push</span>.model.audience.Audience;</div><div class="line"><span class="keyword">import</span> cn.jpush.api.<span class="keyword">push</span>.model.audience.AudienceTarget;</div><div class="line"><span class="keyword">import</span> cn.jpush.api.<span class="keyword">push</span>.model.notification.IosAlert;</div><div class="line"><span class="keyword">import</span> cn.jpush.api.<span class="keyword">push</span>.model.notification.IosNotification;</div><div class="line"><span class="keyword">import</span> cn.jpush.api.<span class="keyword">push</span>.model.notification.Notification;</div><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> org.testng.annotations.Test;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * @author roc</div><div class="line"> * @date 2018/01/09</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> JPushServiceTest &#123;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOG = LoggerFactory.getLogger(JPushServiceTest.<span class="keyword">class</span>);</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String APP_KEY = <span class="string">"b11314807507e2bcfdeebe2e"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String MASTER_SECRET = <span class="string">"2c88a01e073a0fe4fc7b167c"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> String GROUP_MASTER_SECRET = <span class="string">"b11314807507e2bcfdeebe2e"</span>;</div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> String GROUP_PUSH_KEY = <span class="string">"2c88a01e073a0fe4fc7b167c"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ALERT = <span class="string">"JPush Test - alert"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String MSG_CONTENT = <span class="string">"JPush Test - msgContent"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String REGISTRATION_ID1 = <span class="string">"0900e8d85ef"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String REGISTRATION_ID2 = <span class="string">"0a04ad7d8b4"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String REGISTRATION_ID3 = <span class="string">"18071adc030dcba91c0"</span>;</div><div class="line"></div><div class="line">    @Test</div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> testNettyClient() &#123;</div><div class="line"></div><div class="line">        ClientConfig clientConfig = ClientConfig.getInstance();</div><div class="line"></div><div class="line">        JPushClient jpushClient = <span class="keyword">new</span> JPushClient(MASTER_SECRET, APP_KEY, <span class="keyword">null</span>, clientConfig);</div><div class="line">        <span class="comment">/*String authCode = ServiceHelper.getBasicAuthorization(APP_KEY, MASTER_SECRET);</span></div><div class="line">        ApacheHttpClient apacheHttpClient = new (authCode, null, clientConfig);</div><div class="line">        jpushClient.getPushClient().setHttpClient(apacheHttpClienApacheHttpClientt);</div><div class="line">        */</div><div class="line">        PushPayload payload = buildTestPayload();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            PushResult result = jpushClient.sendPush(payload);</div><div class="line">            <span class="keyword">int</span> status = result.getResponseCode();</div><div class="line">            LOG.info(<span class="string">"Got result - "</span> + result);</div><div class="line"></div><div class="line">        &#125; <span class="keyword">catch</span> (APIConnectionException e) &#123;</div><div class="line">            LOG.error(<span class="string">"Connection error. Should retry later. "</span>, e);</div><div class="line">            LOG.error(<span class="string">"Sendno: "</span> + payload.getSendno());</div><div class="line"></div><div class="line">        &#125; <span class="keyword">catch</span> (APIRequestException e) &#123;</div><div class="line">            LOG.error(<span class="string">"Error response from JPush server. Should review and fix it. "</span>, e);</div><div class="line">            LOG.info(<span class="string">"HTTP Status: "</span> + e.getStatus());</div><div class="line">            LOG.info(<span class="string">"Error Code: "</span> + e.getErrorCode());</div><div class="line">            LOG.info(<span class="string">"Error Message: "</span> + e.getErrorMessage());</div><div class="line">            LOG.info(<span class="string">"Msg ID: "</span> + e.getMsgId());</div><div class="line">            LOG.error(<span class="string">"Sendno: "</span> + payload.getSendno());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> PushPayload buildTestPayload() &#123;</div><div class="line">        String title = <span class="string">"hello world, roc"</span>;</div><div class="line">        String subTitle = <span class="string">"低头前行了这么久，我只是在找一个抬头的机会"</span>;</div><div class="line">        String body = <span class="string">"人这一生，浪费了太多的时间在毫无意义的事情上，担忧、抱怨、埋怨、比较……"</span>;</div><div class="line"></div><div class="line">        IosAlert iosAlert = IosAlert.newBuilder()</div><div class="line">                .setTitleAndBody(title, subTitle, body).build();</div><div class="line">        IosNotification iosNotification = IosNotification.newBuilder()</div><div class="line">                .setAlert(iosAlert).incrBadge(<span class="number">1</span>)</div><div class="line">                .setSound(<span class="string">"happy"</span>).build();</div><div class="line">        Notification notification = Notification.newBuilder().addPlatformNotification(iosNotification).build();</div><div class="line"></div><div class="line">        PushPayload pushPayload = PushPayload</div><div class="line">                .newBuilder()</div><div class="line">                .setPlatform(Platform.android_ios())</div><div class="line">                .setAudience(</div><div class="line">                        Audience.newBuilder()</div><div class="line">                                .addAudienceTarget(</div><div class="line">                                        AudienceTarget.alias(<span class="string">"TEST303644"</span>))</div><div class="line">                                .build())</div><div class="line">                .setNotification(notification)</div><div class="line">                .setOptions(<span class="keyword">Options</span>.newBuilder().setApnsProduction(<span class="keyword">true</span>).build())</div><div class="line">                .build();</div><div class="line">        <span class="keyword">return</span> pushPayload;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Thread Dump</li>
+</ul>
+<p>Debug跟踪，发现程序进入if分支，调用close()关闭连接后，主线程阻塞进入wait状态。使用IDEA生成thread dump：<br><img src="http://olml6iu96.bkt.clouddn.com/%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8Cif%E5%88%86%E6%94%AF.png" alt="此处输入图片的描述"><br><img src="http://olml6iu96.bkt.clouddn.com/get%20thread%20dump.png" alt="此处输入图片的描述"></p>
+<ul>
+<li>日志输出</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">2018-01-09</span> <span class="selector-tag">21</span><span class="selector-pseudo">:12</span><span class="selector-pseudo">:19.064</span> <span class="selector-attr">[nioEventLoopGroup-2-1]</span> <span class="selector-tag">DEBUG</span> <span class="selector-tag">io</span><span class="selector-class">.netty</span><span class="selector-class">.handler</span><span class="selector-class">.ssl</span><span class="selector-class">.SslHandler</span> <span class="selector-tag">-</span> <span class="selector-attr">[id: 0x6f019129, L:/10.0.31.70:55848 - R:api.jpush.cn/103.40.232.116:443]</span> <span class="selector-tag">HANDSHAKEN</span>: <span class="selector-tag">TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA</span></div><div class="line"><span class="selector-tag">2018-01-09</span> <span class="selector-tag">21</span><span class="selector-pseudo">:12</span><span class="selector-pseudo">:29.324</span> <span class="selector-attr">[nioEventLoopGroup-2-1]</span> <span class="selector-tag">INFO</span>  <span class="selector-tag">c</span><span class="selector-class">.j</span><span class="selector-class">.c</span><span class="selector-class">.connection</span><span class="selector-class">.HttpResponseHandler</span> <span class="selector-tag">-</span> <span class="selector-tag">PooledSlicedByteBuf</span>(<span class="attribute">ridx</span>: <span class="number">0</span>, <span class="attribute">widx</span>: <span class="number">44</span>, <span class="attribute">cap</span>: <span class="number">44</span>/<span class="number">44</span>, <span class="attribute">unwrapped</span>: PooledUnsafeDirectByteBuf(<span class="attribute">ridx</span>: <span class="number">324</span>, <span class="attribute">widx</span>: <span class="number">324</span>, <span class="attribute">cap</span>: <span class="number">373</span>))</div><div class="line"><span class="comment">//此为HttpResponseHandler.java类log输出，与源代码吻合</span></div><div class="line"><span class="selector-tag">2018-01-09</span> <span class="selector-tag">21</span><span class="selector-pseudo">:12</span><span class="selector-pseudo">:49.010</span> <span class="selector-attr">[nioEventLoopGroup-2-1]</span> <span class="selector-tag">INFO</span>  <span class="selector-tag">c</span><span class="selector-class">.j</span><span class="selector-class">.c</span><span class="selector-class">.connection</span><span class="selector-class">.HttpResponseHandler</span> <span class="selector-tag">-</span> <span class="selector-tag">closing</span> <span class="selector-tag">connection</span></div></pre></td></tr></table></figure>
+<p>主线程处于WAIT状态，Netty异步线程已运行完毕，现场恢复成功。</p>
+<p>##解决方案</p>
+<ol>
+<li>升级极光SDK版本，升级后发现最新版已解决该问题。</li>
+<li>增加熔断处理，调用外部服务时，使用Guava SimpleTimeLimiter设置超时熔断。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://olml6iu96.bkt.clouddn.com/WX20170219-233910@2x.png" alt="roc 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://olml6iu96.bkt.clouddn.com/WX20170219-233931@2x.png" alt="roc 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    roc
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://roc-wong.github.io/blog/2018/01/极光推送java-sdk-V3-2-15堵塞BUG.html" title="极光推送java-sdk-V3.2.15堵塞BUG">https://roc-wong.github.io/blog/2018/01/极光推送java-sdk-V3-2-15堵塞BUG.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java后端/" rel="tag"># java后端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/08/NotePad-regular-expression.html" rel="next" title="Notepad++-regular-expression">
+                <i class="fa fa-chevron-left"></i> Notepad++-regular-expression
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://olml6iu96.bkt.clouddn.com/DDEE847383DA170A30DCED69002EA30E.png"
+                alt="roc" />
+            
+              <p class="site-author-name" itemprop="name">roc</p>
+              <p class="site-description motion-element" itemprop="description">roc博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/roc-wong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:roc.fly@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.caosh.me/" title="书豪" target="_blank">书豪</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#案发现场"><span class="nav-number">1.</span> <span class="nav-text">案发现场</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">roc</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">176k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点总阅读次数">2:56</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" rel="external nofollow" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'roc-wong',
+            repo: 'roc-wong.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e84e5ce3e3065e15d8be0172b6f2599c2e2522ce',
+            
+                client_id: '721c48a2f226eea6742e'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9wG3UUpArW7udQ8Bx11ESyIV-gzGzoHsz", "h3uHORely9LqKkhIjd5zFtjy");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
