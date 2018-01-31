@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="lQaW1XXg0qmIeHa2Or2-cQGRIUAZOA7CobMcsBYoPRc" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="roc's blog,roc的博客,roc wong的博客,fly high的博客" />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="fly high" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
+
+个人简介
+目前就职于上海，华宝证券，从事java开发。
+喜欢运动，篮球、羽毛球、夜跑爱好">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://roc-wong.github.io/about/index.html">
+<meta property="og:site_name" content="fly high">
+<meta property="og:description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
+
+个人简介
+目前就职于上海，华宝证券，从事java开发。
+喜欢运动，篮球、羽毛球、夜跑爱好">
+<meta property="og:updated_time" content="2017-03-11T16:09:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about">
+<meta name="twitter:description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
+
+个人简介
+目前就职于上海，华宝证券，从事java开发。
+喜欢运动，篮球、羽毛球、夜跑爱好">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://roc-wong.github.io/about/"/>
+
+
+
+
+
+  <title>服务限流方案 | fly high</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-92195689-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?72781f60d8736c40565a23a9e62eaebb";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fly high</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">九万里风鹏正举</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />日程表</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />公益404</a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2018/01/服务限流方案.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc.wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/eagle.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">服务限流方案</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-31T21:41:04+08:00">2018-01-31</time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/01/服务限流方案.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2018/01/服务限流方案.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/blog/2018/01/服务限流方案.html" class="leancloud_visitors" data-flag-title="服务限流方案">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">13k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">0:13</span>
+              
+            </div>
+          
+
+          <!--
+          
+          -->
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>如何让系统在汹涌澎湃的流量面前谈笑风生？我们的策略是不要让系统超负荷工作。如果现有的系统扛不住业务目标怎么办？加机器！机器不够怎么办？业务降级，服务限流！</p>
+<p>正所谓「他强任他强，清风拂山岗；他横任他横，明月照大江」，降级和限流是系统可用性保障中必不可少的神兵利器，丢卒保车，以暂停边缘业务为代价保障核心业务的资源，以系统不被突发流量压挂为第一要务。</p>
+<a id="more"></a>
+<h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><h3 id="JPush-API-频率控制"><a href="#JPush-API-频率控制" class="headerlink" title="JPush API 频率控制"></a>JPush API 频率控制</h3><p>JPush API对访问次数，具有频率控制。即一定的时间窗口内，API允许调用的次数是有限制的。免费版：1分钟600次。</p>
+<p>超出后：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="attr">"error"</span>:&#123;<span class="attr">"code"</span>:<span class="number">2002</span>,<span class="attr">"message"</span>:<span class="string">"Request times of the app_key exceed the limit of current time window"</span>&#125;&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="各业务组直接对接极光API"><a href="#各业务组直接对接极光API" class="headerlink" title="各业务组直接对接极光API"></a>各业务组直接对接极光API</h3><p>目前智投后端和场外交易都在使用极光推送服务，并且是直接调用极光API。水归一源，终汇聚一处。想实现流量管控，只有将调用出口整合到一处，方可达到限流管控的目的。而这个出口，正是消息中心。</p>
+<p><img src="http://olml6iu96.bkt.clouddn.com/%E6%9E%81%E5%85%89%E6%8E%A8%E9%80%81%E8%B0%83%E7%94%A8%E7%8E%B0%E7%8A%B6.png" alt="现状"></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="令牌桶算法"><a href="#令牌桶算法" class="headerlink" title="令牌桶算法"></a>令牌桶算法</h3><p>令牌桶算法是网络流量整形（Traffic Shaping）和速率限制（Rate Limiting）中最常使用的一种算法。典型情况下，令牌桶算法用来控制发送到网络上的数据的数目，并允许突发数据的发送。令牌桶属于控制速率类型的。令牌桶算法最初来源于计算机网络。在网络传输数据时，为了防止网络拥塞，需限制流出网络的流量，使流量以比较均匀的速度向外发送。令牌桶算法就实现了这个功能，可控制发送到网络上数据的数目，并允许突发数据的发送。</p>
+<p>在 Wikipedia 上，令牌桶算法是这么描述的：</p>
+<ol>
+<li>每秒会有 r 个令牌放入桶中，或者说，每过 1/r 秒桶中增加一个令牌。</li>
+<li>桶中最多存放 b 个令牌，如果桶满了，新放入的令牌会被丢弃。</li>
+<li>当一个 n 字节的数据包到达时，消耗 n 个令牌，然后发送该数据包。</li>
+<li>如果桶中可用令牌小于 n，则该数据包将被缓存或丢弃。</li>
+</ol>
+<p><img src="http://xiaobaoqiu.github.io/images/guava/token_bucket.JPG" alt="令牌桶"></p>
+<p>大小固定的令牌桶可自行以恒定的速率源源不断地产生令牌。如果令牌不被消耗，或者被消耗的速度小于产生的速度，令牌就会不断地增多，直到把桶填满。后面再产生的令牌就会从桶中溢出。最后桶中可以保存的最大令牌数永远不会超过桶的大小。传送到令牌桶的数据包需要消耗令牌。不同大小的数据包，消耗的令牌数量不一样。</p>
+<p>令牌桶这种控制机制基于令牌桶中是否存在令牌来指示什么时候可以发送流量。令牌桶中的每一个令牌都代表一个字节。如果令牌桶中存在令牌，则允许发送流量；而如果令牌桶中不存在令牌，则不允许发送流量。因此，如果突发门限被合理地配置并且令牌桶中有足够的令牌，那么流量就可以以峰值速率发送。</p>
+<p>基于令牌桶算法改造消息中心，流程图如下：</p>
+<p><img src="http://olml6iu96.bkt.clouddn.com/%E9%99%90%E6%B5%81%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="限流方案"></p>
+<h3 id="单机限流"><a href="#单机限流" class="headerlink" title="单机限流"></a>单机限流</h3><p>Google Guava RateLimiter就是令牌桶算法的实现，速率限制器会在可配置的速率下分配许可证。如果必要的话，每个acquire() 会阻塞当前线程直到许可证可用后获取该许可证。一旦获取到许可证，不需要再释放许可证。RateLimiter经常用于限制对一些物理资源或者逻辑资源的访问速率。与Semaphore 相比，Semaphore 限制了并发访问的数量而不是使用速率。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//每秒两个许可</span></div><div class="line"><span class="keyword">final</span> RateLimiter rateLimiter = RateLimiter.create(<span class="number">2.0</span>);</div><div class="line"></div><div class="line"><span class="keyword">void</span> submitTasks(List tasks, Executor executor) &#123;</div><div class="line">    <span class="keyword">for</span> (Runnable <span class="keyword">task</span> : tasks) &#123;</div><div class="line">        rateLimiter.acquire(); <span class="comment">// 拿不到许可就等待</span></div><div class="line">        executor.execute(<span class="keyword">task</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过设置许可证的速率来定义RateLimiter。在默认配置下，许可证会在固定的速率下被分配，速率单位是每秒多少个许可证。为了确保维护配置的速率，许可会被平稳地分配，许可之间的延迟会做调整。可能存在配置一个拥有预热期的RateLimiter的情况，在这段时间内，每秒分配的许可数会稳定地增长直到达到稳定的速率。</p>
+<h3 id="分布式限流"><a href="#分布式限流" class="headerlink" title="分布式限流"></a>分布式限流</h3><p>Remote Dictionary Server（Redis）是一个基于 key-value 键值对的持久化数据库存储系统。支持多种数据结构，包括 string (字符串)、list (链表)、set (集合)、zset (sorted set –有序集合)和 hash（哈希类型）。这些数据类型都支持 push/pop、add/remove 及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。</p>
+<p>想实现分布式限流，非Redis莫属。Redis限流的大体思路是设置一个带有过期时间的key，每次申请令牌时，将 key 所储存的值加上增量 increment， 判断key 所存储的值是否达到上限，未达到上限，则获得许可。如有需要，亦可阻塞当前线程直到获得许可。</p>
+<p>限流相关的命令：</p>
+<p><strong>事务</strong></p>
+<p>MULTI、EXEC、DISCARD和WATCH命令是Redis事务功能的基础，Redis事务允许在一次单独的步骤中执行一组命令，并且可以保证如下两个重要事项：</p>
+<ul>
+<li><p>Redis会将一个事务中的所有命令序列化，然后按顺序执行。</p>
+<p>  Redis不可能在一个Redis事务的执行过程中插入执行另一个客户端发出的请求。这样便能保证Redis将这些命令作为一个单独的隔离操作执行。 </p>
+</li>
+<li><p>在一个Redis事务中，Redis要么执行其中的所有命令，要么什么都不执行。</p>
+<p>  因此，Redis事务能够保证原子性。EXEC命令会触发执行事务中的所有命令。因此，当某个客户端正在执行一次事务时，如果它在调用MULTI命令之前就从Redis服务端断开连接，那么就不会执行事务中的任何操作；相反，如果它在调用EXEC命令之后才从Redis服务端断开连接，那么就会执行事务中的所有操作。当Redis使用只增文件（AOF：Append-only File）时，Redis能够确保使用一个单独的write(2)系统调用，这样便能将事务写入磁盘。然而，如果Redis服务器宕机，或者系统管理员以某种方式停止Redis服务进程的运行，那么Redis很有可能只执行了事务中的一部分操作。Redis将会在重新启动时检查上述状态，然后退出运行，并且输出报错信息。使用redis-check-aof工具可以修复上述的只增文件，这个工具将会从上述文件中删除执行不完全的事务，这样Redis服务器才能再次启动。</p>
+</li>
+</ul>
+<p>从2.2版本开始，除了上述两项保证之外，Redis还能够以乐观锁(Watch)的形式提供更多的保证，这种形式非常类似于“检查再设置”（CAS：Check And Set）操作。</p>
+<p>从2.6版本开始提供脚本（Lua scripting）能力，一种更灵活的批量命令组织方式用于取代目前的事务机制。脚本提供了更强大和灵活的编程能力，但也是一把双刃剑，由于 Redis 需要保证脚本执行的原子性和隔离性，脚本执行期间会阻塞其他命令的执行，因此建议使用高效的脚本完成业务。</p>
+<p><strong>SET</strong></p>
+<p>SET key value [EX seconds] [PX milliseconds] [NX|XX]</p>
+<p>将字符串值 value 关联到 key 。如果 key 已经持有其他值， SET 就覆写旧值，无视类型。对于某个原本带有生存时间（TTL）的键来说， 当 SET 命令成功在这个键上执行时， 这个键原有的 TTL 将被清除。</p>
+<p>从 Redis 2.6.12 版本开始， SET 命令的行为可以通过一系列参数来修改：</p>
+<p>EX second ：设置键的过期时间为 second 秒。 SET key value EX second 效果等同于 SETEX key second value 。<br>PX millisecond ：设置键的过期时间为 millisecond 毫秒。 SET key value PX millisecond 效果等同于 PSETEX key millisecond value 。<br>NX ：只在键不存在时，才对键进行设置操作。 SET key value NX 效果等同于 SETNX key value 。<br>XX ：只在键已经存在时，才对键进行设置操作。</p>
+<p><strong>INCRBY</strong></p>
+<p>将 key 所储存的值加上增量 increment 。如果 key 不存在，那么 key 的值会先被初始化为 0 ，然后再执行 INCRBY 命令。如果值包含错误的类型，或字符串类型的值不能表示为数字，那么返回一个错误。</p>
+<p>Redis 官方基于上述命令提供的限流方案：<a href="https://redis.io/commands/incr#pattern-rate-limiter-1" target="_blank" rel="external">https://redis.io/commands/incr#pattern-rate-limiter-1</a></p>
+<h2 id="代码验证"><a href="#代码验证" class="headerlink" title="代码验证"></a>代码验证</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">package hbec.app.stock.ratelimiter;</div><div class="line"></div><div class="line">/**</div><div class="line"> * @author roc</div><div class="line"> * @<span class="built_in">date</span> <span class="number">2018</span>/<span class="number">01</span>/<span class="number">24</span></div><div class="line"> */</div><div class="line">public interface RateLimiter &#123;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Acquires a permit only <span class="keyword">if</span> one <span class="keyword">is</span> available <span class="keyword">at</span> <span class="keyword">the</span></div><div class="line">     * <span class="built_in">time</span> <span class="keyword">of</span> invocation.</div><div class="line">     *</div><div class="line">     * &lt;p&gt;Acquires a permit, <span class="keyword">if</span> one <span class="keyword">is</span> available <span class="keyword">and</span> returns immediately,</div><div class="line">     * <span class="keyword">with</span> <span class="keyword">the</span> <span class="literal">result</span> &#123;@code LimiterResult<span class="comment">#acquired is true&#125;,</span></div><div class="line">     * reducing <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> available permits <span class="keyword">by</span> one.</div><div class="line">     *</div><div class="line">     * &lt;p&gt;If no permit <span class="keyword">is</span> available <span class="keyword">then</span> this method will <span class="literal">return</span></div><div class="line">     * immediately <span class="keyword">with</span> <span class="keyword">the</span> value &#123;@code <span class="literal">false</span>&#125;.</div><div class="line">     *</div><div class="line">     * @param permits <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> permits <span class="keyword">to</span> acquire</div><div class="line">     * @<span class="literal">return</span> acquire <span class="literal">result</span> &#123;@code <span class="literal">true</span>&#125; <span class="keyword">if</span> a permit was acquired,</div><div class="line">     * <span class="keyword">and</span> &#123;@code <span class="literal">false</span> <span class="keyword">is</span> <span class="literal">false</span>&#125; otherwise</div><div class="line">     */</div><div class="line">    <span class="built_in">boolean</span> tryAcquire(int permits);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Acquires a permit <span class="keyword">from</span> this method, blocking <span class="keyword">until</span> one <span class="keyword">is</span></div><div class="line">     * available, <span class="keyword">or</span> <span class="keyword">the</span> thread <span class="keyword">is</span> &#123;@linkplain Thread<span class="comment">#interrupt interrupted&#125;.</span></div><div class="line">     *</div><div class="line">     * &lt;p&gt;Acquires a permit, <span class="keyword">if</span> one <span class="keyword">is</span> available <span class="keyword">and</span> returns immediately,</div><div class="line">     * reducing <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> available permits <span class="keyword">by</span> one.</div><div class="line">     *</div><div class="line">     * @param permits <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> permits <span class="keyword">to</span> acquire</div><div class="line">     */</div><div class="line">    void acquire(int permits) throws InterruptedException;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> hbec.app.stock.ratelimiter;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.google.common.base.Preconditions;</div><div class="line"><span class="keyword">import</span> hbec.app.stock.commons.redis.JedisTemplate;</div><div class="line"><span class="keyword">import</span> org.apache.commons.lang3.StringUtils;</div><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.Response;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.Transaction;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Random;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> roc</div><div class="line"> * <span class="doctag">@date</span> 2018/01/23</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisRateLimiter</span> <span class="keyword">implements</span> <span class="title">RateLimiter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(RedisRateLimiter.class);</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ZERO = <span class="string">"0"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String NOT_EXISTS = <span class="string">"NX"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_EXPIRE = <span class="string">"PX"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NOT_SET = <span class="number">-1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Random TIME_RANDOM = <span class="keyword">new</span> Random();</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 限流标识，redis key</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> String rateLimiterName;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 存活时间</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> timeToLive;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 许可上限</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> upperLimitPermits;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">private</span> JedisTemplate jedisTemplate;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> permits)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> acquireSync(permits).isAcquired();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">acquire</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> permits)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        LimiterResult limiterResult;</div><div class="line">        do &#123;</div><div class="line">            limiterResult = acquireSync(permits);</div><div class="line">            <span class="keyword">if</span> (!limiterResult.isAcquired()) &#123;</div><div class="line">                <span class="keyword">long</span> sleepTime = limiterResult.getRemainderTTL() + TIME_RANDOM.nextInt(<span class="number">5</span>);</div><div class="line">                Thread.sleep(sleepTime);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">while</span> (!limiterResult.isAcquired());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function">LimiterResult <span class="title">acquireSync</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> permits)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">return</span> jedisTemplate.<span class="title">execute</span><span class="params">(<span class="keyword">new</span> JedisTemplate.JedisAction&lt;LimiterResult&gt;()</span> </span>&#123;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="keyword">public</span> <span class="function">LimiterResult <span class="title">action</span><span class="params">(Jedis jedis)</span> </span>&#123;</div><div class="line"></div><div class="line">                Transaction transaction = jedis.multi();</div><div class="line">                transaction.set(rateLimiterName, ZERO, NOT_EXISTS, P_EXPIRE, timeToLive);</div><div class="line">                Response&lt;Long&gt; currentQPS = transaction.incrBy(rateLimiterName, permits);</div><div class="line">                Response&lt;Long&gt; keyTTL = transaction.pttl(rateLimiterName);</div><div class="line">                transaction.exec();</div><div class="line"></div><div class="line">                Long currentPermit = currentQPS.get();</div><div class="line">                Long remainderTTL = keyTTL.get();</div><div class="line"></div><div class="line">                <span class="keyword">boolean</span> acquired = currentPermit &lt;= upperLimitPermits;</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (!acquired &amp;&amp; remainderTTL == NOT_SET) &#123;</div><div class="line">                    LOGGER.<span class="keyword">error</span>(<span class="string">"Warning! Set ttl false, key=&#123;&#125;, current ttl=&#123;&#125;"</span>, rateLimiterName, remainderTTL);</div><div class="line">                    jedis.expire(rateLimiterName, timeToLive);</div><div class="line">                    remainderTTL = (<span class="keyword">long</span>) timeToLive;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                LOGGER.debug(<span class="string">"rateLimiterName=&#123;&#125;, passed=&#123;&#125;, remainderTTL=&#123;&#125;, time=&#123;&#125;"</span>,</div><div class="line">                        rateLimiterName, acquired ? <span class="string">"true"</span> : <span class="string">"false"</span>,</div><div class="line">                        remainderTTL, currentPermit);</div><div class="line">                <span class="function"><span class="keyword">return</span> LimiterResult.<span class="title">newInstance</span><span class="params">(acquired, remainderTTL)</span></span>;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function">Builder <span class="title">newBuilder</span><span class="params">(JedisTemplate jedisTemplate)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Builder(jedisTemplate);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> JedisTemplate jedisTemplate;</div><div class="line">        <span class="keyword">private</span> String rateLimiterName;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> timeToLive;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> upperLimitPermits;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="title">Builder</span><span class="params">(JedisTemplate jedisTemplate)</span> </span>&#123;</div><div class="line">            Preconditions.checkNotNull(jedisTemplate, <span class="string">"JedisTemplate can't be null."</span>);</div><div class="line">            <span class="keyword">this</span>.jedisTemplate = jedisTemplate;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="function">Builder <span class="title">setRateLimiterName</span><span class="params">(String rateLimiterName)</span> </span>&#123;</div><div class="line"></div><div class="line">            <span class="keyword">this</span>.rateLimiterName = rateLimiterName;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="function">Builder <span class="title">setTimeToLive</span><span class="params">(<span class="keyword">int</span> timeToLive, TimeUnit timeUnit)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.timeToLive = (<span class="keyword">int</span>) timeUnit.toMillis(timeToLive);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="function">Builder <span class="title">setUpperLimitPermits</span><span class="params">(<span class="keyword">int</span> upperLimitPermits)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.upperLimitPermits = upperLimitPermits;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="function">RedisRateLimiter <span class="title">build</span><span class="params">()</span> </span>&#123;</div><div class="line">            Preconditions.checkArgument(StringUtils.isNotBlank(rateLimiterName), <span class="string">"RateLimiterName can't be blank."</span>);</div><div class="line">            Preconditions.checkArgument(upperLimitPermits &gt; <span class="number">0</span>, <span class="string">"UpperLimitPermits must be an integer greater than 0."</span>);</div><div class="line">            Preconditions.checkArgument(timeToLive &gt; <span class="number">0</span>, <span class="string">"TimeToLive must be an integer greater than 0."</span>);</div><div class="line"></div><div class="line">            RedisRateLimiter redisRateLimiter = <span class="keyword">new</span> RedisRateLimiter();</div><div class="line">            redisRateLimiter.jedisTemplate = <span class="keyword">this</span>.jedisTemplate;</div><div class="line">            redisRateLimiter.upperLimitPermits = <span class="keyword">this</span>.upperLimitPermits;</div><div class="line">            redisRateLimiter.rateLimiterName = <span class="keyword">this</span>.rateLimiterName;</div><div class="line">            redisRateLimiter.timeToLive = <span class="keyword">this</span>.timeToLive;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> redisRateLimiter;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> hbec.app.stock.ratelimiter;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> roc</div><div class="line"> * <span class="doctag">@date</span> 2018/01/24</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LimiterResult</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> acquired;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Long remainderTTL;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function">LimiterResult <span class="title">newInstance</span><span class="params">(<span class="keyword">boolean</span> acquired, Long remainderTTL)</span> </span>&#123;</div><div class="line">        LimiterResult limiterResult = <span class="keyword">new</span> LimiterResult();</div><div class="line">        limiterResult.setAcquired(acquired);</div><div class="line">        limiterResult.setRemainderTTL(remainderTTL);</div><div class="line">        <span class="keyword">return</span> limiterResult;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">isAcquired</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> acquired;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function">Long <span class="title">getRemainderTTL</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> remainderTTL;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setAcquired</span><span class="params">(<span class="keyword">boolean</span> acquired)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.acquired = acquired;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setRemainderTTL</span><span class="params">(Long remainderTTL)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.remainderTTL = remainderTTL;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="function">String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">final</span> StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="string">"LimiterResult&#123;"</span>);</div><div class="line">        sb.append(<span class="string">"acquired="</span>).append(acquired);</div><div class="line">        sb.append(<span class="string">", remainderTTL="</span>).append(remainderTTL);</div><div class="line">        sb.append(<span class="string">'&#125;'</span>);</div><div class="line">        <span class="function"><span class="keyword">return</span> sb.<span class="title">toString</span><span class="params">()</span></span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>验证代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> hbec.app.stock.ratelimiter;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> hbec.app.stock.commons.redis.JedisTemplate;</div><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> org.testng.annotations.BeforeTest;</div><div class="line"><span class="keyword">import</span> org.testng.annotations.Test;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.JedisPool;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> roc</div><div class="line"> * <span class="doctag">@date</span> 2018/01/26</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisRateLimiterTest</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(RedisRateLimiterTest.class);</div><div class="line"></div><div class="line">    <span class="keyword">private</span> RateLimiter rateLimiter;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> AtomicInteger atomicInteger = <span class="keyword">new</span> AtomicInteger(<span class="number">1</span>);</div><div class="line"></div><div class="line">    <span class="meta">@BeforeTest</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">        JedisPool jedisPool = <span class="keyword">new</span> JedisPool(<span class="string">"10.0.30.66"</span>, <span class="number">6379</span>);</div><div class="line">        JedisTemplate jedisTemplate = <span class="keyword">new</span> JedisTemplate(jedisPool);</div><div class="line">        String rateLimiterName = <span class="string">"rateLimiterROC"</span>;</div><div class="line"></div><div class="line">        rateLimiter = RedisRateLimiter.newBuilder(jedisTemplate).setRateLimiterName(rateLimiterName)</div><div class="line">                .setUpperLimitPermits(<span class="number">10</span>).setTimeToLive(<span class="number">5</span>, TimeUnit.SECONDS).build();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Test</span>(threadPoolSize = <span class="number">10</span>, invocationCount = <span class="number">20</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testTryAcquire</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">boolean</span> acquired = rateLimiter.tryAcquire(<span class="number">1</span>);</div><div class="line">        <span class="keyword">if</span> (acquired) &#123;</div><div class="line">            LOGGER.info(<span class="string">"thread &#123;&#125; acquire the permit &#123;&#125; times."</span>, Thread.currentThread().getId(), atomicInteger.getAndIncrement());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Test</span>(threadPoolSize = <span class="number">10</span>, invocationCount = <span class="number">20</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAcquire</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        rateLimiter.acquire(<span class="number">1</span>);</div><div class="line">        LOGGER.info(<span class="string">"thread &#123;&#125; acquire the permit &#123;&#125; times."</span>, Thread.currentThread().getId(), atomicInteger.getAndIncrement());</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p><strong>测试用例</strong></p>
+<p>10个线程20次请求，限制5s内10次请求。</p>
+<p><strong>测试结果</strong></p>
+<p>10次请求在5s内正常通过，剩下10次请求等待下个时间窗口轮询。</p>
+<p><img src="http://olml6iu96.bkt.clouddn.com/%E9%99%90%E6%B5%81%E6%B5%8B%E8%AF%95.png" alt="测试结果"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://olml6iu96.bkt.clouddn.com/WX20170219-233910@2x.png" alt="roc.wong 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://olml6iu96.bkt.clouddn.com/WX20170219-233931@2x.png" alt="roc.wong 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    roc.wong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://roc-wong.github.io/blog/2018/01/服务限流方案.html" title="服务限流方案">https://roc-wong.github.io/blog/2018/01/服务限流方案.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2018/01/极光推送java-sdk-V3-2-15堵塞BUG.html" rel="next" title="极光推送java-sdk-V3.2.15堵塞BUG">
+                <i class="fa fa-chevron-left"></i> 极光推送java-sdk-V3.2.15堵塞BUG
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://olml6iu96.bkt.clouddn.com/eagle.png"
+                alt="roc.wong" />
+            
+              <p class="site-author-name" itemprop="name">roc.wong</p>
+              <p class="site-description motion-element" itemprop="description">roc wong的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/roc-wong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:roc.fly@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.caosh.me/" title="书豪" target="_blank">书豪</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#现状"><span class="nav-number">1.</span> <span class="nav-text">现状</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JPush-API-频率控制"><span class="nav-number">1.1.</span> <span class="nav-text">JPush API 频率控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各业务组直接对接极光API"><span class="nav-number">1.2.</span> <span class="nav-text">各业务组直接对接极光API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#令牌桶算法"><span class="nav-number">2.1.</span> <span class="nav-text">令牌桶算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单机限流"><span class="nav-number">2.2.</span> <span class="nav-text">单机限流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式限流"><span class="nav-number">2.3.</span> <span class="nav-text">分布式限流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码验证"><span class="nav-number">3.</span> <span class="nav-text">代码验证</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">roc.wong</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">189k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点总阅读次数">3:09</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" rel="external nofollow" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'roc-wong',
+            repo: 'roc-wong.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e84e5ce3e3065e15d8be0172b6f2599c2e2522ce',
+            
+                client_id: '721c48a2f226eea6742e'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9wG3UUpArW7udQ8Bx11ESyIV-gzGzoHsz", "h3uHORely9LqKkhIjd5zFtjy");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
