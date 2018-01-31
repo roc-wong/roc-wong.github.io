@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://roc-wong.github.io/"/>
-  <updated>2018-01-31T13:54:09.871Z</updated>
+  <updated>2018-01-31T13:55:41.474Z</updated>
   <id>https://roc-wong.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://roc-wong.github.io/blog/2018/01/%E6%9C%8D%E5%8A%A1%E9%99%90%E6%B5%81%E6%96%B9%E6%A1%88.html"/>
     <id>https://roc-wong.github.io/blog/2018/01/服务限流方案.html</id>
     <published>2018-01-31T13:41:04.000Z</published>
-    <updated>2018-01-31T13:54:09.871Z</updated>
+    <updated>2018-01-31T13:55:41.474Z</updated>
     
     <content type="html"><![CDATA[<p>如何让系统在汹涌澎湃的流量面前谈笑风生？我们的策略是不要让系统超负荷工作。如果现有的系统扛不住业务目标怎么办？加机器！机器不够怎么办？业务降级，服务限流！</p>
 <p>正所谓「他强任他强，清风拂山岗；他横任他横，明月照大江」，降级和限流是系统可用性保障中必不可少的神兵利器，丢卒保车，以暂停边缘业务为代价保障核心业务的资源，以系统不被突发流量压挂为第一要务。</p>
@@ -83,7 +83,8 @@
     
     <summary type="html">
     
-      服务限流
+      &lt;p&gt;如何让系统在汹涌澎湃的流量面前谈笑风生？我们的策略是不要让系统超负荷工作。如果现有的系统扛不住业务目标怎么办？加机器！机器不够怎么办？业务降级，服务限流！&lt;/p&gt;
+&lt;p&gt;正所谓「他强任他强，清风拂山岗；他横任他横，明月照大江」，降级和限流是系统可用性保障中必不可少的神兵利器，丢卒保车，以暂停边缘业务为代价保障核心业务的资源，以系统不被突发流量压挂为第一要务。&lt;/p&gt;
     
     </summary>
     
