@@ -143,7 +143,7 @@
 
 
 
-  <title>IntelliJ IDEA For Mac 快捷键 | fly high</title>
+  <title>bash-support.vim-Bash-IDE | fly high</title>
   
 
 
@@ -326,7 +326,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2017/03/IntelliJ-IDEA-key-map-for-Mac-OS.html">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2018/02/bash-support-vim-Bash-IDE.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="roc.wong">
@@ -343,7 +343,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">IntelliJ IDEA For Mac 快捷键</h1>
+          <h1 class="post-title" itemprop="name headline">bash-support.vim-Bash-IDE</h1>
         
 
         <div class="post-meta">
@@ -355,7 +355,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-10T22:58:22+08:00">2017-03-10</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-12T15:10:46+08:00">2018-02-12</time>
             
 
             
@@ -376,8 +376,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IDE/" itemprop="url" rel="index">
-                    <span itemprop="name">IDE</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -394,8 +394,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/blog/2017/03/IntelliJ-IDEA-key-map-for-Mac-OS.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2017/03/IntelliJ-IDEA-key-map-for-Mac-OS.html" itemprop="commentsCount"></span>
+                <a href="/blog/2018/02/bash-support-vim-Bash-IDE.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2018/02/bash-support-vim-Bash-IDE.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -403,7 +403,7 @@
 
           
           
-             <span id="/blog/2017/03/IntelliJ-IDEA-key-map-for-Mac-OS.html" class="leancloud_visitors" data-flag-title="IntelliJ IDEA For Mac 快捷键">
+             <span id="/blog/2018/02/bash-support-vim-Bash-IDE.html" class="leancloud_visitors" data-flag-title="bash-support.vim-Bash-IDE">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -428,7 +428,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">5k</span>
+                <span title="字数统计">4k</span>
               
 
               
@@ -442,7 +442,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">0:05</span>
+                <span title="阅读时长">0:04</span>
               
             </div>
           
@@ -450,7 +450,7 @@
           <!--
           
               <div class="post-description">
-                  IntelliJ IDEA 本身的设计思维是提倡键盘优先于鼠标的，所以各种快捷键组合层出不穷，对于快捷键设置也有各种支持，对于其他 IDE 的快捷键组合也有预设模板进行支持。使用时，请干掉那些不相关软件的快捷键。
+                  bash-support是一个高度定制化的 vim 插件，它允许你插入：文件头、补全语句、注释、函数、以及代码块。它也使你可以进行语法检查、使脚本可执行、一键启动调试器；而完成所有的这些而不需要关闭编辑器。
               </div>
           
           -->
@@ -467,194 +467,97 @@
       
 
       
-        <blockquote>
-<p>刘心武说：与其讨好别人，不如武装自己；与其逃避现实，不如笑对人生；与其听风听雨，不如昂首出击！</p>
-</blockquote>
-<p><strong>建议将 Mac 系统中与 IntelliJ IDEA 冲突的快捷键取消或更改，不建议改 IntelliJ IDEA 的默认快捷键。</strong></p>
-<p>本篇博客整理自IntelliJ IDEA 简体中文专题教程和日常开发归档：</p>
+        <p>IDE（集成开发环境）就是这样一个软件，它为了最大化程序员生产效率，提供了很多编程所需的设施和组件。 IDE 将所有开发工作集中到一个程序中，使得程序员可以编写、修改、编译、部署以及调试程序。</p>
+<p>在这篇文章中，我们会介绍如何通过使用 bash-support vim 插件将 Vim 编辑器安装和配置 为一个编写 Bash 脚本的 IDE。</p>
+<a id="more"></a>
+<p>一键安装Bash-support脚本：</p>
 <blockquote>
 <ul>
-<li><p><a href="https://github.com/judasn/IntelliJ-IDEA-Tutorial" target="_blank" rel="external">IntelliJ IDEA 简体中文专题教程</a></p>
-</li>
-<li><p>Windows / Linux：<a href="https://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard.pdf" target="_blank" rel="external">https://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard.pdf</a></p>
-</li>
-<li><p>Mac OS X：<a href="https://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard_Mac.pdf" target="_blank" rel="external">https://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard_Mac.pdf</a></p>
-</li>
+<li><a href="https://github.com/roc-wong/shell-tools/blob/master/xpress_install/bash_support.sh" target="_blank" rel="external">https://github.com/roc-wong/shell-tools/blob/master/xpress_install/bash_support.sh</a></li>
 </ul>
 </blockquote>
-<a id="more"></a>
-<p> 在 IntelliJ IDEA 中有两个 Mac 版本的快捷键，一个叫做：Mac OS X，一个叫做：Mac OS X 10.5+<br>。目前都是用：Mac OS X 10.5+ 有两套的原因：<a href="https://intellij-support.jetbrains.com/hc/en-us/community/posts/206159109-Updated-Mac-OS-X-keymap-Feedback-needed" target="_blank" rel="external">https://intellij-support.jetbrains.com/hc/en-us/community/posts/206159109-Updated-Mac-OS-X-keymap-Feedback-needed</a></p>
-<h4 id="Mac键盘符号和修饰键说明"><a href="#Mac键盘符号和修饰键说明" class="headerlink" title="Mac键盘符号和修饰键说明"></a>Mac键盘符号和修饰键说明</h4><ul>
-<li><code>⌘</code> Command</li>
-<li><code>⇧</code> Shift</li>
-<li><code>⌥</code> Option</li>
-<li><code>⌃</code> Control</li>
-<li><code>↩︎</code> Return/Enter</li>
-<li><code>⌫</code> Delete</li>
-<li><code>⌦</code> 向前删除键（Fn+Delete）</li>
-<li><code>↑</code> 上箭头</li>
-<li><code>↓</code> 下箭头</li>
-<li><code>←</code> 左箭头</li>
-<li><code>→</code> 右箭头</li>
-<li><code>⇞</code> Page Up（Fn+↑）</li>
-<li><code>⇟</code> Page Down（Fn+↓）</li>
-<li><code>Home</code> Fn + ←</li>
-<li><code>End</code> Fn + →</li>
-<li><code>⇥</code> 右制表符（Tab键）</li>
-<li><code>⇤</code> 左制表符（Shift+Tab）</li>
-<li><code>⎋</code> Escape (Esc)</li>
+<p>本篇博客整理自Linux中国：</p>
+<blockquote>
+<ul>
+<li><a href="https://linux.cn/article-8467-1.html" target="_blank" rel="external">如何用bash-support插件将Vim编辑器打造成编写Bash脚本的IDE</a></li>
 </ul>
-<h4 id="一、Editing（编辑）"><a href="#一、Editing（编辑）" class="headerlink" title="一、Editing（编辑）"></a>一、Editing（编辑）</h4><ul>
-<li><code>Control + Space</code> 基本的代码补全（补全任何类、方法、变量）</li>
-<li><code>Control + Shift + Space</code> 智能代码补全（过滤器方法列表和变量的预期类型）</li>
-<li><code>Command + Shift + Enter</code> 自动结束代码，行末自动添加分号</li>
-<li><code>Command + P</code> 显示方法的参数信息</li>
-<li><code>Control + J</code> 快速查看文档</li>
-<li><code>Shift + F1</code> 查看外部文档（在某些代码上会触发打开浏览器显示相关文档）</li>
-<li><code>Command + 鼠标放在代码上</code> 显示代码简要信息</li>
-<li><code>Command + F1</code> 在错误或警告处显示具体描述信息</li>
-<li><code>Command + N, Control + Enter, Control + N</code> 生成代码（getter、setter、构造函数、hashCode/equals,toString）</li>
-<li><code>Control + O</code> 覆盖方法（重写父类方法）</li>
-<li><code>Control + I</code> 实现方法（实现接口中的方法）</li>
-<li><code>Command + Option + T</code> 包围代码（使用if..else, try..catch, for, synchronized等包围选中的代码）</li>
-<li><code>Command + /</code> 注释/取消注释与行注释</li>
-<li><code>Command + Option + /</code> 注释/取消注释与块注释</li>
-<li><code>Option + 方向键上</code> 连续选中代码块</li>
-<li><code>Option + 方向键下</code> 减少当前选中的代码块</li>
-<li><code>Control + Shift + Q</code> 显示上下文信息</li>
-<li><code>Option + Enter</code> 显示意向动作和快速修复代码</li>
-<li><code>Command + Option + L</code> 格式化代码</li>
-<li><code>Control + Option + O</code> 优化import</li>
-<li><code>Control + Option + I</code> 自动缩进线</li>
-<li><code>Tab / Shift + Tab</code> 缩进代码 / 反缩进代码</li>
-<li><code>Command + X</code> 剪切当前行或选定的块到剪贴板</li>
-<li><code>Command + C</code> 复制当前行或选定的块到剪贴板</li>
-<li><code>Command + V</code> 从剪贴板粘贴</li>
-<li><code>Command + Shift + V</code> 从最近的缓冲区粘贴</li>
-<li><code>Command + D</code> 复制当前行或选定的块</li>
-<li><code>Command + Delete</code> 删除当前行或选定的块的行</li>
-<li><code>Control + Shift + J</code> 智能的将代码拼接成一行</li>
-<li><code>Command + Enter</code> 智能的拆分拼接的行</li>
-<li><code>Shift + Enter</code> 开始新的一行</li>
-<li><code>Command + Shift + U</code> 大小写切换</li>
-<li><code>Command + Shift + ] / Command + Shift + [</code> 选择直到代码块结束/开始</li>
-<li><code>Option + Fn + Delete</code> 删除到单词的末尾</li>
-<li><code>Option + Delete</code> 删除到单词的开头</li>
-<li><code>Command + 加号 / Command + 减号</code> 展开 / 折叠代码块</li>
-<li><code>Command + Shift + 加号</code> 展开所以代码块</li>
-<li><code>Command + Shift + 减号</code> 折叠所有代码块</li>
-<li><code>Command + W</code> 关闭活动的编辑器选项卡</li>
+</blockquote>
+<h2 id="什么是-bash-support-vim-插件"><a href="#什么是-bash-support-vim-插件" class="headerlink" title="什么是 bash-support.vim 插件"></a>什么是 bash-support.vim 插件</h2><p>bash-support 是一个高度定制化的 vim 插件，它允许你插入：文件头、补全语句、注释、函数、以及代码块。它也使你可以进行语法检查、使脚本可执行、一键启动调试器；而完成所有的这些而不需要关闭编辑器。</p>
+<p>它使用快捷键（映射），通过有组织地、一致的文件内容编写/插入，使得 bash 脚本编程变得有趣和愉快。</p>
+<p>插件当前版本是 4.3，4.0 版本 重写了之前的 3.12.1 版本，4.0 及之后的版本基于一个全新的、更强大的、和之前版本模板语法不同的模板系统。</p>
+<h2 id="如何在-Linux-中安装-Bash-support-插件"><a href="#如何在-Linux-中安装-Bash-support-插件" class="headerlink" title="如何在 Linux 中安装 Bash-support 插件"></a>如何在 Linux 中安装 Bash-support 插件</h2><p>用下面的命令下载最新版本的 bash-support 插件：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>cd Downloads</div><div class="line"><span class="variable">$ </span>curl <span class="symbol">http:</span>/<span class="regexp">/www.vim.org/scripts</span><span class="regexp">/download_script.php?src_id=24452 &gt;bash-support.zip</span></div></pre></td></tr></table></figure>
+<p>按照如下步骤安装；在你的主目录创建 .vim 目录（如果它不存在的话），进入该目录并提取 bash-support.zip 内容：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir ~/<span class="selector-class">.vim</span></div><div class="line">$ cd <span class="selector-class">.vim</span></div><div class="line">$ unzip ~/Downloads/bash-support.zip</div></pre></td></tr></table></figure>
+<p>下一步，在 .vimrc 文件中激活它：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>vi ~<span class="regexp">/.vimrc</span></div></pre></td></tr></table></figure>
+<p>并插入下面一行：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">filetype plug-<span class="keyword">in</span> <span class="keyword">on</span>   </div><div class="line"><span class="keyword">set</span> <span class="built_in">number</span>   <span class="comment"># 可选，增加这行以在 vim 中显示行号</span></div></pre></td></tr></table></figure>
+<h2 id="如何在-Vim-编辑器中使用-Bash-support-插件"><a href="#如何在-Vim-编辑器中使用-Bash-support-插件" class="headerlink" title="如何在 Vim 编辑器中使用 Bash-support 插件"></a>如何在 Vim 编辑器中使用 Bash-support 插件</h2><p>为了简化使用，通常使用的结构和特定操作可以分别通过键映射来插入/执行。 ~/.vim/doc/bashsupport.txt 和 ~/.vim/bash-support/doc/bash-hotkeys.pdf 或者 ~/.vim/bash-support/doc/bash-hotkeys.tex 文件中介绍了映射。</p>
+<p><strong>重要</strong>：</p>
+<ol>
+<li><strong>所有映射（+字符 组合）都是针对特定文件类型的：为了避免和其它插件的映射冲突，它们只适用于 sh 文件。</strong></li>
+<li><strong>使用键映射的时候打字速度也有关系，引导符”\”和后面字符的组合要在特定短时间内才能识别出来（很可能少于 3 秒 - 基于假设）。</strong></li>
+</ol>
+<h2 id="如何为新脚本自动生成文件头"><a href="#如何为新脚本自动生成文件头" class="headerlink" title="如何为新脚本自动生成文件头"></a>如何为新脚本自动生成文件头</h2><p>下面我们会介绍和学习使用这个插件一些显著的功能。看下面的示例文件头，为了要在你所有的新脚本中自动创建该文件头，请按照以下步骤操作。</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005111cw2zxty9yd2ww3ow.png" alt="脚本示例文件头选项"></p>
+<p>首先设置你的个人信息（作者名称、作者参考、组织、公司等）。在一个 Bash 缓冲区（像下面这样打开一个测试脚本）中使用映射 \ntw 启动模板设置向导。</p>
+<p>选中选项 1 设置个性化文件，然后按回车键。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vi <span class="keyword">test</span>.<span class="keyword">sh</span></div></pre></td></tr></table></figure>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005111c6kdizyg4ie16k70.png" alt="在脚本文件中设置个性化信息"></p>
+<p>之后，再次输入回车键。然后再一次选中选项 1 设置个性化文件的路径并输入回车。</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005112cpp9l6w922g0nu9j.png" alt="设置个性化文件路径"></p>
+<p>设置向导会把目标文件 .vim/bash-support/rc/personal.templates 拷贝到 .vim/templates/personal.templates，打开并编辑它，在这里你可以输入你的信息。</p>
+<p>按 i 键像截图那样在单引号中插入合适的值。</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005112x12kbb66z6gnxxgg.png" alt="在脚本文件头添加信息"></p>
+<p>一旦你设置了正确的值，输入 :wq 保存并退出文件。关闭 Bash 测试脚本，打开另一个脚本来测试新的配置。现在文件头中应该有和下面截图类似的你的个人信息：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="keyword">vi</span> test2.<span class="keyword">sh</span></div></pre></td></tr></table></figure></p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005113cv0myl26mbn1h370.png" alt="自动添加文件头到脚本"></p>
+<h2 id="添加-Bash-support-插件帮助信息"><a href="#添加-Bash-support-插件帮助信息" class="headerlink" title="添加 Bash-support 插件帮助信息"></a>添加 Bash-support 插件帮助信息</h2><p>为此，在 Vim 命令行输入下面的命令并按回车键，它会创建 .vim/doc/tags 文件：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:helptags <span class="variable">$HOME</span><span class="regexp">/.vim/</span>doc<span class="regexp">/</span></div></pre></td></tr></table></figure>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005113gixlnxzsxe58i8n8.png" alt="在 Vi 编辑器添加插件帮助"></p>
+<h2 id="如何在-Shell-脚本中插入注释"><a href="#如何在-Shell-脚本中插入注释" class="headerlink" title="如何在 Shell 脚本中插入注释"></a>如何在 Shell 脚本中插入注释</h2><p>要插入一个块注释，在普通模式下输入 \cfr：</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005113hr1vsvdih7iy7d1s.png" alt="添加注释到脚本"></p>
+<h2 id="如何在-Shell-脚本中插入语句"><a href="#如何在-Shell-脚本中插入语句" class="headerlink" title="如何在 Shell 脚本中插入语句"></a>如何在 Shell 脚本中插入语句</h2><p>下面是一些用于插入语句的键映射（n – 普通模式, i – 插入模式，v 可视模式）：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="string">\sc</span> – <span class="keyword">case</span> <span class="keyword">in</span> … esac （n, i）</div><div class="line"><span class="string">\sei</span> – elif <span class="keyword">then</span> （n, i）</div><div class="line"><span class="string">\sf</span> – <span class="keyword">for</span> <span class="keyword">in</span> <span class="keyword">do</span> done （n, i, v）</div><div class="line"><span class="string">\sfo</span> – <span class="keyword">for</span> ((…)) <span class="keyword">do</span> done （n, i, v）</div><div class="line"><span class="string">\si</span> – <span class="keyword">if</span> <span class="keyword">then</span> fi （n, i, v）</div><div class="line"><span class="string">\sie</span> – <span class="keyword">if</span> <span class="keyword">then</span> <span class="keyword">else</span> fi （n, i, v）</div><div class="line"><span class="string">\ss</span> – select <span class="keyword">in</span> <span class="keyword">do</span> done （n, i, v）</div><div class="line"><span class="string">\su</span> – <span class="keyword">until</span> <span class="keyword">do</span> done （n, i, v）</div><div class="line"><span class="string">\sw</span> – <span class="keyword">while</span> <span class="keyword">do</span> done （n, i, v）</div><div class="line"><span class="string">\sfu</span> – <span class="keyword">function</span> （n, i, v）</div><div class="line"><span class="string">\se</span> – echo -e <span class="string">"…"</span> （n, i, v）</div><div class="line"><span class="string">\sp</span> – printf <span class="string">"…"</span> （n, i, v）</div><div class="line"><span class="string">\sa</span> – 数组元素, $&#123;.[.]&#125; （n, i, v） 和其它更多的数组功能。</div></pre></td></tr></table></figure>
+<h2 id="插入一个函数和函数头"><a href="#插入一个函数和函数头" class="headerlink" title="插入一个函数和函数头"></a>插入一个函数和函数头</h2><p>输入 \sfu 添加一个新的空函数，然后添加函数名并按回车键创建它。之后，添加你的函数代码。</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005114jz0iplcmz10imi7j.png" alt="在脚本中插入新函数"></p>
+<p>为了给上面的函数创建函数头，输入 \cfu，输入函数名称，按回车键并填入合适的值（名称、介绍、参数、返回值）：</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005114jz0iplcmz10imi7j.png" alt="在脚本中创建函数头"></p>
+<h2 id="更多关于添加-Bash-语句的例子"><a href="#更多关于添加-Bash-语句的例子" class="headerlink" title="更多关于添加 Bash 语句的例子"></a>更多关于添加 Bash 语句的例子</h2><p>下面是一个使用 \si 插入一条 if 语句的例子：</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005114bd11zhj3b338ej33.png" alt="在脚本中插入语句"></p>
+<p>下面的例子显示使用 \se 添加一条 echo 语句：</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005115i2rh71k7rz3c88xh.png" alt="在脚本中添加 echo 语句"></p>
+<h2 id="如何在-Vi-编辑器中使用运行操作"><a href="#如何在-Vi-编辑器中使用运行操作" class="headerlink" title="如何在 Vi 编辑器中使用运行操作"></a>如何在 Vi 编辑器中使用运行操作</h2><p>下面是一些运行操作键映射的列表：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">\rr – 更新文件，运行脚本（<span class="built_in">n</span>, i）</div><div class="line">\ra – 设置脚本命令行参数 （<span class="built_in">n</span>, i）</div><div class="line">\rc – 更新文件，检查语法 （<span class="built_in">n</span>, i）</div><div class="line">\rco – 语法检查选项 （<span class="built_in">n</span>, i）</div><div class="line">\rd – 启动调试器（<span class="built_in">n</span>, i）</div><div class="line">\re – 使脚本可/不可执行(*) （<span class="built_in">n</span>, i）</div></pre></td></tr></table></figure>
+<h2 id="使脚本可执行"><a href="#使脚本可执行" class="headerlink" title="使脚本可执行"></a>使脚本可执行</h2><p>编写完脚本后，保存它然后输入 \re 和回车键使它可执行。</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005115ezuvseyjvkksyosn.png" alt="使脚本可执行"></p>
+<h2 id="如何在-Bash-脚本中使用预定义代码片段"><a href="#如何在-Bash-脚本中使用预定义代码片段" class="headerlink" title="如何在 Bash 脚本中使用预定义代码片段"></a>如何在 Bash 脚本中使用预定义代码片段</h2><p>预定义代码片段是为了特定目的包含了已写好代码的文件。为了添加代码段，输入 \nr 和 \nw 读/写预定义代码段。输入下面的命令列出默认的代码段：</p>
+<p>$ ls ~/.vim/bash-support/codesnippets/<br><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005115vgjeagjassxxkzk6.png" alt="代码段列表"></p>
+<p>为了使用代码段，例如 free-software-comment，输入 \nr 并使用自动补全功能选择它的名称，然后输入回车键：</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005116e9ouzri0iyaghr5h.png" alt="添加代码段到脚本"></p>
+<h2 id="创建自定义预定义代码段"><a href="#创建自定义预定义代码段" class="headerlink" title="创建自定义预定义代码段"></a>创建自定义预定义代码段</h2><p>可以在  ~/.vim/bash-support/codesnippets/目录下编写你自己的代码段。另外，你还可以从你正常的脚本代码中创建你自己的代码段：</p>
+<ol>
+<li>选择你想作为代码段的部分代码，然后输入  \nw 并给它一个相近的文件名。</li>
+<li>要读入它，只需要输入  \nr 然后使用文件名就可以添加你自定义的代码段。</li>
+</ol>
+<h2 id="在当前光标处查看内建和命令帮助"><a href="#在当前光标处查看内建和命令帮助" class="headerlink" title="在当前光标处查看内建和命令帮助"></a>在当前光标处查看内建和命令帮助</h2><p>要显示帮助，在普通模式下输入：</p>
+<ol>
+<li>\hh – 内建帮助</li>
+<li>\hm – 命令帮助</li>
+</ol>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005116v16e1vnarxovx1x9.png" alt="查看内建命令帮助"></p>
+<p>更多参考资料，可以查看文件：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">~/.vim<span class="meta-keyword">/doc/</span>bashsupport.txt  <span class="meta">#在线文档的副本</span></div><div class="line">~/.vim<span class="meta-keyword">/doc/</span>tags</div></pre></td></tr></table></figure>
+<ul>
+<li>访问 Bash-support 插件 GitHub 仓库：<a href="https://github.com/WolfgangMehner/bash-support" target="_blank" rel="external">https://github.com/WolfgangMehner/bash-support</a></li>
+<li>在 Vim 网站访问 Bash-support 插件：<a href="http://www.vim.org/scripts/script.php?script_id=365" target="_blank" rel="external">http://www.vim.org/scripts/script.php?script_id=365</a></li>
 </ul>
-<h4 id="二、Search-Replace（查询-替换）"><a href="#二、Search-Replace（查询-替换）" class="headerlink" title="二、Search/Replace（查询/替换）"></a>二、Search/Replace（查询/替换）</h4><ul>
-<li><code>Double Shift</code> 查询任何东西</li>
-<li><code>Command + F</code> 文件内查找</li>
-<li><code>Command + G</code> 查找模式下，向下查找</li>
-<li><code>Command + Shift + G</code> 查找模式下，向上查找</li>
-<li><code>Command + R</code> 文件内替换</li>
-<li><code>Command + Shift + F</code> 全局查找（根据路径）</li>
-<li><code>Command + Shift + R</code> 全局替换（根据路径）</li>
-<li><code>Command + Shift + S</code> 查询结构（Ultimate Edition 版专用，需要在Keymap中设置）</li>
-<li><code>Command + Shift + M</code> 替换结构（Ultimate Edition 版专用，需要在Keymap中设置）</li>
-</ul>
-<h4 id="三、Usage-Search（使用查询）"><a href="#三、Usage-Search（使用查询）" class="headerlink" title="三、Usage Search（使用查询）"></a>三、Usage Search（使用查询）</h4><ul>
-<li><code>Option + F7 / Command + F7</code> 在文件中查找用法 / 在类中查找用法</li>
-<li><code>Command + Shift + F7</code> 在文件中突出显示的用法</li>
-<li><code>Command + Option + F7</code> 显示用法</li>
-</ul>
-<h4 id="四、Compile-and-Run（编译和运行）"><a href="#四、Compile-and-Run（编译和运行）" class="headerlink" title="四、Compile and Run（编译和运行）"></a>四、Compile and Run（编译和运行）</h4><ul>
-<li><code>Command + F9</code> 编译Project</li>
-<li><code>Command + Shift + F9</code> 编译选择的文件、包或模块</li>
-<li><code>Control + Option + R</code> 弹出 Run 的可选择菜单</li>
-<li><code>Control + Option + D</code> 弹出 Debug 的可选择菜单</li>
-<li><code>Control + R</code> 运行</li>
-<li><code>Control + D</code> 调试</li>
-<li><code>Control + Shift + R, Control + Shift + D</code> 从编辑器运行上下文环境配置</li>
-</ul>
-<h4 id="五、Debugging（调试）"><a href="#五、Debugging（调试）" class="headerlink" title="五、Debugging（调试）"></a>五、Debugging（调试）</h4><ul>
-<li><code>F8</code> 进入下一步，如果当前行断点是一个方法，则不进入当前方法体内</li>
-<li><code>F7</code> 进入下一步，如果当前行断点是一个方法，则进入当前方法体内，如果该方法体还有方法，则不会进入该内嵌的方法中</li>
-<li><code>Shift + F7</code> 智能步入，断点所在行上有多个方法调用，会弹出进入哪个方法</li>
-<li><code>Shift + F8</code> 跳出</li>
-<li><code>Option + F9</code> 运行到光标处，如果光标前有其他断点会进入到该断点</li>
-<li><code>Option + F8</code> 计算表达式（可以更改变量值使其生效）</li>
-<li><code>Command + Option + R</code> 恢复程序运行，如果该断点下面代码还有断点则停在下一个断点上</li>
-<li><code>Command + F8</code> 切换断点（若光标当前行有断点则取消断点，没有则加上断点）</li>
-<li><code>Command + Shift + F8</code> 查看断点信息</li>
-</ul>
-<h4 id="六、Navigation（导航）"><a href="#六、Navigation（导航）" class="headerlink" title="六、Navigation（导航）"></a>六、Navigation（导航）</h4><ul>
-<li><code>Command + O</code> 查找类文件</li>
-<li><code>Command + Shift + O</code> 查找所有类型文件、打开文件、打开目录，打开目录需要在输入的内容前面或后面加一个反斜杠<code>/</code></li>
-<li><code>Command + Option + O</code> 前往指定的变量 / 方法</li>
-<li><code>Control + 方向键左 / Control + 方向键右</code> 左右切换打开的编辑tab页</li>
-<li><code>F12</code> 返回到前一个工具窗口</li>
-<li><code>Esc</code> 从工具窗口进入代码文件窗口</li>
-<li><code>Shift + Esc</code> 隐藏当前或最后一个活动的窗口，且光标进入代码文件窗口</li>
-<li><code>Command + Shift + F4</code> 关闭活动run/messages/find/… tab</li>
-<li><code>Command + L</code> 在当前文件跳转到某一行的指定处</li>
-<li><code>Command + E</code> 显示最近打开的文件记录列表</li>
-<li><code>Option + 方向键左 / Option + 方向键右</code> 光标跳转到当前单词 / 中文句的左 / 右侧开头位置</li>
-<li><code>Command + Option + 方向键左 / Command + Option + 方向键右</code> 退回 / 前进到上一个操作的地方</li>
-<li><code>Command + Shift + Delete</code> 跳转到最后一个编辑的地方</li>
-<li><code>Option + F1</code> 显示当前文件选择目标弹出层，弹出层中有很多目标可以进行选择(如在代码编辑窗口可以选择显示该文件的Finder)</li>
-<li><code>Command + B / Command +  鼠标点击</code> 进入光标所在的方法/变量的接口或是定义处</li>
-<li><code>Command + Option + B</code> 跳转到实现处，在某个调用的方法名上使用会跳到具体的实现处，可以跳过接口</li>
-<li><code>Option + Space, Command + Y</code> 快速打开光标所在方法、类的定义</li>
-<li><code>Control + Shift + B</code> 跳转到类型声明处</li>
-<li><code>Command + U</code> 前往当前光标所在方法的父类的方法 / 接口定义</li>
-<li><code>Control + 方向键下 / Control + 方向键上</code> 当前光标跳转到当前文件的前一个/后一个方法名位置</li>
-<li><code>Command + ] / Command + [</code> 移动光标到当前所在代码的花括号开始/结束位置</li>
-<li><code>Command + F12</code> 弹出当前文件结构层，可以在弹出的层上直接输入进行筛选（可用于搜索类中的方法）</li>
-<li><code>Control + H</code> 显示当前类的层次结构</li>
-<li><code>Command + Shift + H</code> 显示方法层次结构</li>
-<li><code>Control + Option + H</code> 显示调用层次结构</li>
-<li><code>F2 / Shift + F2</code> 跳转到下一个/上一个突出错误或警告的位置</li>
-<li><code>F4 / Command + 方向键下</code> 编辑/查看代码源</li>
-<li><code>Option + Home</code> 显示到当前文件的导航条</li>
-<li><code>F3</code>选中文件/文件夹/代码行，添加/取消书签</li>
-<li><code>Option + F3</code> 选中文件/文件夹/代码行，使用助记符添加/取消书签</li>
-<li><code>Control + 0...Control + 9</code> 定位到对应数值的书签位置</li>
-<li><code>Command + F3</code> 显示所有书签</li>
-</ul>
-<h4 id="七、Refactoring（重构）"><a href="#七、Refactoring（重构）" class="headerlink" title="七、Refactoring（重构）"></a>七、Refactoring（重构）</h4><ul>
-<li><code>F5</code> 复制文件到指定目录</li>
-<li><code>F6</code> 移动文件到指定目录</li>
-<li><code>Command + Delete</code> 在文件上为安全删除文件，弹出确认框</li>
-<li><code>Shift + F6</code> 重命名文件</li>
-<li><code>Command + F6</code> 更改签名</li>
-<li><code>Command + Option + N</code> 一致性</li>
-<li><code>Command + Option + M</code> 将选中的代码提取为方法</li>
-<li><code>Command + Option + V</code> 提取变量</li>
-<li><code>Command + Option + F</code> 提取字段</li>
-<li><code>Command + Option + C</code> 提取常量</li>
-<li><code>Command + Option + P</code> 提取参数</li>
-</ul>
-<h4 id="八、VCS-Local-History（版本控制-本地历史记录）"><a href="#八、VCS-Local-History（版本控制-本地历史记录）" class="headerlink" title="八、VCS/Local History（版本控制/本地历史记录）"></a>八、VCS/Local History（版本控制/本地历史记录）</h4><ul>
-<li><code>Command + K</code> 提交代码到版本控制器</li>
-<li><code>Command + T</code> 从版本控制器更新代码</li>
-<li><code>Option + Shift + C</code> 查看最近的变更记录</li>
-<li><code>Control + C</code> 快速弹出版本控制器操作面板</li>
-</ul>
-<h4 id="九、Live-Templates（动态代码模板）"><a href="#九、Live-Templates（动态代码模板）" class="headerlink" title="九、Live Templates（动态代码模板）"></a>九、Live Templates（动态代码模板）</h4><ul>
-<li><code>Command + Option + J</code> 弹出模板选择窗口，将选定的代码使用动态模板包住</li>
-<li><code>Command + J</code> 插入自定义动态代码模板</li>
-</ul>
-<h4 id="十、General（通用）"><a href="#十、General（通用）" class="headerlink" title="十、General（通用）"></a>十、General（通用）</h4><ul>
-<li><code>Command + 1...Command + 9</code> 打开相应编号的工具窗口</li>
-<li><code>Command + S</code> 保存所有</li>
-<li><code>Command + Option + Y</code> 同步、刷新</li>
-<li><code>Control + Command + F</code> 切换全屏模式</li>
-<li><code>Command + Shift + F12</code> 切换最大化编辑器</li>
-<li><code>Option + Shift + F</code> 添加到收藏夹</li>
-<li><code>Option + Shift + I</code> 检查当前文件与当前的配置文件</li>
-<li>Control + ` 快速切换当前的scheme（切换主题、代码样式等）</li>
-<li><code>Command + ,</code> 打开IDEA系统设置</li>
-<li><code>Command + ;</code> 打开项目结构对话框</li>
-<li><code>Shift + Command + A</code> 查找动作（可设置相关选项）</li>
-<li><code>Control + Shift + Tab</code> 编辑窗口标签和工具窗口之间切换（如果在切换的过程加按上delete，则是关闭对应选中的窗口）</li>
-</ul>
-<h4 id="十一、Other（一些官方文档上没有体现的快捷键）"><a href="#十一、Other（一些官方文档上没有体现的快捷键）" class="headerlink" title="十一、Other（一些官方文档上没有体现的快捷键）"></a>十一、Other（一些官方文档上没有体现的快捷键）</h4><ul>
-<li><code>Command + Shift +8</code> 竖编辑模式</li>
-</ul>
+<p>就是这些啦，在这篇文章中，我们介绍了在 Linux 中使用 Bash-support 插件安装和配置 Vim 为一个 Bash-IDE 的步骤。快去发现这个插件其它令人兴奋的功能吧，一定要在评论中和我们分享哦。</p>
+<p>作者简介：</p>
+<p>Aaron Kili 是一个 Linux 和 F.O.S.S 爱好者、Linux 系统管理员、网络开发人员，现在也是 TecMint 的内容创作者，她喜欢和电脑一起工作，坚信共享知识。</p>
+<p>via: <a href="http://www.tecmint.com/use-vim-as-bash-ide-using-bash-support-in-linux/" target="_blank" rel="external">http://www.tecmint.com/use-vim-as-bash-ide-using-bash-support-in-linux/</a></p>
+<p>作者：Aaron Kili 译者：ictlyh 校对：wxy</p>
+<p>本文由 LCTT 原创编译，Linux中国 荣誉推出</p>
 
       
     </div>
@@ -704,7 +607,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://roc-wong.github.io/blog/2017/03/IntelliJ-IDEA-key-map-for-Mac-OS.html" title="IntelliJ IDEA For Mac 快捷键">https://roc-wong.github.io/blog/2017/03/IntelliJ-IDEA-key-map-for-Mac-OS.html</a>
+    <a href="https://roc-wong.github.io/blog/2018/02/bash-support-vim-Bash-IDE.html" title="bash-support.vim-Bash-IDE">https://roc-wong.github.io/blog/2018/02/bash-support-vim-Bash-IDE.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -719,9 +622,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/IDE/" rel="tag"># IDE</a>
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
-            <a href="/tags/IntelliJ-IDEA/" rel="tag"># IntelliJ IDEA</a>
+            <a href="/tags/Shell/" rel="tag"># Shell</a>
           
         </div>
       
@@ -734,8 +637,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2017/03/IntelliJ-IDEA-key-map.html" rel="next" title="IntelliJ IDEA 快键键">
-                <i class="fa fa-chevron-left"></i> IntelliJ IDEA 快键键
+              <a href="/blog/2018/01/服务限流方案.html" rel="next" title="服务限流方案">
+                <i class="fa fa-chevron-left"></i> 服务限流方案
               </a>
             
           </div>
@@ -743,10 +646,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2017/03/IntelliJ-IDEA-plugins.html" rel="prev" title="IntelliJ IDEA 插件推荐">
-                IntelliJ IDEA 插件推荐 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -927,7 +826,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Mac键盘符号和修饰键说明"><span class="nav-number">1.</span> <span class="nav-text">Mac键盘符号和修饰键说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一、Editing（编辑）"><span class="nav-number">2.</span> <span class="nav-text">一、Editing（编辑）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、Search-Replace（查询-替换）"><span class="nav-number">3.</span> <span class="nav-text">二、Search/Replace（查询/替换）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、Usage-Search（使用查询）"><span class="nav-number">4.</span> <span class="nav-text">三、Usage Search（使用查询）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、Compile-and-Run（编译和运行）"><span class="nav-number">5.</span> <span class="nav-text">四、Compile and Run（编译和运行）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、Debugging（调试）"><span class="nav-number">6.</span> <span class="nav-text">五、Debugging（调试）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、Navigation（导航）"><span class="nav-number">7.</span> <span class="nav-text">六、Navigation（导航）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七、Refactoring（重构）"><span class="nav-number">8.</span> <span class="nav-text">七、Refactoring（重构）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#八、VCS-Local-History（版本控制-本地历史记录）"><span class="nav-number">9.</span> <span class="nav-text">八、VCS/Local History（版本控制/本地历史记录）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#九、Live-Templates（动态代码模板）"><span class="nav-number">10.</span> <span class="nav-text">九、Live Templates（动态代码模板）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十、General（通用）"><span class="nav-number">11.</span> <span class="nav-text">十、General（通用）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十一、Other（一些官方文档上没有体现的快捷键）"><span class="nav-number">12.</span> <span class="nav-text">十一、Other（一些官方文档上没有体现的快捷键）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是-bash-support-vim-插件"><span class="nav-number">1.</span> <span class="nav-text">什么是 bash-support.vim 插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在-Linux-中安装-Bash-support-插件"><span class="nav-number">2.</span> <span class="nav-text">如何在 Linux 中安装 Bash-support 插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在-Vim-编辑器中使用-Bash-support-插件"><span class="nav-number">3.</span> <span class="nav-text">如何在 Vim 编辑器中使用 Bash-support 插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何为新脚本自动生成文件头"><span class="nav-number">4.</span> <span class="nav-text">如何为新脚本自动生成文件头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加-Bash-support-插件帮助信息"><span class="nav-number">5.</span> <span class="nav-text">添加 Bash-support 插件帮助信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在-Shell-脚本中插入注释"><span class="nav-number">6.</span> <span class="nav-text">如何在 Shell 脚本中插入注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在-Shell-脚本中插入语句"><span class="nav-number">7.</span> <span class="nav-text">如何在 Shell 脚本中插入语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入一个函数和函数头"><span class="nav-number">8.</span> <span class="nav-text">插入一个函数和函数头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多关于添加-Bash-语句的例子"><span class="nav-number">9.</span> <span class="nav-text">更多关于添加 Bash 语句的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在-Vi-编辑器中使用运行操作"><span class="nav-number">10.</span> <span class="nav-text">如何在 Vi 编辑器中使用运行操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使脚本可执行"><span class="nav-number">11.</span> <span class="nav-text">使脚本可执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在-Bash-脚本中使用预定义代码片段"><span class="nav-number">12.</span> <span class="nav-text">如何在 Bash 脚本中使用预定义代码片段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建自定义预定义代码段"><span class="nav-number">13.</span> <span class="nav-text">创建自定义预定义代码段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在当前光标处查看内建和命令帮助"><span class="nav-number">14.</span> <span class="nav-text">在当前光标处查看内建和命令帮助</span></a></li></ol></div>
             
 
           </div>
@@ -1132,7 +1031,7 @@
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitmint({
-            id: 'IntelliJ IDEA For Mac 快捷键',
+            id: 'bash-support.vim-Bash-IDE',
             owner: 'roc-wong',
             repo: 'roc-wong.github.io',
             

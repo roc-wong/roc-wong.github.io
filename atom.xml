@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://roc-wong.github.io/"/>
-  <updated>2018-01-31T13:55:41.474Z</updated>
+  <updated>2018-02-12T07:28:39.705Z</updated>
   <id>https://roc-wong.github.io/</id>
   
   <author>
@@ -16,18 +16,133 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>bash-support.vim-Bash-IDE</title>
+    <link href="https://roc-wong.github.io/blog/2018/02/bash-support-vim-Bash-IDE.html"/>
+    <id>https://roc-wong.github.io/blog/2018/02/bash-support-vim-Bash-IDE.html</id>
+    <published>2018-02-12T07:10:46.000Z</published>
+    <updated>2018-02-12T07:28:39.705Z</updated>
+    
+    <content type="html"><![CDATA[<p>IDE（集成开发环境）就是这样一个软件，它为了最大化程序员生产效率，提供了很多编程所需的设施和组件。 IDE 将所有开发工作集中到一个程序中，使得程序员可以编写、修改、编译、部署以及调试程序。</p>
+<p>在这篇文章中，我们会介绍如何通过使用 bash-support vim 插件将 Vim 编辑器安装和配置 为一个编写 Bash 脚本的 IDE。</p>
+<a id="more"></a>
+<p>一键安装Bash-support脚本：</p>
+<blockquote>
+<ul>
+<li><a href="https://github.com/roc-wong/shell-tools/blob/master/xpress_install/bash_support.sh" target="_blank" rel="external">https://github.com/roc-wong/shell-tools/blob/master/xpress_install/bash_support.sh</a></li>
+</ul>
+</blockquote>
+<p>本篇博客整理自Linux中国：</p>
+<blockquote>
+<ul>
+<li><a href="https://linux.cn/article-8467-1.html" target="_blank" rel="external">如何用bash-support插件将Vim编辑器打造成编写Bash脚本的IDE</a></li>
+</ul>
+</blockquote>
+<h2 id="什么是-bash-support-vim-插件"><a href="#什么是-bash-support-vim-插件" class="headerlink" title="什么是 bash-support.vim 插件"></a>什么是 bash-support.vim 插件</h2><p>bash-support 是一个高度定制化的 vim 插件，它允许你插入：文件头、补全语句、注释、函数、以及代码块。它也使你可以进行语法检查、使脚本可执行、一键启动调试器；而完成所有的这些而不需要关闭编辑器。</p>
+<p>它使用快捷键（映射），通过有组织地、一致的文件内容编写/插入，使得 bash 脚本编程变得有趣和愉快。</p>
+<p>插件当前版本是 4.3，4.0 版本 重写了之前的 3.12.1 版本，4.0 及之后的版本基于一个全新的、更强大的、和之前版本模板语法不同的模板系统。</p>
+<h2 id="如何在-Linux-中安装-Bash-support-插件"><a href="#如何在-Linux-中安装-Bash-support-插件" class="headerlink" title="如何在 Linux 中安装 Bash-support 插件"></a>如何在 Linux 中安装 Bash-support 插件</h2><p>用下面的命令下载最新版本的 bash-support 插件：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>cd Downloads</div><div class="line"><span class="variable">$ </span>curl <span class="symbol">http:</span>/<span class="regexp">/www.vim.org/scripts</span><span class="regexp">/download_script.php?src_id=24452 &gt;bash-support.zip</span></div></pre></td></tr></table></figure>
+<p>按照如下步骤安装；在你的主目录创建 .vim 目录（如果它不存在的话），进入该目录并提取 bash-support.zip 内容：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir ~/<span class="selector-class">.vim</span></div><div class="line">$ cd <span class="selector-class">.vim</span></div><div class="line">$ unzip ~/Downloads/bash-support.zip</div></pre></td></tr></table></figure>
+<p>下一步，在 .vimrc 文件中激活它：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>vi ~<span class="regexp">/.vimrc</span></div></pre></td></tr></table></figure>
+<p>并插入下面一行：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">filetype plug-<span class="keyword">in</span> <span class="keyword">on</span>   </div><div class="line"><span class="keyword">set</span> <span class="built_in">number</span>   <span class="comment"># 可选，增加这行以在 vim 中显示行号</span></div></pre></td></tr></table></figure>
+<h2 id="如何在-Vim-编辑器中使用-Bash-support-插件"><a href="#如何在-Vim-编辑器中使用-Bash-support-插件" class="headerlink" title="如何在 Vim 编辑器中使用 Bash-support 插件"></a>如何在 Vim 编辑器中使用 Bash-support 插件</h2><p>为了简化使用，通常使用的结构和特定操作可以分别通过键映射来插入/执行。 ~/.vim/doc/bashsupport.txt 和 ~/.vim/bash-support/doc/bash-hotkeys.pdf 或者 ~/.vim/bash-support/doc/bash-hotkeys.tex 文件中介绍了映射。</p>
+<p><strong>重要</strong>：</p>
+<ol>
+<li><strong>所有映射（+字符 组合）都是针对特定文件类型的：为了避免和其它插件的映射冲突，它们只适用于 sh 文件。</strong></li>
+<li><strong>使用键映射的时候打字速度也有关系，引导符”\”和后面字符的组合要在特定短时间内才能识别出来（很可能少于 3 秒 - 基于假设）。</strong></li>
+</ol>
+<h2 id="如何为新脚本自动生成文件头"><a href="#如何为新脚本自动生成文件头" class="headerlink" title="如何为新脚本自动生成文件头"></a>如何为新脚本自动生成文件头</h2><p>下面我们会介绍和学习使用这个插件一些显著的功能。看下面的示例文件头，为了要在你所有的新脚本中自动创建该文件头，请按照以下步骤操作。</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005111cw2zxty9yd2ww3ow.png" alt="脚本示例文件头选项"></p>
+<p>首先设置你的个人信息（作者名称、作者参考、组织、公司等）。在一个 Bash 缓冲区（像下面这样打开一个测试脚本）中使用映射 \ntw 启动模板设置向导。</p>
+<p>选中选项 1 设置个性化文件，然后按回车键。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vi <span class="keyword">test</span>.<span class="keyword">sh</span></div></pre></td></tr></table></figure>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005111c6kdizyg4ie16k70.png" alt="在脚本文件中设置个性化信息"></p>
+<p>之后，再次输入回车键。然后再一次选中选项 1 设置个性化文件的路径并输入回车。</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005112cpp9l6w922g0nu9j.png" alt="设置个性化文件路径"></p>
+<p>设置向导会把目标文件 .vim/bash-support/rc/personal.templates 拷贝到 .vim/templates/personal.templates，打开并编辑它，在这里你可以输入你的信息。</p>
+<p>按 i 键像截图那样在单引号中插入合适的值。</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005112x12kbb66z6gnxxgg.png" alt="在脚本文件头添加信息"></p>
+<p>一旦你设置了正确的值，输入 :wq 保存并退出文件。关闭 Bash 测试脚本，打开另一个脚本来测试新的配置。现在文件头中应该有和下面截图类似的你的个人信息：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="keyword">vi</span> test2.<span class="keyword">sh</span></div></pre></td></tr></table></figure></p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005113cv0myl26mbn1h370.png" alt="自动添加文件头到脚本"></p>
+<h2 id="添加-Bash-support-插件帮助信息"><a href="#添加-Bash-support-插件帮助信息" class="headerlink" title="添加 Bash-support 插件帮助信息"></a>添加 Bash-support 插件帮助信息</h2><p>为此，在 Vim 命令行输入下面的命令并按回车键，它会创建 .vim/doc/tags 文件：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:helptags <span class="variable">$HOME</span><span class="regexp">/.vim/</span>doc<span class="regexp">/</span></div></pre></td></tr></table></figure>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005113gixlnxzsxe58i8n8.png" alt="在 Vi 编辑器添加插件帮助"></p>
+<h2 id="如何在-Shell-脚本中插入注释"><a href="#如何在-Shell-脚本中插入注释" class="headerlink" title="如何在 Shell 脚本中插入注释"></a>如何在 Shell 脚本中插入注释</h2><p>要插入一个块注释，在普通模式下输入 \cfr：</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005113hr1vsvdih7iy7d1s.png" alt="添加注释到脚本"></p>
+<h2 id="如何在-Shell-脚本中插入语句"><a href="#如何在-Shell-脚本中插入语句" class="headerlink" title="如何在 Shell 脚本中插入语句"></a>如何在 Shell 脚本中插入语句</h2><p>下面是一些用于插入语句的键映射（n – 普通模式, i – 插入模式，v 可视模式）：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="string">\sc</span> – <span class="keyword">case</span> <span class="keyword">in</span> … esac （n, i）</div><div class="line"><span class="string">\sei</span> – elif <span class="keyword">then</span> （n, i）</div><div class="line"><span class="string">\sf</span> – <span class="keyword">for</span> <span class="keyword">in</span> <span class="keyword">do</span> done （n, i, v）</div><div class="line"><span class="string">\sfo</span> – <span class="keyword">for</span> ((…)) <span class="keyword">do</span> done （n, i, v）</div><div class="line"><span class="string">\si</span> – <span class="keyword">if</span> <span class="keyword">then</span> fi （n, i, v）</div><div class="line"><span class="string">\sie</span> – <span class="keyword">if</span> <span class="keyword">then</span> <span class="keyword">else</span> fi （n, i, v）</div><div class="line"><span class="string">\ss</span> – select <span class="keyword">in</span> <span class="keyword">do</span> done （n, i, v）</div><div class="line"><span class="string">\su</span> – <span class="keyword">until</span> <span class="keyword">do</span> done （n, i, v）</div><div class="line"><span class="string">\sw</span> – <span class="keyword">while</span> <span class="keyword">do</span> done （n, i, v）</div><div class="line"><span class="string">\sfu</span> – <span class="keyword">function</span> （n, i, v）</div><div class="line"><span class="string">\se</span> – echo -e <span class="string">"…"</span> （n, i, v）</div><div class="line"><span class="string">\sp</span> – printf <span class="string">"…"</span> （n, i, v）</div><div class="line"><span class="string">\sa</span> – 数组元素, $&#123;.[.]&#125; （n, i, v） 和其它更多的数组功能。</div></pre></td></tr></table></figure>
+<h2 id="插入一个函数和函数头"><a href="#插入一个函数和函数头" class="headerlink" title="插入一个函数和函数头"></a>插入一个函数和函数头</h2><p>输入 \sfu 添加一个新的空函数，然后添加函数名并按回车键创建它。之后，添加你的函数代码。</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005114jz0iplcmz10imi7j.png" alt="在脚本中插入新函数"></p>
+<p>为了给上面的函数创建函数头，输入 \cfu，输入函数名称，按回车键并填入合适的值（名称、介绍、参数、返回值）：</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005114jz0iplcmz10imi7j.png" alt="在脚本中创建函数头"></p>
+<h2 id="更多关于添加-Bash-语句的例子"><a href="#更多关于添加-Bash-语句的例子" class="headerlink" title="更多关于添加 Bash 语句的例子"></a>更多关于添加 Bash 语句的例子</h2><p>下面是一个使用 \si 插入一条 if 语句的例子：</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005114bd11zhj3b338ej33.png" alt="在脚本中插入语句"></p>
+<p>下面的例子显示使用 \se 添加一条 echo 语句：</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005115i2rh71k7rz3c88xh.png" alt="在脚本中添加 echo 语句"></p>
+<h2 id="如何在-Vi-编辑器中使用运行操作"><a href="#如何在-Vi-编辑器中使用运行操作" class="headerlink" title="如何在 Vi 编辑器中使用运行操作"></a>如何在 Vi 编辑器中使用运行操作</h2><p>下面是一些运行操作键映射的列表：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">\rr – 更新文件，运行脚本（<span class="built_in">n</span>, i）</div><div class="line">\ra – 设置脚本命令行参数 （<span class="built_in">n</span>, i）</div><div class="line">\rc – 更新文件，检查语法 （<span class="built_in">n</span>, i）</div><div class="line">\rco – 语法检查选项 （<span class="built_in">n</span>, i）</div><div class="line">\rd – 启动调试器（<span class="built_in">n</span>, i）</div><div class="line">\re – 使脚本可/不可执行(*) （<span class="built_in">n</span>, i）</div></pre></td></tr></table></figure>
+<h2 id="使脚本可执行"><a href="#使脚本可执行" class="headerlink" title="使脚本可执行"></a>使脚本可执行</h2><p>编写完脚本后，保存它然后输入 \re 和回车键使它可执行。</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005115ezuvseyjvkksyosn.png" alt="使脚本可执行"></p>
+<h2 id="如何在-Bash-脚本中使用预定义代码片段"><a href="#如何在-Bash-脚本中使用预定义代码片段" class="headerlink" title="如何在 Bash 脚本中使用预定义代码片段"></a>如何在 Bash 脚本中使用预定义代码片段</h2><p>预定义代码片段是为了特定目的包含了已写好代码的文件。为了添加代码段，输入 \nr 和 \nw 读/写预定义代码段。输入下面的命令列出默认的代码段：</p>
+<p>$ ls ~/.vim/bash-support/codesnippets/<br><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005115vgjeagjassxxkzk6.png" alt="代码段列表"></p>
+<p>为了使用代码段，例如 free-software-comment，输入 \nr 并使用自动补全功能选择它的名称，然后输入回车键：</p>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005116e9ouzri0iyaghr5h.png" alt="添加代码段到脚本"></p>
+<h2 id="创建自定义预定义代码段"><a href="#创建自定义预定义代码段" class="headerlink" title="创建自定义预定义代码段"></a>创建自定义预定义代码段</h2><p>可以在  ~/.vim/bash-support/codesnippets/目录下编写你自己的代码段。另外，你还可以从你正常的脚本代码中创建你自己的代码段：</p>
+<ol>
+<li>选择你想作为代码段的部分代码，然后输入  \nw 并给它一个相近的文件名。</li>
+<li>要读入它，只需要输入  \nr 然后使用文件名就可以添加你自定义的代码段。</li>
+</ol>
+<h2 id="在当前光标处查看内建和命令帮助"><a href="#在当前光标处查看内建和命令帮助" class="headerlink" title="在当前光标处查看内建和命令帮助"></a>在当前光标处查看内建和命令帮助</h2><p>要显示帮助，在普通模式下输入：</p>
+<ol>
+<li>\hh – 内建帮助</li>
+<li>\hm – 命令帮助</li>
+</ol>
+<p><img src="https://dn-linuxcn.qbox.me/data/attachment/album/201705/02/005116v16e1vnarxovx1x9.png" alt="查看内建命令帮助"></p>
+<p>更多参考资料，可以查看文件：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">~/.vim<span class="meta-keyword">/doc/</span>bashsupport.txt  <span class="meta">#在线文档的副本</span></div><div class="line">~/.vim<span class="meta-keyword">/doc/</span>tags</div></pre></td></tr></table></figure>
+<ul>
+<li>访问 Bash-support 插件 GitHub 仓库：<a href="https://github.com/WolfgangMehner/bash-support" target="_blank" rel="external">https://github.com/WolfgangMehner/bash-support</a></li>
+<li>在 Vim 网站访问 Bash-support 插件：<a href="http://www.vim.org/scripts/script.php?script_id=365" target="_blank" rel="external">http://www.vim.org/scripts/script.php?script_id=365</a></li>
+</ul>
+<p>就是这些啦，在这篇文章中，我们介绍了在 Linux 中使用 Bash-support 插件安装和配置 Vim 为一个 Bash-IDE 的步骤。快去发现这个插件其它令人兴奋的功能吧，一定要在评论中和我们分享哦。</p>
+<p>作者简介：</p>
+<p>Aaron Kili 是一个 Linux 和 F.O.S.S 爱好者、Linux 系统管理员、网络开发人员，现在也是 TecMint 的内容创作者，她喜欢和电脑一起工作，坚信共享知识。</p>
+<p>via: <a href="http://www.tecmint.com/use-vim-as-bash-ide-using-bash-support-in-linux/" target="_blank" rel="external">http://www.tecmint.com/use-vim-as-bash-ide-using-bash-support-in-linux/</a></p>
+<p>作者：Aaron Kili 译者：ictlyh 校对：wxy</p>
+<p>本文由 LCTT 原创编译，Linux中国 荣誉推出</p>
+]]></content>
+    
+    <summary type="html">
+    
+      bash-support是一个高度定制化的 vim 插件，它允许你插入：文件头、补全语句、注释、函数、以及代码块。它也使你可以进行语法检查、使脚本可执行、一键启动调试器；而完成所有的这些而不需要关闭编辑器。
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://roc-wong.github.io/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="https://roc-wong.github.io/tags/Linux/"/>
+    
+      <category term="Shell" scheme="https://roc-wong.github.io/tags/Shell/"/>
+    
+  </entry>
+  
+  <entry>
     <title>服务限流方案</title>
     <link href="https://roc-wong.github.io/blog/2018/01/%E6%9C%8D%E5%8A%A1%E9%99%90%E6%B5%81%E6%96%B9%E6%A1%88.html"/>
     <id>https://roc-wong.github.io/blog/2018/01/服务限流方案.html</id>
     <published>2018-01-31T13:41:04.000Z</published>
-    <updated>2018-01-31T13:55:41.474Z</updated>
+    <updated>2018-02-03T06:51:57.047Z</updated>
     
     <content type="html"><![CDATA[<p>如何让系统在汹涌澎湃的流量面前谈笑风生？我们的策略是不要让系统超负荷工作。如果现有的系统扛不住业务目标怎么办？加机器！机器不够怎么办？业务降级，服务限流！</p>
 <p>正所谓「他强任他强，清风拂山岗；他横任他横，明月照大江」，降级和限流是系统可用性保障中必不可少的神兵利器，丢卒保车，以暂停边缘业务为代价保障核心业务的资源，以系统不被突发流量压挂为第一要务。</p>
 <a id="more"></a>
 <h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><h3 id="JPush-API-频率控制"><a href="#JPush-API-频率控制" class="headerlink" title="JPush API 频率控制"></a>JPush API 频率控制</h3><p>JPush API对访问次数，具有频率控制。即一定的时间窗口内，API允许调用的次数是有限制的。免费版：1分钟600次。</p>
 <p>超出后：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="attr">"error"</span>:&#123;<span class="attr">"code"</span>:<span class="number">2002</span>,<span class="attr">"message"</span>:<span class="string">"Request times of the app_key exceed the limit of current time window"</span>&#125;&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="各业务组直接对接极光API"><a href="#各业务组直接对接极光API" class="headerlink" title="各业务组直接对接极光API"></a>各业务组直接对接极光API</h3><p>目前智投后端和场外交易都在使用极光推送服务，并且是直接调用极光API。水归一源，终汇聚一处。想实现流量管控，只有将调用出口整合到一处，方可达到限流管控的目的。而这个出口，正是消息中心。</p>
+<h3 id="各业务组直接对接极光API"><a href="#各业务组直接对接极光API" class="headerlink" title="各业务组直接对接极光API"></a>各业务组直接对接极光API</h3><p>目前各业务线都在使用极光推送服务，并且是直接调用极光API。水归一源，终汇聚一处。想实现流量管控，只有将调用出口整合到一处，方可达到限流管控的目的。</p>
 <p><img src="http://olml6iu96.bkt.clouddn.com/%E6%9E%81%E5%85%89%E6%8E%A8%E9%80%81%E8%B0%83%E7%94%A8%E7%8E%B0%E7%8A%B6.png" alt="现状"></p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="令牌桶算法"><a href="#令牌桶算法" class="headerlink" title="令牌桶算法"></a>令牌桶算法</h3><p>令牌桶算法是网络流量整形（Traffic Shaping）和速率限制（Rate Limiting）中最常使用的一种算法。典型情况下，令牌桶算法用来控制发送到网络上的数据的数目，并允许突发数据的发送。令牌桶属于控制速率类型的。令牌桶算法最初来源于计算机网络。在网络传输数据时，为了防止网络拥塞，需限制流出网络的流量，使流量以比较均匀的速度向外发送。令牌桶算法就实现了这个功能，可控制发送到网络上数据的数目，并允许突发数据的发送。</p>
 <p>在 Wikipedia 上，令牌桶算法是这么描述的：</p>
@@ -58,7 +173,7 @@
 <p>  因此，Redis事务能够保证原子性。EXEC命令会触发执行事务中的所有命令。因此，当某个客户端正在执行一次事务时，如果它在调用MULTI命令之前就从Redis服务端断开连接，那么就不会执行事务中的任何操作；相反，如果它在调用EXEC命令之后才从Redis服务端断开连接，那么就会执行事务中的所有操作。当Redis使用只增文件（AOF：Append-only File）时，Redis能够确保使用一个单独的write(2)系统调用，这样便能将事务写入磁盘。然而，如果Redis服务器宕机，或者系统管理员以某种方式停止Redis服务进程的运行，那么Redis很有可能只执行了事务中的一部分操作。Redis将会在重新启动时检查上述状态，然后退出运行，并且输出报错信息。使用redis-check-aof工具可以修复上述的只增文件，这个工具将会从上述文件中删除执行不完全的事务，这样Redis服务器才能再次启动。</p>
 </li>
 </ul>
-<p>从2.2版本开始，除了上述两项保证之外，Redis还能够以乐观锁(Watch)的形式提供更多的保证，这种形式非常类似于“检查再设置”（CAS：Check And Set）操作。</p>
+<p>从2.2版本开始，除了上述两项保证之外，Redis还能够以乐观锁(Watch)的形式提供更多的保证，这种形式非常类似于”检查再设置”（CAS：Check And Set）操作。</p>
 <p>从2.6版本开始提供脚本（Lua scripting）能力，一种更灵活的批量命令组织方式用于取代目前的事务机制。脚本提供了更强大和灵活的编程能力，但也是一把双刃剑，由于 Redis 需要保证脚本执行的原子性和隔离性，脚本执行期间会阻塞其他命令的执行，因此建议使用高效的脚本完成业务。</p>
 <p><strong>SET</strong></p>
 <p>SET key value [EX seconds] [PX milliseconds] [NX|XX]</p>
@@ -67,9 +182,10 @@
 <p>EX second ：设置键的过期时间为 second 秒。 SET key value EX second 效果等同于 SETEX key second value 。<br>PX millisecond ：设置键的过期时间为 millisecond 毫秒。 SET key value PX millisecond 效果等同于 PSETEX key millisecond value 。<br>NX ：只在键不存在时，才对键进行设置操作。 SET key value NX 效果等同于 SETNX key value 。<br>XX ：只在键已经存在时，才对键进行设置操作。</p>
 <p><strong>INCRBY</strong></p>
 <p>将 key 所储存的值加上增量 increment 。如果 key 不存在，那么 key 的值会先被初始化为 0 ，然后再执行 INCRBY 命令。如果值包含错误的类型，或字符串类型的值不能表示为数字，那么返回一个错误。</p>
-<p>Redis 官方基于上述命令提供的限流方案：<a href="https://redis.io/commands/incr#pattern-rate-limiter-1" target="_blank" rel="external">https://redis.io/commands/incr#pattern-rate-limiter-1</a></p>
-<h2 id="代码验证"><a href="#代码验证" class="headerlink" title="代码验证"></a>代码验证</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">package hbec.app.stock.ratelimiter;</div><div class="line"></div><div class="line">/**</div><div class="line"> * @author roc</div><div class="line"> * @<span class="built_in">date</span> <span class="number">2018</span>/<span class="number">01</span>/<span class="number">24</span></div><div class="line"> */</div><div class="line">public interface RateLimiter &#123;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Acquires a permit only <span class="keyword">if</span> one <span class="keyword">is</span> available <span class="keyword">at</span> <span class="keyword">the</span></div><div class="line">     * <span class="built_in">time</span> <span class="keyword">of</span> invocation.</div><div class="line">     *</div><div class="line">     * &lt;p&gt;Acquires a permit, <span class="keyword">if</span> one <span class="keyword">is</span> available <span class="keyword">and</span> returns immediately,</div><div class="line">     * <span class="keyword">with</span> <span class="keyword">the</span> <span class="literal">result</span> &#123;@code LimiterResult<span class="comment">#acquired is true&#125;,</span></div><div class="line">     * reducing <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> available permits <span class="keyword">by</span> one.</div><div class="line">     *</div><div class="line">     * &lt;p&gt;If no permit <span class="keyword">is</span> available <span class="keyword">then</span> this method will <span class="literal">return</span></div><div class="line">     * immediately <span class="keyword">with</span> <span class="keyword">the</span> value &#123;@code <span class="literal">false</span>&#125;.</div><div class="line">     *</div><div class="line">     * @param permits <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> permits <span class="keyword">to</span> acquire</div><div class="line">     * @<span class="literal">return</span> acquire <span class="literal">result</span> &#123;@code <span class="literal">true</span>&#125; <span class="keyword">if</span> a permit was acquired,</div><div class="line">     * <span class="keyword">and</span> &#123;@code <span class="literal">false</span> <span class="keyword">is</span> <span class="literal">false</span>&#125; otherwise</div><div class="line">     */</div><div class="line">    <span class="built_in">boolean</span> tryAcquire(int permits);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Acquires a permit <span class="keyword">from</span> this method, blocking <span class="keyword">until</span> one <span class="keyword">is</span></div><div class="line">     * available, <span class="keyword">or</span> <span class="keyword">the</span> thread <span class="keyword">is</span> &#123;@linkplain Thread<span class="comment">#interrupt interrupted&#125;.</span></div><div class="line">     *</div><div class="line">     * &lt;p&gt;Acquires a permit, <span class="keyword">if</span> one <span class="keyword">is</span> available <span class="keyword">and</span> returns immediately,</div><div class="line">     * reducing <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> available permits <span class="keyword">by</span> one.</div><div class="line">     *</div><div class="line">     * @param permits <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> permits <span class="keyword">to</span> acquire</div><div class="line">     */</div><div class="line">    void acquire(int permits) throws InterruptedException;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> hbec.app.stock.ratelimiter;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.google.common.base.Preconditions;</div><div class="line"><span class="keyword">import</span> hbec.app.stock.commons.redis.JedisTemplate;</div><div class="line"><span class="keyword">import</span> org.apache.commons.lang3.StringUtils;</div><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.Response;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.Transaction;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Random;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> roc</div><div class="line"> * <span class="doctag">@date</span> 2018/01/23</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisRateLimiter</span> <span class="keyword">implements</span> <span class="title">RateLimiter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(RedisRateLimiter.class);</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ZERO = <span class="string">"0"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String NOT_EXISTS = <span class="string">"NX"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_EXPIRE = <span class="string">"PX"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NOT_SET = <span class="number">-1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Random TIME_RANDOM = <span class="keyword">new</span> Random();</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 限流标识，redis key</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> String rateLimiterName;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 存活时间</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> timeToLive;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 许可上限</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> upperLimitPermits;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">private</span> JedisTemplate jedisTemplate;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> permits)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> acquireSync(permits).isAcquired();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">acquire</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> permits)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        LimiterResult limiterResult;</div><div class="line">        do &#123;</div><div class="line">            limiterResult = acquireSync(permits);</div><div class="line">            <span class="keyword">if</span> (!limiterResult.isAcquired()) &#123;</div><div class="line">                <span class="keyword">long</span> sleepTime = limiterResult.getRemainderTTL() + TIME_RANDOM.nextInt(<span class="number">5</span>);</div><div class="line">                Thread.sleep(sleepTime);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">while</span> (!limiterResult.isAcquired());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function">LimiterResult <span class="title">acquireSync</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> permits)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">return</span> jedisTemplate.<span class="title">execute</span><span class="params">(<span class="keyword">new</span> JedisTemplate.JedisAction&lt;LimiterResult&gt;()</span> </span>&#123;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="keyword">public</span> <span class="function">LimiterResult <span class="title">action</span><span class="params">(Jedis jedis)</span> </span>&#123;</div><div class="line"></div><div class="line">                Transaction transaction = jedis.multi();</div><div class="line">                transaction.set(rateLimiterName, ZERO, NOT_EXISTS, P_EXPIRE, timeToLive);</div><div class="line">                Response&lt;Long&gt; currentQPS = transaction.incrBy(rateLimiterName, permits);</div><div class="line">                Response&lt;Long&gt; keyTTL = transaction.pttl(rateLimiterName);</div><div class="line">                transaction.exec();</div><div class="line"></div><div class="line">                Long currentPermit = currentQPS.get();</div><div class="line">                Long remainderTTL = keyTTL.get();</div><div class="line"></div><div class="line">                <span class="keyword">boolean</span> acquired = currentPermit &lt;= upperLimitPermits;</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (!acquired &amp;&amp; remainderTTL == NOT_SET) &#123;</div><div class="line">                    LOGGER.<span class="keyword">error</span>(<span class="string">"Warning! Set ttl false, key=&#123;&#125;, current ttl=&#123;&#125;"</span>, rateLimiterName, remainderTTL);</div><div class="line">                    jedis.expire(rateLimiterName, timeToLive);</div><div class="line">                    remainderTTL = (<span class="keyword">long</span>) timeToLive;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                LOGGER.debug(<span class="string">"rateLimiterName=&#123;&#125;, passed=&#123;&#125;, remainderTTL=&#123;&#125;, time=&#123;&#125;"</span>,</div><div class="line">                        rateLimiterName, acquired ? <span class="string">"true"</span> : <span class="string">"false"</span>,</div><div class="line">                        remainderTTL, currentPermit);</div><div class="line">                <span class="function"><span class="keyword">return</span> LimiterResult.<span class="title">newInstance</span><span class="params">(acquired, remainderTTL)</span></span>;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function">Builder <span class="title">newBuilder</span><span class="params">(JedisTemplate jedisTemplate)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Builder(jedisTemplate);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> JedisTemplate jedisTemplate;</div><div class="line">        <span class="keyword">private</span> String rateLimiterName;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> timeToLive;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> upperLimitPermits;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="title">Builder</span><span class="params">(JedisTemplate jedisTemplate)</span> </span>&#123;</div><div class="line">            Preconditions.checkNotNull(jedisTemplate, <span class="string">"JedisTemplate can't be null."</span>);</div><div class="line">            <span class="keyword">this</span>.jedisTemplate = jedisTemplate;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="function">Builder <span class="title">setRateLimiterName</span><span class="params">(String rateLimiterName)</span> </span>&#123;</div><div class="line"></div><div class="line">            <span class="keyword">this</span>.rateLimiterName = rateLimiterName;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="function">Builder <span class="title">setTimeToLive</span><span class="params">(<span class="keyword">int</span> timeToLive, TimeUnit timeUnit)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.timeToLive = (<span class="keyword">int</span>) timeUnit.toMillis(timeToLive);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="function">Builder <span class="title">setUpperLimitPermits</span><span class="params">(<span class="keyword">int</span> upperLimitPermits)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.upperLimitPermits = upperLimitPermits;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="function">RedisRateLimiter <span class="title">build</span><span class="params">()</span> </span>&#123;</div><div class="line">            Preconditions.checkArgument(StringUtils.isNotBlank(rateLimiterName), <span class="string">"RateLimiterName can't be blank."</span>);</div><div class="line">            Preconditions.checkArgument(upperLimitPermits &gt; <span class="number">0</span>, <span class="string">"UpperLimitPermits must be an integer greater than 0."</span>);</div><div class="line">            Preconditions.checkArgument(timeToLive &gt; <span class="number">0</span>, <span class="string">"TimeToLive must be an integer greater than 0."</span>);</div><div class="line"></div><div class="line">            RedisRateLimiter redisRateLimiter = <span class="keyword">new</span> RedisRateLimiter();</div><div class="line">            redisRateLimiter.jedisTemplate = <span class="keyword">this</span>.jedisTemplate;</div><div class="line">            redisRateLimiter.upperLimitPermits = <span class="keyword">this</span>.upperLimitPermits;</div><div class="line">            redisRateLimiter.rateLimiterName = <span class="keyword">this</span>.rateLimiterName;</div><div class="line">            redisRateLimiter.timeToLive = <span class="keyword">this</span>.timeToLive;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> redisRateLimiter;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Redis官方基于上述命令提供的限流代码：<a href="https://redis.io/commands/incr#pattern-rate-limiter-1" target="_blank" rel="external">https://redis.io/commands/incr#pattern-rate-limiter-1</a></p>
+<h2 id="代码验证"><a href="#代码验证" class="headerlink" title="代码验证"></a>代码验证</h2><p>使用jedis client进行限流方案验证：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">package hbec.app.stock.ratelimiter;</div><div class="line"></div><div class="line">/**</div><div class="line"> * @author roc</div><div class="line"> * @<span class="built_in">date</span> <span class="number">2018</span>/<span class="number">01</span>/<span class="number">24</span></div><div class="line"> */</div><div class="line">public interface RateLimiter &#123;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Acquires a permit only <span class="keyword">if</span> one <span class="keyword">is</span> available <span class="keyword">at</span> <span class="keyword">the</span></div><div class="line">     * <span class="built_in">time</span> <span class="keyword">of</span> invocation.</div><div class="line">     *</div><div class="line">     * &lt;p&gt;Acquires a permit, <span class="keyword">if</span> one <span class="keyword">is</span> available <span class="keyword">and</span> returns immediately,</div><div class="line">     * <span class="keyword">with</span> <span class="keyword">the</span> <span class="literal">result</span> &#123;@code LimiterResult<span class="comment">#acquired is true&#125;,</span></div><div class="line">     * reducing <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> available permits <span class="keyword">by</span> one.</div><div class="line">     *</div><div class="line">     * &lt;p&gt;If no permit <span class="keyword">is</span> available <span class="keyword">then</span> this method will <span class="literal">return</span></div><div class="line">     * immediately <span class="keyword">with</span> <span class="keyword">the</span> value &#123;@code <span class="literal">false</span>&#125;.</div><div class="line">     *</div><div class="line">     * @param permits <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> permits <span class="keyword">to</span> acquire</div><div class="line">     * @<span class="literal">return</span> acquire <span class="literal">result</span> &#123;@code <span class="literal">true</span>&#125; <span class="keyword">if</span> a permit was acquired,</div><div class="line">     * <span class="keyword">and</span> &#123;@code <span class="literal">false</span> <span class="keyword">is</span> <span class="literal">false</span>&#125; otherwise</div><div class="line">     */</div><div class="line">    <span class="built_in">boolean</span> tryAcquire(int permits);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Acquires a permit <span class="keyword">from</span> this method, blocking <span class="keyword">until</span> one <span class="keyword">is</span></div><div class="line">     * available, <span class="keyword">or</span> <span class="keyword">the</span> thread <span class="keyword">is</span> &#123;@linkplain Thread<span class="comment">#interrupt interrupted&#125;.</span></div><div class="line">     *</div><div class="line">     * &lt;p&gt;Acquires a permit, <span class="keyword">if</span> one <span class="keyword">is</span> available <span class="keyword">and</span> returns immediately,</div><div class="line">     * reducing <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> available permits <span class="keyword">by</span> one.</div><div class="line">     *</div><div class="line">     * @param permits <span class="keyword">the</span> <span class="built_in">number</span> <span class="keyword">of</span> permits <span class="keyword">to</span> acquire</div><div class="line">     */</div><div class="line">    void acquire(int permits) throws InterruptedException;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> hbec.app.stock.ratelimiter;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.google.common.base.Preconditions;</div><div class="line"><span class="keyword">import</span> hbec.app.stock.commons.redis.JedisTemplate;</div><div class="line"><span class="keyword">import</span> org.apache.commons.lang3.StringUtils;</div><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.Response;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.Transaction;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Random;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> roc</div><div class="line"> * <span class="doctag">@date</span> 2018/01/23</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisRateLimiter</span> <span class="keyword">implements</span> <span class="title">RateLimiter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(RedisRateLimiter.class);</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ZERO = <span class="string">"0"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String NOT_EXISTS = <span class="string">"NX"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_EXPIRE = <span class="string">"PX"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NOT_SET = <span class="number">-1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Random TIME_RANDOM = <span class="keyword">new</span> Random();</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 限流标识，redis key</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> String rateLimiterName;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 限流标识的存活时间</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> timeToLive;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 每个限流时间窗口内，允许获得的最大许可次数</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> upperLimitPermits;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">private</span> JedisTemplate jedisTemplate;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> permits)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> acquireSync(permits).isAcquired();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">acquire</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> permits)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        LimiterResult limiterResult;</div><div class="line">        do &#123;</div><div class="line">            limiterResult = acquireSync(permits);</div><div class="line">            <span class="keyword">if</span> (!limiterResult.isAcquired()) &#123;</div><div class="line">                <span class="keyword">long</span> sleepTime = limiterResult.getRemainderTTL() + TIME_RANDOM.nextInt(<span class="number">5</span>);</div><div class="line">                Thread.sleep(sleepTime);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">while</span> (!limiterResult.isAcquired());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function">LimiterResult <span class="title">acquireSync</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> permits)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">return</span> jedisTemplate.<span class="title">execute</span><span class="params">(<span class="keyword">new</span> JedisTemplate.JedisAction&lt;LimiterResult&gt;()</span> </span>&#123;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="keyword">public</span> <span class="function">LimiterResult <span class="title">action</span><span class="params">(Jedis jedis)</span> </span>&#123;</div><div class="line"></div><div class="line">                Transaction transaction = jedis.multi();</div><div class="line">                transaction.set(rateLimiterName, ZERO, NOT_EXISTS, P_EXPIRE, timeToLive);</div><div class="line">                Response&lt;Long&gt; permitResponse = transaction.incrBy(rateLimiterName, permits);</div><div class="line">                Response&lt;Long&gt; ttlResponse = transaction.pttl(rateLimiterName);</div><div class="line">                transaction.exec();</div><div class="line"></div><div class="line">                Long currentPermit = permitResponse.get();</div><div class="line">                Long remainderTTL = ttlResponse.get();</div><div class="line"></div><div class="line">                <span class="keyword">boolean</span> acquired = currentPermit &lt;= upperLimitPermits;</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (!acquired &amp;&amp; remainderTTL == NOT_SET) &#123;</div><div class="line">                    LOGGER.<span class="keyword">error</span>(<span class="string">"Warning! Set ttl false, key=&#123;&#125;, current ttl=&#123;&#125;"</span>, rateLimiterName, remainderTTL);</div><div class="line">                    jedis.expire(rateLimiterName, timeToLive);</div><div class="line">                    remainderTTL = (<span class="keyword">long</span>) timeToLive;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                LOGGER.debug(<span class="string">"rateLimiterName=&#123;&#125;, passed=&#123;&#125;, remainderTTL=&#123;&#125;, time=&#123;&#125;"</span>,</div><div class="line">                        rateLimiterName, acquired ? <span class="string">"true"</span> : <span class="string">"false"</span>,</div><div class="line">                        remainderTTL, currentPermit);</div><div class="line">                <span class="function"><span class="keyword">return</span> LimiterResult.<span class="title">newInstance</span><span class="params">(acquired, remainderTTL)</span></span>;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function">Builder <span class="title">newBuilder</span><span class="params">(JedisTemplate jedisTemplate)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Builder(jedisTemplate);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> JedisTemplate jedisTemplate;</div><div class="line">        <span class="keyword">private</span> String rateLimiterName;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> timeToLive;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> upperLimitPermits;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="title">Builder</span><span class="params">(JedisTemplate jedisTemplate)</span> </span>&#123;</div><div class="line">            Preconditions.checkNotNull(jedisTemplate, <span class="string">"JedisTemplate can't be null."</span>);</div><div class="line">            <span class="keyword">this</span>.jedisTemplate = jedisTemplate;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="function">Builder <span class="title">setRateLimiterName</span><span class="params">(String rateLimiterName)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.rateLimiterName = rateLimiterName;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="function">Builder <span class="title">setTimeToLive</span><span class="params">(<span class="keyword">int</span> timeToLive, TimeUnit timeUnit)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.timeToLive = (<span class="keyword">int</span>) timeUnit.toMillis(timeToLive);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="function">Builder <span class="title">setUpperLimitPermits</span><span class="params">(<span class="keyword">int</span> upperLimitPermits)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.upperLimitPermits = upperLimitPermits;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="function">RedisRateLimiter <span class="title">build</span><span class="params">()</span> </span>&#123;</div><div class="line">            Preconditions.checkArgument(StringUtils.isNotBlank(rateLimiterName), <span class="string">"RateLimiterName can't be blank."</span>);</div><div class="line">            Preconditions.checkArgument(upperLimitPermits &gt; <span class="number">0</span>, <span class="string">"UpperLimitPermits must be an integer greater than 0."</span>);</div><div class="line">            Preconditions.checkArgument(timeToLive &gt; <span class="number">0</span>, <span class="string">"TimeToLive must be an integer greater than 0."</span>);</div><div class="line"></div><div class="line">            RedisRateLimiter redisRateLimiter = <span class="keyword">new</span> RedisRateLimiter();</div><div class="line">            redisRateLimiter.jedisTemplate = <span class="keyword">this</span>.jedisTemplate;</div><div class="line">            redisRateLimiter.upperLimitPermits = <span class="keyword">this</span>.upperLimitPermits;</div><div class="line">            redisRateLimiter.rateLimiterName = <span class="keyword">this</span>.rateLimiterName;</div><div class="line">            redisRateLimiter.timeToLive = <span class="keyword">this</span>.timeToLive;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> redisRateLimiter;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> hbec.app.stock.ratelimiter;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> roc</div><div class="line"> * <span class="doctag">@date</span> 2018/01/24</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LimiterResult</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> acquired;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Long remainderTTL;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function">LimiterResult <span class="title">newInstance</span><span class="params">(<span class="keyword">boolean</span> acquired, Long remainderTTL)</span> </span>&#123;</div><div class="line">        LimiterResult limiterResult = <span class="keyword">new</span> LimiterResult();</div><div class="line">        limiterResult.setAcquired(acquired);</div><div class="line">        limiterResult.setRemainderTTL(remainderTTL);</div><div class="line">        <span class="keyword">return</span> limiterResult;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">isAcquired</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> acquired;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function">Long <span class="title">getRemainderTTL</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> remainderTTL;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setAcquired</span><span class="params">(<span class="keyword">boolean</span> acquired)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.acquired = acquired;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setRemainderTTL</span><span class="params">(Long remainderTTL)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.remainderTTL = remainderTTL;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> <span class="function">String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">final</span> StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="string">"LimiterResult&#123;"</span>);</div><div class="line">        sb.append(<span class="string">"acquired="</span>).append(acquired);</div><div class="line">        sb.append(<span class="string">", remainderTTL="</span>).append(remainderTTL);</div><div class="line">        sb.append(<span class="string">'&#125;'</span>);</div><div class="line">        <span class="function"><span class="keyword">return</span> sb.<span class="title">toString</span><span class="params">()</span></span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>验证代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> hbec.app.stock.ratelimiter;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> hbec.app.stock.commons.redis.JedisTemplate;</div><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> org.testng.annotations.BeforeTest;</div><div class="line"><span class="keyword">import</span> org.testng.annotations.Test;</div><div class="line"><span class="keyword">import</span> redis.clients.jedis.JedisPool;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> roc</div><div class="line"> * <span class="doctag">@date</span> 2018/01/26</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisRateLimiterTest</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(RedisRateLimiterTest.class);</div><div class="line"></div><div class="line">    <span class="keyword">private</span> RateLimiter rateLimiter;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> AtomicInteger atomicInteger = <span class="keyword">new</span> AtomicInteger(<span class="number">1</span>);</div><div class="line"></div><div class="line">    <span class="meta">@BeforeTest</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">        JedisPool jedisPool = <span class="keyword">new</span> JedisPool(<span class="string">"10.0.30.66"</span>, <span class="number">6379</span>);</div><div class="line">        JedisTemplate jedisTemplate = <span class="keyword">new</span> JedisTemplate(jedisPool);</div><div class="line">        String rateLimiterName = <span class="string">"rateLimiterROC"</span>;</div><div class="line"></div><div class="line">        rateLimiter = RedisRateLimiter.newBuilder(jedisTemplate).setRateLimiterName(rateLimiterName)</div><div class="line">                .setUpperLimitPermits(<span class="number">10</span>).setTimeToLive(<span class="number">5</span>, TimeUnit.SECONDS).build();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Test</span>(threadPoolSize = <span class="number">10</span>, invocationCount = <span class="number">20</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testTryAcquire</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">boolean</span> acquired = rateLimiter.tryAcquire(<span class="number">1</span>);</div><div class="line">        <span class="keyword">if</span> (acquired) &#123;</div><div class="line">            LOGGER.info(<span class="string">"thread &#123;&#125; acquire the permit &#123;&#125; times."</span>, Thread.currentThread().getId(), atomicInteger.getAndIncrement());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Test</span>(threadPoolSize = <span class="number">10</span>, invocationCount = <span class="number">20</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAcquire</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        rateLimiter.acquire(<span class="number">1</span>);</div><div class="line">        LOGGER.info(<span class="string">"thread &#123;&#125; acquire the permit &#123;&#125; times."</span>, Thread.currentThread().getId(), atomicInteger.getAndIncrement());</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -1750,771 +1866,6 @@
 <h4 id="十一、Other（一些官方文档上没有体现的快捷键）"><a href="#十一、Other（一些官方文档上没有体现的快捷键）" class="headerlink" title="十一、Other（一些官方文档上没有体现的快捷键）"></a>十一、Other（一些官方文档上没有体现的快捷键）</h4><ul>
 <li><code>Command + Shift +8</code> 竖编辑模式</li>
 </ul>
-]]></content>
-    
-    <summary type="html">
-    
-      IntelliJ IDEA 本身的设计思维是提倡键盘优先于鼠标的，所以各种快捷键组合层出不穷，对于快捷键设置也有各种支持，对于其他 IDE 的快捷键组合也有预设模板进行支持。使用时，请干掉那些不相关软件的快捷键。
-    
-    </summary>
-    
-      <category term="IDE" scheme="https://roc-wong.github.io/categories/IDE/"/>
-    
-    
-      <category term="IDE" scheme="https://roc-wong.github.io/tags/IDE/"/>
-    
-      <category term="IntelliJ IDEA" scheme="https://roc-wong.github.io/tags/IntelliJ-IDEA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IntelliJ IDEA 快键键</title>
-    <link href="https://roc-wong.github.io/blog/2017/03/IntelliJ-IDEA-key-map.html"/>
-    <id>https://roc-wong.github.io/blog/2017/03/IntelliJ-IDEA-key-map.html</id>
-    <published>2017-03-10T14:54:23.000Z</published>
-    <updated>2017-03-10T15:18:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>直到有一天，当我发现我们都已经渐渐地老去的时候，我才感悟到人世间最珍贵的东西莫过于朋友之间的友谊!朋友，谢谢人生路上曾有你。</p>
-</blockquote>
-<h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><blockquote>
-<p>非常感谢我的朋友<a href="http://www.caosh.me/" target="_blank" rel="external">曹同学</a>(PS:他的博客还在搬家阶段……)，一个极客程序猿，让我真正开始使用IntelliJ IDEA。</p>
-</blockquote>
-<p>IntelliJ IDEA 本身的设计思维是提倡键盘优先于鼠标的，所以各种快捷键组合层出不穷，对于快捷键设置也有各种支持，对于其他 IDE 的快捷键组合也有预设模板进行支持。使用时，请干掉那些不相关软件的快捷键。</p>
-<a id="more"></a>
-<p>本篇博客整理自IntelliJ IDEA 简体中文专题教程和日常开发归档：</p>
-<blockquote>
-<ul>
-<li><p><a href="https://github.com/judasn/IntelliJ-IDEA-Tutorial" target="_blank" rel="external">IntelliJ IDEA 简体中文专题教程</a></p>
-</li>
-<li><p>Windows / Linux：<a href="https://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard.pdf" target="_blank" rel="external">https://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard.pdf</a></p>
-</li>
-<li><p>Mac OS X：<a href="https://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard_Mac.pdf" target="_blank" rel="external">https://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard_Mac.pdf</a></p>
-</li>
-</ul>
-</blockquote>
-<h2 id="Ctrl"><a href="#Ctrl" class="headerlink" title="Ctrl"></a>Ctrl</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">快捷键</th>
-<th style="text-align:left">介绍</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Ctrl + F</td>
-<td style="text-align:left">在当前文件进行文本查找 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + R</td>
-<td style="text-align:left">在当前文件进行文本替换 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Z</td>
-<td style="text-align:left">撤销 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Y</td>
-<td style="text-align:left">删除光标所在行 或 删除选中的行 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + X</td>
-<td style="text-align:left">剪切光标所在行 或 剪切选择内容</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + C</td>
-<td style="text-align:left">复制光标所在行 或 复制选择内容</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + D</td>
-<td style="text-align:left">复制光标所在行 或 复制选择内容，并把复制内容插入光标位置下面 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + W</td>
-<td style="text-align:left">递进式选择代码块。可选中光标所在的单词或段落，连续按会在原有选中的基础上再扩展选中范围 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + E</td>
-<td style="text-align:left">显示最近打开的文件记录列表 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + N</td>
-<td style="text-align:left">根据输入的 <strong>类名</strong> 查找类文件 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + G</td>
-<td style="text-align:left">在当前文件跳转到指定行处</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + J</td>
-<td style="text-align:left">插入自定义动态代码模板 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + P</td>
-<td style="text-align:left">方法参数提示显示 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Q</td>
-<td style="text-align:left">光标所在的变量 / 类名 / 方法名等上面（也可以在提示补充的时候按），显示文档内容</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + U</td>
-<td style="text-align:left">前往当前光标所在的方法的父类的方法 / 接口定义 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + B</td>
-<td style="text-align:left">进入光标所在的方法/变量的接口或是定义处，等效于 <code>Ctrl + 左键单击</code>  <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + K</td>
-<td style="text-align:left">版本控制提交项目，需要此项目有加入到版本控制才可用</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + T</td>
-<td style="text-align:left">版本控制更新项目，需要此项目有加入到版本控制才可用</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + H</td>
-<td style="text-align:left">显示当前类的层次结构</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + O</td>
-<td style="text-align:left">选择可重写的方法</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + I</td>
-<td style="text-align:left">选择可继承的方法</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + +</td>
-<td style="text-align:left">展开代码</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + -</td>
-<td style="text-align:left">折叠代码</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + /</td>
-<td style="text-align:left">注释光标所在行代码，会根据当前不同文件类型使用不同的注释符号 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + [</td>
-<td style="text-align:left">移动光标到当前所在代码的花括号开始位置</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + ]</td>
-<td style="text-align:left">移动光标到当前所在代码的花括号结束位置</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + F1</td>
-<td style="text-align:left">在光标所在的错误代码处显示错误信息 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + F3</td>
-<td style="text-align:left">调转到所选中的词的下一个引用位置 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + F4</td>
-<td style="text-align:left">关闭当前编辑文件</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + F8</td>
-<td style="text-align:left">在 Debug 模式下，设置光标当前行为断点，如果当前已经是断点则去掉断点</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + F9</td>
-<td style="text-align:left">执行 Make Project 操作</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + F11</td>
-<td style="text-align:left">选中文件 / 文件夹，使用助记符设定 / 取消书签 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + F12</td>
-<td style="text-align:left">弹出当前文件结构层，可以在弹出的层上直接输入，进行筛选</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Tab</td>
-<td style="text-align:left">编辑窗口切换，如果在切换的过程又加按上delete，则是关闭对应选中的窗口</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + End</td>
-<td style="text-align:left">跳到文件尾</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Home</td>
-<td style="text-align:left">跳到文件头</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Space</td>
-<td style="text-align:left">基础代码补全，默认在 Windows 系统上被输入法占用，需要进行修改，建议修改为 <code>Ctrl + 逗号</code> <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Delete</td>
-<td style="text-align:left">删除光标后面的单词或是中文句 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + BackSpace</td>
-<td style="text-align:left">删除光标前面的单词或是中文句 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + 1,2,3…9</td>
-<td style="text-align:left">定位到对应数值的书签位置 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + 左键单击</td>
-<td style="text-align:left">在打开的文件标题上，弹出该文件路径 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + 光标定位</td>
-<td style="text-align:left">按 Ctrl 不要松开，会显示光标所在的类信息摘要</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + 左方向键</td>
-<td style="text-align:left">光标跳转到当前单词 / 中文句的左侧开头位置 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + 右方向键</td>
-<td style="text-align:left">光标跳转到当前单词 / 中文句的右侧开头位置 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + 前方向键</td>
-<td style="text-align:left">等效于鼠标滚轮向前效果 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + 后方向键</td>
-<td style="text-align:left">等效于鼠标滚轮向后效果 <code>（必备）</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="Alt"><a href="#Alt" class="headerlink" title="Alt"></a>Alt</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">快捷键</th>
-<th style="text-align:left">介绍</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Alt + `</td>
-<td style="text-align:left">显示版本控制常用操作菜单弹出层 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + Q</td>
-<td style="text-align:left">弹出一个提示，显示当前类的声明 / 上下文信息</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + F1</td>
-<td style="text-align:left">显示当前文件选择目标弹出层，弹出层中有很多目标可以进行选择 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + F2</td>
-<td style="text-align:left">对于前面页面，显示各类浏览器打开目标选择弹出层</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + F3</td>
-<td style="text-align:left">选中文本，逐个往下查找相同文本，并高亮显示</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + F7</td>
-<td style="text-align:left">查找光标所在的方法 / 变量 / 类被调用的地方</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + F8</td>
-<td style="text-align:left">在 Debug 的状态下，选中对象，弹出可输入计算表达式调试框，查看该输入内容的调试结果</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + Home</td>
-<td style="text-align:left">定位 / 显示到当前文件的 <code>Navigation Bar</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + Enter</td>
-<td style="text-align:left">IntelliJ IDEA 根据光标所在问题，提供快速修复选择，光标放在的位置不同提示的结果也不同 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + Insert</td>
-<td style="text-align:left">代码自动生成，如生成对象的 set / get 方法，构造函数，toString() 等 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + 左方向键</td>
-<td style="text-align:left">切换当前已打开的窗口中的子视图，比如Debug窗口中有Output、Debugger等子视图，用此快捷键就可以在子视图中切换 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + 右方向键</td>
-<td style="text-align:left">按切换当前已打开的窗口中的子视图，比如Debug窗口中有Output、Debugger等子视图，用此快捷键就可以在子视图中切换 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + 前方向键</td>
-<td style="text-align:left">当前光标跳转到当前文件的前一个方法名位置 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + 后方向键</td>
-<td style="text-align:left">当前光标跳转到当前文件的后一个方法名位置 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + 1,2,3…9</td>
-<td style="text-align:left">显示对应数值的选项卡，其中 1 是 Project 用得最多 <code>（必备）</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="Shift"><a href="#Shift" class="headerlink" title="Shift"></a>Shift</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">快捷键</th>
-<th style="text-align:left">介绍</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Shift + F1</td>
-<td style="text-align:left">如果有外部文档可以连接外部文档</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + F2</td>
-<td style="text-align:left">跳转到上一个高亮错误 或 警告位置</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + F3</td>
-<td style="text-align:left">在查找模式下，查找匹配上一个</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + F4</td>
-<td style="text-align:left">对当前打开的文件，使用新Windows窗口打开，旧窗口保留</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + F6</td>
-<td style="text-align:left">对文件 / 文件夹 重命名</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + F7</td>
-<td style="text-align:left">在 Debug 模式下，智能步入。断点所在行上有多个方法调用，会弹出进入哪个方法</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + F8</td>
-<td style="text-align:left">在 Debug 模式下，跳出，表现出来的效果跟 <code>F9</code> 一样</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + F9</td>
-<td style="text-align:left">等效于点击工具栏的 <code>Debug</code> 按钮</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + F10</td>
-<td style="text-align:left">等效于点击工具栏的 <code>Run</code> 按钮</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + F11</td>
-<td style="text-align:left">弹出书签显示层 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + Tab</td>
-<td style="text-align:left">取消缩进 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + ESC</td>
-<td style="text-align:left">隐藏当前 或 最后一个激活的工具窗口</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + End</td>
-<td style="text-align:left">选中光标到当前行尾位置</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + Home</td>
-<td style="text-align:left">选中光标到当前行头位置</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + Enter</td>
-<td style="text-align:left">开始新一行。光标所在行下空出一行，光标定位到新行位置 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + 左键单击</td>
-<td style="text-align:left">在打开的文件名上按此快捷键，可以关闭当前打开文件 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Shift + 滚轮前后滚动</td>
-<td style="text-align:left">当前文件的横向滚动轴滚动 <code>（必备）</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="Ctrl-Alt"><a href="#Ctrl-Alt" class="headerlink" title="Ctrl + Alt"></a>Ctrl + Alt</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">快捷键</th>
-<th style="text-align:left">介绍</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Ctrl + Alt + L</td>
-<td style="text-align:left">格式化代码，可以对当前文件和整个包目录使用 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + O</td>
-<td style="text-align:left">优化导入的类，可以对当前文件和整个包目录使用 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + I</td>
-<td style="text-align:left">光标所在行 或 选中部分进行自动代码缩进，有点类似格式化</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + T</td>
-<td style="text-align:left">对选中的代码弹出环绕选项弹出层 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + J</td>
-<td style="text-align:left">弹出模板选择窗口，将选定的代码加入动态模板中</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + H</td>
-<td style="text-align:left">调用层次</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + B</td>
-<td style="text-align:left">在某个调用的方法名上使用会跳到具体的实现处，可以跳过接口</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + V</td>
-<td style="text-align:left">快速引进变量</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + Y</td>
-<td style="text-align:left">同步、刷新</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + S</td>
-<td style="text-align:left">打开 IntelliJ IDEA 系统设置 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + F7</td>
-<td style="text-align:left">显示使用的地方。寻找被该类或是变量被调用的地方，用弹出框的方式找出来</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + F11</td>
-<td style="text-align:left">切换全屏模式</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + Enter</td>
-<td style="text-align:left">光标所在行上空出一行，光标定位到新行 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + Home</td>
-<td style="text-align:left">弹出跟当前文件有关联的文件弹出层</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + Space</td>
-<td style="text-align:left">类名自动完成</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + 左方向键</td>
-<td style="text-align:left">退回到上一个操作的地方 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + 右方向键</td>
-<td style="text-align:left">前进到上一个操作的地方 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + 前方向键</td>
-<td style="text-align:left">在查找模式下，跳到上个查找的文件</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Alt + 后方向键</td>
-<td style="text-align:left">在查找模式下，跳到下个查找的文件</td>
-</tr>
-</tbody>
-</table>
-<h2 id="Ctrl-Shift"><a href="#Ctrl-Shift" class="headerlink" title="Ctrl + Shift"></a>Ctrl + Shift</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">快捷键</th>
-<th style="text-align:left">介绍</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Ctrl + Shift + F</td>
-<td style="text-align:left">根据输入内容查找整个项目 或 指定目录内文件 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + R</td>
-<td style="text-align:left">根据输入内容替换对应内容，范围为整个项目 或 指定目录内文件 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + J</td>
-<td style="text-align:left">自动将下一行合并到当前行末尾 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + Z</td>
-<td style="text-align:left">取消撤销 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + W</td>
-<td style="text-align:left">递进式取消选择代码块。可选中光标所在的单词或段落，连续按会在原有选中的基础上再扩展取消选中范围 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + N</td>
-<td style="text-align:left">通过文件名定位 / 打开文件 / 目录，打开目录需要在输入的内容后面多加一个正斜杠 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + U</td>
-<td style="text-align:left">对选中的代码进行大 / 小写轮流转换 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + T</td>
-<td style="text-align:left">对当前类生成单元测试类，如果已经存在的单元测试类则可以进行选择 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + C</td>
-<td style="text-align:left">复制当前文件磁盘路径到剪贴板 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + V</td>
-<td style="text-align:left">弹出缓存的最近拷贝的内容管理器弹出层</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + E</td>
-<td style="text-align:left">显示最近修改的文件列表的弹出层</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + H</td>
-<td style="text-align:left">显示方法层次结构</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + B</td>
-<td style="text-align:left">跳转到类型声明处 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + I</td>
-<td style="text-align:left">快速查看光标所在的方法 或 类的定义</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + A</td>
-<td style="text-align:left">查找动作 / 设置</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + /</td>
-<td style="text-align:left">代码块注释 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + [</td>
-<td style="text-align:left">选中从光标所在位置到它的顶部中括号位置 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + ]</td>
-<td style="text-align:left">选中从光标所在位置到它的底部中括号位置 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + +</td>
-<td style="text-align:left">展开所有代码 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + -</td>
-<td style="text-align:left">折叠所有代码 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + F7</td>
-<td style="text-align:left">高亮显示所有该选中文本，按Esc高亮消失 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + F8</td>
-<td style="text-align:left">在 Debug 模式下，指定断点进入条件</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + F9</td>
-<td style="text-align:left">编译选中的文件 / 包 / Module</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + F12</td>
-<td style="text-align:left">编辑器最大化 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + Space</td>
-<td style="text-align:left">智能代码提示</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + Enter</td>
-<td style="text-align:left">自动结束代码，行末自动添加分号 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + Backspace</td>
-<td style="text-align:left">退回到上次修改的地方 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + 1,2,3…9</td>
-<td style="text-align:left">快速添加指定数值的书签 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + 左键单击</td>
-<td style="text-align:left">把光标放在某个类变量上，按此快捷键可以直接定位到该类中 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + 左方向键</td>
-<td style="text-align:left">在代码文件上，光标跳转到当前单词 / 中文句的左侧开头位置，同时选中该单词 / 中文句 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + 右方向键</td>
-<td style="text-align:left">在代码文件上，光标跳转到当前单词 / 中文句的右侧开头位置，同时选中该单词 / 中文句 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + 前方向键</td>
-<td style="text-align:left">光标放在方法名上，将方法移动到上一个方法前面，调整方法排序 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + 后方向键</td>
-<td style="text-align:left">光标放在方法名上，将方法移动到下一个方法前面，调整方法排序 <code>（必备）</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="Alt-Shift"><a href="#Alt-Shift" class="headerlink" title="Alt + Shift"></a>Alt + Shift</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">快捷键</th>
-<th style="text-align:left">介绍</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Alt + Shift + N</td>
-<td style="text-align:left">选择 / 添加 task <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + Shift + F</td>
-<td style="text-align:left">显示添加到收藏夹弹出层 / 添加到收藏夹</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + Shift + C</td>
-<td style="text-align:left">查看最近操作项目的变化情况列表</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + Shift + I</td>
-<td style="text-align:left">查看项目当前文件</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + Shift + F7</td>
-<td style="text-align:left">在 Debug 模式下，下一步，进入当前方法体内，如果方法体还有方法，则会进入该内嵌的方法中，依此循环进入</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + Shift + F9</td>
-<td style="text-align:left">弹出 <code>Debug</code>  的可选择菜单</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + Shift + F10</td>
-<td style="text-align:left">弹出 <code>Run</code>  的可选择菜单</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + Shift + 左键双击</td>
-<td style="text-align:left">选择被双击的单词 / 中文句，按住不放，可以同时选择其他单词 / 中文句 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + Shift + 前方向键</td>
-<td style="text-align:left">移动光标所在行向上移动 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Alt + Shift + 后方向键</td>
-<td style="text-align:left">移动光标所在行向下移动 <code>（必备）</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="Ctrl-Shift-Alt"><a href="#Ctrl-Shift-Alt" class="headerlink" title="Ctrl + Shift + Alt"></a>Ctrl + Shift + Alt</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">快捷键</th>
-<th style="text-align:left">介绍</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Ctrl + Shift + Alt + V</td>
-<td style="text-align:left">无格式黏贴 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + Alt + N</td>
-<td style="text-align:left">前往指定的变量 / 方法</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + Alt + S</td>
-<td style="text-align:left">打开当前项目设置 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl + Shift + Alt + C</td>
-<td style="text-align:left">复制参考信息</td>
-</tr>
-</tbody>
-</table>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">快捷键</th>
-<th style="text-align:left">介绍</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">F2</td>
-<td style="text-align:left">跳转到下一个高亮错误 或 警告位置 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">F3</td>
-<td style="text-align:left">在查找模式下，定位到下一个匹配处</td>
-</tr>
-<tr>
-<td style="text-align:left">F4</td>
-<td style="text-align:left">编辑源 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">F7</td>
-<td style="text-align:left">在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则进入当前方法体内，如果该方法体还有方法，则不会进入该内嵌的方法中</td>
-</tr>
-<tr>
-<td style="text-align:left">F8</td>
-<td style="text-align:left">在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则不进入当前方法体内</td>
-</tr>
-<tr>
-<td style="text-align:left">F9</td>
-<td style="text-align:left">在 Debug 模式下，恢复程序运行，但是如果该断点下面代码还有断点则停在下一个断点上</td>
-</tr>
-<tr>
-<td style="text-align:left">F11</td>
-<td style="text-align:left">添加书签 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">F12</td>
-<td style="text-align:left">回到前一个工具窗口 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Tab</td>
-<td style="text-align:left">缩进 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">ESC</td>
-<td style="text-align:left">从工具窗口进入代码文件窗口 <code>（必备）</code></td>
-</tr>
-<tr>
-<td style="text-align:left">连按两次Shift</td>
-<td style="text-align:left">弹出 <code>Search Everywhere</code> 弹出层</td>
-</tr>
-</tbody>
-</table>
-<h2 id="UpperLowerCapitalize-大小写插件快捷键"><a href="#UpperLowerCapitalize-大小写插件快捷键" class="headerlink" title="UpperLowerCapitalize 大小写插件快捷键"></a>UpperLowerCapitalize 大小写插件快捷键</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">快捷键</th>
-<th style="text-align:left">介绍</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Alt+P</td>
-<td style="text-align:left">to uppercase</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt+L</td>
-<td style="text-align:left">to lowercase</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt+C</td>
-<td style="text-align:left">首字母大写</td>
-</tr>
-</tbody>
-</table>
 ]]></content>
     
     <summary type="html">
