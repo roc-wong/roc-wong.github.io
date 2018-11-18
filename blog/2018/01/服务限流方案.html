@@ -88,28 +88,16 @@
 
 
 
-<meta name="description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
-
-个人简介
-目前就职于上海某证券公司，从事java开发。
-喜欢运动，篮球、羽毛球、夜跑爱好">
+<meta name="description" content="roc wong的博客">
 <meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://roc-wong.github.io/about/index.html">
+<meta property="og:title" content="book">
+<meta property="og:url" content="https://roc-wong.github.io/book/index.html">
 <meta property="og:site_name" content="fly high">
-<meta property="og:description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
-
-个人简介
-目前就职于上海某证券公司，从事java开发。
-喜欢运动，篮球、羽毛球、夜跑爱好">
-<meta property="og:updated_time" content="2018-09-13T02:09:07.089Z">
+<meta property="og:description" content="roc wong的博客">
+<meta property="og:updated_time" content="2018-01-06T11:38:48.588Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
-
-个人简介
-目前就职于上海某证券公司，从事java开发。
-喜欢运动，篮球、羽毛球、夜跑爱好">
+<meta name="twitter:title" content="book">
+<meta name="twitter:description" content="roc wong的博客">
 
 
 
@@ -137,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="https://roc-wong.github.io/about/"/>
+  <link rel="canonical" href="https://roc-wong.github.io/book/"/>
 
 
 
@@ -331,7 +319,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="roc.wong">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://olml6iu96.bkt.clouddn.com/eagle.png">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/roc-wong/images/master/eagle.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -469,7 +457,7 @@
 <h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><h3 id="JPush-API-频率控制"><a href="#JPush-API-频率控制" class="headerlink" title="JPush API 频率控制"></a>JPush API 频率控制</h3><p>JPush API对访问次数，具有频率控制。即一定的时间窗口内，API允许调用的次数是有限制的。免费版：1分钟600次。</p>
 <p>超出后：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="attr">"error"</span>:&#123;<span class="attr">"code"</span>:<span class="number">2002</span>,<span class="attr">"message"</span>:<span class="string">"Request times of the app_key exceed the limit of current time window"</span>&#125;&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="各业务组直接对接极光API"><a href="#各业务组直接对接极光API" class="headerlink" title="各业务组直接对接极光API"></a>各业务组直接对接极光API</h3><p>目前各业务线都在使用极光推送服务，并且是直接调用极光API。水归一源，终汇聚一处。想实现流量管控，只有将调用出口整合到一处，方可达到限流管控的目的。</p>
-<p><img src="http://olml6iu96.bkt.clouddn.com/%E6%9E%81%E5%85%89%E6%8E%A8%E9%80%81%E8%B0%83%E7%94%A8%E7%8E%B0%E7%8A%B6.png" alt="现状"></p>
+<p><img src="https://raw.githubusercontent.com/roc-wong/images/master/%E6%9E%81%E5%85%89%E6%8E%A8%E9%80%81%E8%B0%83%E7%94%A8%E7%8E%B0%E7%8A%B6.png" alt="现状"></p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="令牌桶算法"><a href="#令牌桶算法" class="headerlink" title="令牌桶算法"></a>令牌桶算法</h3><p>令牌桶算法是网络流量整形（Traffic Shaping）和速率限制（Rate Limiting）中最常使用的一种算法。典型情况下，令牌桶算法用来控制发送到网络上的数据的数目，并允许突发数据的发送。令牌桶属于控制速率类型的。令牌桶算法最初来源于计算机网络。在网络传输数据时，为了防止网络拥塞，需限制流出网络的流量，使流量以比较均匀的速度向外发送。令牌桶算法就实现了这个功能，可控制发送到网络上数据的数目，并允许突发数据的发送。</p>
 <p>在 Wikipedia 上，令牌桶算法是这么描述的：</p>
 <ol>
@@ -482,7 +470,7 @@
 <p>大小固定的令牌桶可自行以恒定的速率源源不断地产生令牌。如果令牌不被消耗，或者被消耗的速度小于产生的速度，令牌就会不断地增多，直到把桶填满。后面再产生的令牌就会从桶中溢出。最后桶中可以保存的最大令牌数永远不会超过桶的大小。传送到令牌桶的数据包需要消耗令牌。不同大小的数据包，消耗的令牌数量不一样。</p>
 <p>令牌桶这种控制机制基于令牌桶中是否存在令牌来指示什么时候可以发送流量。令牌桶中的每一个令牌都代表一个字节。如果令牌桶中存在令牌，则允许发送流量；而如果令牌桶中不存在令牌，则不允许发送流量。因此，如果突发门限被合理地配置并且令牌桶中有足够的令牌，那么流量就可以以峰值速率发送。</p>
 <p>基于令牌桶算法改造消息中心，流程图如下：</p>
-<p><img src="http://olml6iu96.bkt.clouddn.com/%E9%99%90%E6%B5%81%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="限流方案"></p>
+<p><img src="https://raw.githubusercontent.com/roc-wong/images/master/%E9%99%90%E6%B5%81%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="限流方案"></p>
 <h3 id="单机限流"><a href="#单机限流" class="headerlink" title="单机限流"></a>单机限流</h3><p>Google Guava RateLimiter就是令牌桶算法的实现，速率限制器会在可配置的速率下分配许可证。如果必要的话，每个acquire() 会阻塞当前线程直到许可证可用后获取该许可证。一旦获取到许可证，不需要再释放许可证。RateLimiter经常用于限制对一些物理资源或者逻辑资源的访问速率。与Semaphore 相比，Semaphore 限制了并发访问的数量而不是使用速率。</p>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//每秒两个许可</span></div><div class="line"><span class="keyword">final</span> RateLimiter rateLimiter = RateLimiter.create(<span class="number">2.0</span>);</div><div class="line"></div><div class="line"><span class="keyword">void</span> submitTasks(List tasks, Executor executor) &#123;</div><div class="line">    <span class="keyword">for</span> (Runnable <span class="keyword">task</span> : tasks) &#123;</div><div class="line">        rateLimiter.acquire(); <span class="comment">// 拿不到许可就等待</span></div><div class="line">        executor.execute(<span class="keyword">task</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>通过设置许可证的速率来定义RateLimiter。在默认配置下，许可证会在固定的速率下被分配，速率单位是每秒多少个许可证。为了确保维护配置的速率，许可会被平稳地分配，许可之间的延迟会做调整。可能存在配置一个拥有预热期的RateLimiter的情况，在这段时间内，每秒分配的许可数会稳定地增长直到达到稳定的速率。</p>
@@ -521,7 +509,7 @@
 <p>10个线程20次请求，限制5s内10次请求。</p>
 <p><strong>测试结果</strong></p>
 <p>10次请求在5s内正常通过，剩下10次请求等待下个时间窗口轮询。</p>
-<p><img src="http://olml6iu96.bkt.clouddn.com/%E9%99%90%E6%B5%81%E6%B5%8B%E8%AF%95.png" alt="测试结果"></p>
+<p><img src="https://raw.githubusercontent.com/roc-wong/images/master/%E9%99%90%E6%B5%81%E6%B5%8B%E8%AF%95.png" alt="测试结果"></p>
 
       
     </div>
@@ -542,14 +530,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="http://olml6iu96.bkt.clouddn.com/WX20170219-233910@2x.png" alt="roc.wong 微信支付"/>
+        <img id="wechat_qr" src="https://raw.githubusercontent.com/roc-wong/images/master/WX20170219-233910@2x.png" alt="roc.wong 微信支付"/>
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="http://olml6iu96.bkt.clouddn.com/WX20170219-233931@2x.png" alt="roc.wong 支付宝"/>
+        <img id="alipay_qr" src="https://raw.githubusercontent.com/roc-wong/images/master/WX20170219-233931@2x.png" alt="roc.wong 支付宝"/>
         <p>支付宝</p>
       </div>
     
@@ -682,7 +670,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="http://olml6iu96.bkt.clouddn.com/eagle.png"
+                src="https://raw.githubusercontent.com/roc-wong/images/master/eagle.png"
                 alt="roc.wong" />
             
               <p class="site-author-name" itemprop="name">roc.wong</p>
