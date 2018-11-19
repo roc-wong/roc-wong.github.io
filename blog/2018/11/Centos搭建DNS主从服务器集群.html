@@ -88,16 +88,28 @@
 
 
 
-<meta name="description" content="roc wong的博客">
+<meta name="description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
+
+个人简介
+目前就职于上海某证券公司，从事java开发。
+喜欢运动，篮球、羽毛球、夜跑爱好">
 <meta property="og:type" content="website">
-<meta property="og:title" content="book">
-<meta property="og:url" content="https://roc-wong.github.io/book/index.html">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://roc-wong.github.io/about/index.html">
 <meta property="og:site_name" content="fly high">
-<meta property="og:description" content="roc wong的博客">
-<meta property="og:updated_time" content="2018-01-06T11:38:48.588Z">
+<meta property="og:description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
+
+个人简介
+目前就职于上海某证券公司，从事java开发。
+喜欢运动，篮球、羽毛球、夜跑爱好">
+<meta property="og:updated_time" content="2018-09-13T02:09:07.089Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="book">
-<meta name="twitter:description" content="roc wong的博客">
+<meta name="twitter:title" content="about">
+<meta name="twitter:description" content="You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period.
+
+个人简介
+目前就职于上海某证券公司，从事java开发。
+喜欢运动，篮球、羽毛球、夜跑爱好">
 
 
 
@@ -125,7 +137,7 @@
 
 
 
-  <link rel="canonical" href="https://roc-wong.github.io/book/"/>
+  <link rel="canonical" href="https://roc-wong.github.io/about/"/>
 
 
 
@@ -438,7 +450,7 @@
           <!--
           
               <div class="post-description">
-                  DNS服务器集群
+                  DNS（Domain Name Server，域名服务器）是进行域名(domain name)和与之相对应的IP地址 (IP address)转换的服务器。DNS中保存了一张域名(domain name)和与之相对应的IP地址 (IP address)的表，以解析消息的域名。 域名是Internet上某一台计算机或计算机组的名称，用于在数据传输时标识计算机的电子方位（有时也指地理位置）。域名是由一串用点分隔的名字组成的，通常包含组织名，而且始终包括两到三个字母的后缀，以指明组织的类型或该域所在的国家或地区。
               </div>
           
           -->
@@ -455,7 +467,11 @@
       
 
       
-        <p>BIND（Berkeley internet Name Daemon)也叫做NAMED，是现今互联网上使用最为广泛的DNS 服务器程序。这篇文章将要讲述如何在 chroot 监牢中运行 BIND，这样它就无法访问文件系统中除“监牢”以外的其它部分。</p>
+        <h1 id="Centos6-搭建DNS主从服务器"><a href="#Centos6-搭建DNS主从服务器" class="headerlink" title="Centos6 搭建DNS主从服务器"></a>Centos6 搭建DNS主从服务器</h1><p>标签（空格分隔）： 工作</p>
+<hr>
+<p>BIND（Berkeley internet Name</p>
+<hr>
+<p> Daemon)也叫做NAMED，是现今互联网上使用最为广泛的DNS 服务器程序。这篇文章将要讲述如何在 chroot 监牢中运行 BIND，这样它就无法访问文件系统中除“监牢”以外的其它部分。</p>
 <p>在这篇文章中，我会将BIND的运行根目录改为 /var/named/chroot/。当然，对于BIND来说，这个目录就是 /（根目录）。 “jail”（监牢，下同）是一个软件机制，其功能是使得某个程序无法访问规定区域之外的资源，同样也为了增强安全性（LCTT 译注：chroot “监牢”，所谓“监牢”就是指通过chroot机制来更改某个进程所能看到的根目录，即将某进程限制在指定目录中，保证该进程只能对该目录及其子目录的文件进行操作，从而保证整个服务器的安全）。Bind Chroot DNS 服务器的默认“监牢”为 /var/named/chroot。</p>
 <h2 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h2><p>10.29.181.61 Master DNS服务器<br>10.29.181.62 Slave  DNS服务器</p>
 <p>DNS服务器的合法域名：zts.local</p>
@@ -539,6 +555,8 @@
 <li><a href="https://blog.csdn.net/huluedeai/article/details/50674286" target="_blank" rel="external">Linux命令学习之nslookup</a></li>
 <li><a href="http://blog.51cto.com/vinsent/1967876" target="_blank" rel="external">搭建一个互联网DNS服务器架构</a></li>
 <li><a href="https://blog.csdn.net/yelllowcong/article/details/78823520" target="_blank" rel="external">CentOS之DNS服务器安装-yellowcong</a></li>
+<li><a href="https://blog.csdn.net/xiaoyuanfannao/article/details/82885120" target="_blank" rel="external">centos7搭建主从DNS服务器</a></li>
+<li><a href="https://blog.csdn.net/weixin_41004350/article/details/79107732" target="_blank" rel="external">Centos7 搭建DNS服务器与原理配置详解</a></li>
 </ul>
 
       
@@ -808,7 +826,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本环境"><span class="nav-number">1.</span> <span class="nav-text">基本环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建主从DNS服务器集群"><span class="nav-number">2.</span> <span class="nav-text">搭建主从DNS服务器集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、安装Bind-Chroot-DNS-服务器"><span class="nav-number">2.1.</span> <span class="nav-text">1、安装Bind Chroot DNS 服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、拷贝bind相关文件-准备bind-chroot-环境"><span class="nav-number">2.2.</span> <span class="nav-text">2、拷贝bind相关文件,准备bind chroot 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、在bind-chroot-的目录中创建相关文件"><span class="nav-number">2.3.</span> <span class="nav-text">3、在bind chroot 的目录中创建相关文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、-将-Bind-锁定文件设置为可写"><span class="nav-number">2.4.</span> <span class="nav-text">4、 将 Bind 锁定文件设置为可写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、-将-etc-named-conf-拷贝到-bind-chroot目录"><span class="nav-number">2.5.</span> <span class="nav-text">5、 将 /etc/named.conf 拷贝到 bind chroot目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、-在-etc-named-conf中对-bind-进行配置"><span class="nav-number">2.6.</span> <span class="nav-text">6、 在/etc/named.conf中对 bind 进行配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、-为-zts-local-域名创建转发域与反向域文件"><span class="nav-number">2.7.</span> <span class="nav-text">7、 为 zts.local 域名创建转发域与反向域文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-创建转发域"><span class="nav-number">2.7.1.</span> <span class="nav-text">a)创建转发域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-创建反向域"><span class="nav-number">2.7.2.</span> <span class="nav-text">b)创建反向域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、启动-bind-chroot-服务"><span class="nav-number">2.8.</span> <span class="nav-text">8、启动 bind-chroot 服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、搭建从DNS服务器"><span class="nav-number">2.9.</span> <span class="nav-text">9、搭建从DNS服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-安装从DNS服务器"><span class="nav-number">2.9.1.</span> <span class="nav-text">a)安装从DNS服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-修改主DNS服务器配置"><span class="nav-number">2.9.2.</span> <span class="nav-text">b)修改主DNS服务器配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-重启主、从DNS服务器"><span class="nav-number">2.9.3.</span> <span class="nav-text">c)重启主、从DNS服务器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、测试"><span class="nav-number">2.10.</span> <span class="nav-text">9、测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Centos6-搭建DNS主从服务器"><span class="nav-number">1.</span> <span class="nav-text">Centos6 搭建DNS主从服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本环境"><span class="nav-number">1.1.</span> <span class="nav-text">基本环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建主从DNS服务器集群"><span class="nav-number">1.2.</span> <span class="nav-text">搭建主从DNS服务器集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、安装Bind-Chroot-DNS-服务器"><span class="nav-number">1.2.1.</span> <span class="nav-text">1、安装Bind Chroot DNS 服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、拷贝bind相关文件-准备bind-chroot-环境"><span class="nav-number">1.2.2.</span> <span class="nav-text">2、拷贝bind相关文件,准备bind chroot 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、在bind-chroot-的目录中创建相关文件"><span class="nav-number">1.2.3.</span> <span class="nav-text">3、在bind chroot 的目录中创建相关文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、-将-Bind-锁定文件设置为可写"><span class="nav-number">1.2.4.</span> <span class="nav-text">4、 将 Bind 锁定文件设置为可写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、-将-etc-named-conf-拷贝到-bind-chroot目录"><span class="nav-number">1.2.5.</span> <span class="nav-text">5、 将 /etc/named.conf 拷贝到 bind chroot目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、-在-etc-named-conf中对-bind-进行配置"><span class="nav-number">1.2.6.</span> <span class="nav-text">6、 在/etc/named.conf中对 bind 进行配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、-为-zts-local-域名创建转发域与反向域文件"><span class="nav-number">1.2.7.</span> <span class="nav-text">7、 为 zts.local 域名创建转发域与反向域文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-创建转发域"><span class="nav-number">1.2.7.1.</span> <span class="nav-text">a)创建转发域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-创建反向域"><span class="nav-number">1.2.7.2.</span> <span class="nav-text">b)创建反向域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、启动-bind-chroot-服务"><span class="nav-number">1.2.8.</span> <span class="nav-text">8、启动 bind-chroot 服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、搭建从DNS服务器"><span class="nav-number">1.2.9.</span> <span class="nav-text">9、搭建从DNS服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-安装从DNS服务器"><span class="nav-number">1.2.9.1.</span> <span class="nav-text">a)安装从DNS服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-修改主DNS服务器配置"><span class="nav-number">1.2.9.2.</span> <span class="nav-text">b)修改主DNS服务器配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-重启主、从DNS服务器"><span class="nav-number">1.2.9.3.</span> <span class="nav-text">c)重启主、从DNS服务器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、测试"><span class="nav-number">1.2.10.</span> <span class="nav-text">9、测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.3.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://roc-wong.github.io/"/>
-  <updated>2018-11-19T13:36:45.127Z</updated>
+  <updated>2018-11-19T13:44:53.890Z</updated>
   <id>https://roc-wong.github.io/</id>
   
   <author>
@@ -20,9 +20,13 @@
     <link href="https://roc-wong.github.io/blog/2018/11/Centos%E6%90%AD%E5%BB%BADNS%E4%B8%BB%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4.html"/>
     <id>https://roc-wong.github.io/blog/2018/11/Centos搭建DNS主从服务器集群.html</id>
     <published>2018-11-19T13:32:17.000Z</published>
-    <updated>2018-11-19T13:36:45.127Z</updated>
+    <updated>2018-11-19T13:44:53.890Z</updated>
     
-    <content type="html"><![CDATA[<p>BIND（Berkeley internet Name Daemon)也叫做NAMED，是现今互联网上使用最为广泛的DNS 服务器程序。这篇文章将要讲述如何在 chroot 监牢中运行 BIND，这样它就无法访问文件系统中除“监牢”以外的其它部分。</p>
+    <content type="html"><![CDATA[<h1 id="Centos6-搭建DNS主从服务器"><a href="#Centos6-搭建DNS主从服务器" class="headerlink" title="Centos6 搭建DNS主从服务器"></a>Centos6 搭建DNS主从服务器</h1><p>标签（空格分隔）： 工作</p>
+<hr>
+<p>BIND（Berkeley internet Name</p>
+<hr>
+<p> Daemon)也叫做NAMED，是现今互联网上使用最为广泛的DNS 服务器程序。这篇文章将要讲述如何在 chroot 监牢中运行 BIND，这样它就无法访问文件系统中除“监牢”以外的其它部分。</p>
 <p>在这篇文章中，我会将BIND的运行根目录改为 /var/named/chroot/。当然，对于BIND来说，这个目录就是 /（根目录）。 “jail”（监牢，下同）是一个软件机制，其功能是使得某个程序无法访问规定区域之外的资源，同样也为了增强安全性（LCTT 译注：chroot “监牢”，所谓“监牢”就是指通过chroot机制来更改某个进程所能看到的根目录，即将某进程限制在指定目录中，保证该进程只能对该目录及其子目录的文件进行操作，从而保证整个服务器的安全）。Bind Chroot DNS 服务器的默认“监牢”为 /var/named/chroot。</p>
 <h2 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h2><p>10.29.181.61 Master DNS服务器<br>10.29.181.62 Slave  DNS服务器</p>
 <p>DNS服务器的合法域名：zts.local</p>
@@ -106,12 +110,14 @@
 <li><a href="https://blog.csdn.net/huluedeai/article/details/50674286" target="_blank" rel="external">Linux命令学习之nslookup</a></li>
 <li><a href="http://blog.51cto.com/vinsent/1967876" target="_blank" rel="external">搭建一个互联网DNS服务器架构</a></li>
 <li><a href="https://blog.csdn.net/yelllowcong/article/details/78823520" target="_blank" rel="external">CentOS之DNS服务器安装-yellowcong</a></li>
+<li><a href="https://blog.csdn.net/xiaoyuanfannao/article/details/82885120" target="_blank" rel="external">centos7搭建主从DNS服务器</a></li>
+<li><a href="https://blog.csdn.net/weixin_41004350/article/details/79107732" target="_blank" rel="external">Centos7 搭建DNS服务器与原理配置详解</a></li>
 </ul>
 ]]></content>
     
     <summary type="html">
     
-      DNS服务器集群
+      DNS（Domain Name Server，域名服务器）是进行域名(domain name)和与之相对应的IP地址 (IP address)转换的服务器。DNS中保存了一张域名(domain name)和与之相对应的IP地址 (IP address)的表，以解析消息的域名。 域名是Internet上某一台计算机或计算机组的名称，用于在数据传输时标识计算机的电子方位（有时也指地理位置）。域名是由一串用点分隔的名字组成的，通常包含组织名，而且始终包括两到三个字母的后缀，以指明组织的类型或该域所在的国家或地区。
     
     </summary>
     
