@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="lQaW1XXg0qmIeHa2Or2-cQGRIUAZOA7CobMcsBYoPRc" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="roc's blog,roc的博客,roc wong的博客,fly high的博客" />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="fly high" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="roc wong的博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="book">
+<meta property="og:url" content="https://roc-wong.github.io/book/index.html">
+<meta property="og:site_name" content="fly high">
+<meta property="og:description" content="roc wong的博客">
+<meta property="og:updated_time" content="2018-01-06T11:38:48.588Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="book">
+<meta name="twitter:description" content="roc wong的博客">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://roc-wong.github.io/book/"/>
+
+
+
+
+
+  <title>CentOS 搭建DNS主从服务器集群 | fly high</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-92195689-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?72781f60d8736c40565a23a9e62eaebb";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fly high</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">九万里风鹏正举</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />日程表</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />公益404</a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2018/11/Centos搭建DNS主从服务器集群.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc.wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/roc-wong/images/master/eagle.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CentOS 搭建DNS主从服务器集群</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-19T21:32:17+08:00">2018-11-19</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/11/Centos搭建DNS主从服务器集群.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2018/11/Centos搭建DNS主从服务器集群.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/blog/2018/11/Centos搭建DNS主从服务器集群.html" class="leancloud_visitors" data-flag-title="CentOS 搭建DNS主从服务器集群">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">17k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">0:17</span>
+              
+            </div>
+          
+
+          <!--
+          
+              <div class="post-description">
+                  DNS服务器集群
+              </div>
+          
+          -->
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>BIND（Berkeley internet Name Daemon)也叫做NAMED，是现今互联网上使用最为广泛的DNS 服务器程序。这篇文章将要讲述如何在 chroot 监牢中运行 BIND，这样它就无法访问文件系统中除“监牢”以外的其它部分。</p>
+<p>在这篇文章中，我会将BIND的运行根目录改为 /var/named/chroot/。当然，对于BIND来说，这个目录就是 /（根目录）。 “jail”（监牢，下同）是一个软件机制，其功能是使得某个程序无法访问规定区域之外的资源，同样也为了增强安全性（LCTT 译注：chroot “监牢”，所谓“监牢”就是指通过chroot机制来更改某个进程所能看到的根目录，即将某进程限制在指定目录中，保证该进程只能对该目录及其子目录的文件进行操作，从而保证整个服务器的安全）。Bind Chroot DNS 服务器的默认“监牢”为 /var/named/chroot。</p>
+<h2 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h2><p>10.29.181.61 Master DNS服务器<br>10.29.181.62 Slave  DNS服务器</p>
+<p>DNS服务器的合法域名：zts.local</p>
+<p><strong>要求</strong></p>
+<p>允许所有来源的主机对改域名进行解析，内网其他主机访问外网时候走ISP的DNS，只解析内网IP主机的请求进行转发，不会对外网主机的解析请求进行转发。</p>
+<h2 id="搭建主从DNS服务器集群"><a href="#搭建主从DNS服务器集群" class="headerlink" title="搭建主从DNS服务器集群"></a>搭建主从DNS服务器集群</h2><h3 id="1、安装Bind-Chroot-DNS-服务器"><a href="#1、安装Bind-Chroot-DNS-服务器" class="headerlink" title="1、安装Bind Chroot DNS 服务器"></a>1、安装Bind Chroot DNS 服务器</h3><figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@nrozntgbd2 ~]# yum install <span class="keyword">bind</span>-chroot <span class="keyword">bind</span> <span class="keyword">bind</span>-utils dig -y</div></pre></td></tr></table></figure>
+<h3 id="2、拷贝bind相关文件-准备bind-chroot-环境"><a href="#2、拷贝bind相关文件-准备bind-chroot-环境" class="headerlink" title="2、拷贝bind相关文件,准备bind chroot 环境"></a>2、拷贝bind相关文件,准备bind chroot 环境</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@nrozntgbd2 ~]# cp -R <span class="regexp">/usr/</span>share<span class="regexp">/doc/</span>bind-*<span class="regexp">/sample/</span>var<span class="regexp">/named/</span>* <span class="regexp">/var/</span>named<span class="regexp">/chroot/</span>var<span class="regexp">/named/</span></div></pre></td></tr></table></figure>
+<h3 id="3、在bind-chroot-的目录中创建相关文件"><a href="#3、在bind-chroot-的目录中创建相关文件" class="headerlink" title="3、在bind chroot 的目录中创建相关文件"></a>3、在bind chroot 的目录中创建相关文件</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[<span class="symbol">root@</span>nrozntgbd2 ~]# touch /<span class="keyword">var</span>/named/chroot/<span class="keyword">var</span>/named/<span class="keyword">data</span>/cache_dump.db</div><div class="line">[<span class="symbol">root@</span>nrozntgbd2 ~]# touch /<span class="keyword">var</span>/named/chroot/<span class="keyword">var</span>/named/<span class="keyword">data</span>/named_stats.txt</div><div class="line">[<span class="symbol">root@</span>nrozntgbd2 ~]# touch /<span class="keyword">var</span>/named/chroot/<span class="keyword">var</span>/named/<span class="keyword">data</span>/named_mem_stats.txt</div><div class="line">[<span class="symbol">root@</span>nrozntgbd2 ~]# touch /<span class="keyword">var</span>/named/chroot/<span class="keyword">var</span>/named/<span class="keyword">data</span>/named.run</div><div class="line">[<span class="symbol">root@</span>nrozntgbd2 ~]# mkdir /<span class="keyword">var</span>/named/chroot/<span class="keyword">var</span>/named/<span class="keyword">dynamic</span></div><div class="line">[<span class="symbol">root@</span>nrozntgbd2 ~]# touch /<span class="keyword">var</span>/named/chroot/<span class="keyword">var</span>/named/<span class="keyword">dynamic</span>/managed-keys.bind</div></pre></td></tr></table></figure>
+<h3 id="4、-将-Bind-锁定文件设置为可写"><a href="#4、-将-Bind-锁定文件设置为可写" class="headerlink" title="4、 将 Bind 锁定文件设置为可写"></a>4、 将 Bind 锁定文件设置为可写</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[<span class="symbol">root@</span>nrozntgbd2 ~]# chmod -R <span class="number">777</span> /<span class="keyword">var</span>/named/chroot/<span class="keyword">var</span>/named/<span class="keyword">data</span></div><div class="line">[<span class="symbol">root@</span>nrozntgbd2 ~]# chmod -R <span class="number">777</span> /<span class="keyword">var</span>/named/chroot/<span class="keyword">var</span>/named/<span class="keyword">dynamic</span></div></pre></td></tr></table></figure>
+<h3 id="5、-将-etc-named-conf-拷贝到-bind-chroot目录"><a href="#5、-将-etc-named-conf-拷贝到-bind-chroot目录" class="headerlink" title="5、 将 /etc/named.conf 拷贝到 bind chroot目录"></a>5、 将 /etc/named.conf 拷贝到 bind chroot目录</h3><figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@nrozntgbd2 ~]# cp -p /etc/<span class="keyword">named</span>.conf /var/<span class="keyword">named</span>/chroot/etc/<span class="keyword">named</span>.conf</div></pre></td></tr></table></figure>
+<h3 id="6、-在-etc-named-conf中对-bind-进行配置"><a href="#6、-在-etc-named-conf中对-bind-进行配置" class="headerlink" title="6、 在/etc/named.conf中对 bind 进行配置"></a>6、 在/etc/named.conf中对 bind 进行配置</h3><p>在 named.conf 文件尾添加 zts.local 域信息， 创建转发域（Forward Zone）与反向域（Reverse Zone）（LCTT 译注：这里zts.local 并非一个真实有效的互联网域名，而是通常用于本地测试的一个域名；如果你需要做权威 DNS 解析，你可以将你拥有的域名如这里所示配置解析。）：</p>
+<p>[root@nrozntgbd2 ~]# vi /var/named/chroot/etc/named.conf</p>
+<p>a. 编辑配置文件/etc/named.conf，找到listen-on这一行，改为：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">listen-<span class="keyword">on</span> port <span class="number">53</span> &#123; any; &#125;; <span class="comment">#any是匹配所有的意思</span></div></pre></td></tr></table></figure>
+<p>b. 找到allow-query这一行，改为：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">allow-query     &#123; any<span class="comment">; &#125;;</span></div></pre></td></tr></table></figure>
+<p>c. 添加要解析的域</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//正向解析</span></div><div class="line">zone <span class="string">"zts.local"</span> &#123;</div><div class="line">    <span class="keyword">type</span> master;</div><div class="line">    <span class="keyword">file</span> <span class="string">"zts.local.zone"</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//反向解析</span></div><div class="line">zone <span class="string">"181.29.10.in-addr.arpa"</span> <span class="keyword">IN</span> &#123;</div><div class="line">        <span class="keyword">type</span> master;</div><div class="line">        <span class="keyword">file</span> <span class="string">"10.29.181.zone"</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>d. 对DNS配置文件进行一下语法检查：<code>named-checkconf /var/named/chroot/etc/named.conf</code></p>
+<p><strong>named.conf 完全配置如下：</strong></p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// named.conf</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// 由Red Hat提供，将 ISC BIND named(8) DNS服务器 </span></div><div class="line"><span class="comment">// 配置为暂存域名服务器 (用来做本地DNS解析).</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// See /usr/share/doc/bind*/sample/ for example named configuration files.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line">options &#123;</div><div class="line">        listen-<span class="keyword">on</span> port 53 &#123; any; &#125;;</div><div class="line">        listen-<span class="keyword">on</span>-v6 port 53 &#123; ::1; &#125;;</div><div class="line">        directory       <span class="string">"/var/named"</span>;</div><div class="line">        dump-<span class="keyword">file</span>       <span class="string">"/var/named/data/cache_dump.db"</span>;</div><div class="line">        statistics-<span class="keyword">file</span> <span class="string">"/var/named/data/named_stats.txt"</span>;</div><div class="line">        memstatistics-<span class="keyword">file</span> <span class="string">"/var/named/data/named_mem_stats.txt"</span>;</div><div class="line">        allow-<span class="keyword">query</span>     &#123; any; &#125;;</div><div class="line"></div><div class="line">        <span class="comment">/*</span></div><div class="line">         - 如果你要建立一个 授权域名服务器 服务器, 那么不要开启 recursion（递归） 功能。</div><div class="line">         - 如果你要建立一个 递归 DNS 服务器, 那么需要开启recursion 功能。</div><div class="line">         - 如果你的递归DNS服务器有公网IP地址, 你必须开启访问控制功能，</div><div class="line">           只有那些合法用户才可以发询问. 如果不这么做的话，那么你的服</div><div class="line">           服务就会受到DNS 放大攻击。实现BCP38将有效抵御这类攻击。</div><div class="line">        */</div><div class="line">        recursion yes;</div><div class="line"></div><div class="line">        dnssec-enable yes;</div><div class="line">        dnssec-validation yes;</div><div class="line">        dnssec-lookaside auto;</div><div class="line"></div><div class="line">        <span class="comment">/* Path to ISC DLV key */</span></div><div class="line">        bindkeys-<span class="keyword">file</span> <span class="string">"/etc/named.iscdlv.key"</span>;</div><div class="line"></div><div class="line">        managed-keys-directory <span class="string">"/var/named/dynamic"</span>;</div><div class="line"></div><div class="line">        pid-<span class="keyword">file</span> <span class="string">"/run/named/named.pid"</span>;</div><div class="line">        session-keyfile <span class="string">"/run/named/session.key"</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">logging &#123;</div><div class="line">        channel default_debug &#123;</div><div class="line">                <span class="keyword">file</span> <span class="string">"data/named.run"</span>;</div><div class="line">                severity dynamic;</div><div class="line">        &#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">zone <span class="string">"."</span> <span class="keyword">IN</span> &#123;</div><div class="line">        <span class="keyword">type</span> hint;</div><div class="line">        <span class="keyword">file</span> <span class="string">"named.ca"</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">zone <span class="string">"zts.local"</span> &#123;</div><div class="line">    <span class="keyword">type</span> master;</div><div class="line">    <span class="keyword">file</span> <span class="string">"zts.local.zone"</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">zone <span class="string">"181.29.10.in-addr.arpa"</span> <span class="keyword">IN</span> &#123;</div><div class="line">        <span class="keyword">type</span> master;</div><div class="line">        <span class="keyword">file</span> <span class="string">"10.29.181.zone"</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">include</span> <span class="string">"/etc/named.rfc1912.zones"</span>;</div><div class="line"><span class="keyword">include</span> <span class="string">"/etc/named.root.key"</span>;</div></pre></td></tr></table></figure>
+<h3 id="7、-为-zts-local-域名创建转发域与反向域文件"><a href="#7、-为-zts-local-域名创建转发域与反向域文件" class="headerlink" title="7、 为 zts.local 域名创建转发域与反向域文件"></a>7、 为 zts.local 域名创建转发域与反向域文件</h3><h4 id="a-创建转发域"><a href="#a-创建转发域" class="headerlink" title="a)创建转发域"></a>a)创建转发域</h4><p><code>[root@nrozntgbd2 ~]# vi /var/named/chroot/var/named/zts.local.zone</code></p>
+<p>添加如下内容并保存：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">$<span class="keyword">ORIGIN </span>zts.local.</div><div class="line">$TTL <span class="number">86400</span></div><div class="line"><span class="comment">;</span></div><div class="line"><span class="comment">;在zone的配置文件中，它是以分号来作为批注语句标识符的。</span></div><div class="line"><span class="comment">;修改这个配置文件时，要注意，名称最后面没有加句点的是主机名，最后面加了句点的是FQDN（除了$ORIGIN那里）。</span></div><div class="line"><span class="comment">;$ORIGIN那里填域名。下面的@符号会引用这里填写的值。如果不填，则会引用主配置文件中zone语句后面的值。</span></div><div class="line"><span class="comment">;$TTL表示timeto live值，表示当其它DNS查询到本zone的DNS记录时，这个记录能在它的DNS缓存中存在多久，单位为秒。</span></div><div class="line">@ IN SOA dns1.zts.local. roc.fly.qq.com.  (</div><div class="line">        <span class="number">2018111901</span></div><div class="line">        <span class="number">1</span>H</div><div class="line">        <span class="number">5</span>m</div><div class="line">        <span class="number">2</span>D</div><div class="line">        <span class="number">6</span>H )</div><div class="line"><span class="comment">;</span></div><div class="line"><span class="comment">;SOA后面的两个参数分别是主DNS服务器主机名和管理者邮箱(xie@zts.local)。因为@符号有特殊含义，所以写成这样。</span></div><div class="line"><span class="comment">;括号内的第一个参数是序号，代表本配置文档的新旧，序号越大，表示越新。每次修改本文档后，都要将这个值改大。</span></div><div class="line"><span class="comment">;第二个参数是刷新频率，表示slave隔多久会跟master比对一次配置档案，单位为秒。</span></div><div class="line"><span class="comment">;第三个参数是失败重新尝试时间，单位为秒</span></div><div class="line"><span class="comment">;第四个参数是失效时间，单位为秒。</span></div><div class="line"><span class="comment">;在BIND9中，第五个参数表示其它DNS服务器能缓存negative answers的时间，单位为秒。</span></div><div class="line"><span class="comment">;</span></div><div class="line"></div><div class="line"></div><div class="line">@ IN NS dns1.zts.local.</div><div class="line">  IN NS dns2.zts.local.</div><div class="line">dns1  IN  A  <span class="number">10</span>.<span class="number">29</span>.<span class="number">181</span>.<span class="number">61</span></div><div class="line">dns2  IN  A  <span class="number">10</span>.<span class="number">29</span>.<span class="number">181</span>.<span class="number">62</span></div><div class="line"><span class="comment">;</span></div><div class="line"><span class="comment">;类型NS定义指定域的DNS服务器主机名(如dns1.zts.local)，不管是主DNS还是从DNS。</span></div><div class="line"><span class="comment">;类型A定义指定主机(如dns1)的IP地址。如果是使用的IPv6地址，则需使用类型AAAA。</span></div><div class="line"><span class="comment">;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">;@  IN  MX  10  mail1.zts.local.</span></div><div class="line"><span class="comment">;   IN  MX  20  mail2.zts.local.</span></div><div class="line"><span class="comment">;mail1  IN  A  10.29.181.61</span></div><div class="line"><span class="comment">;mail2  IN  A  10.29.181.62</span></div><div class="line"><span class="comment">;</span></div><div class="line"><span class="comment">;类型MX定义指定域的邮件服务器主机名(如mail1.zts.local)。</span></div><div class="line"><span class="comment">;MX后面的数字为优先级，越小越优先。同样的优先级值则可以在多台邮件服务器之间进行负载分担。</span></div><div class="line"><span class="comment">;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">;www  IN  CNAME  servs.zts.local.</span></div><div class="line"><span class="comment">;ftp  IN  CNAME  servs.zts.local.</span></div><div class="line"><span class="comment">;servs  IN  A  10.29.181.6</span></div><div class="line"><span class="comment">;</span></div><div class="line"><span class="comment">;类型CNAME用于定义别名。通常用于同一台主机提供多个服务的情况。</span></div><div class="line"><span class="comment">;以这里的设定为例，当要解析ftp.zts.local的IP时，它会解析成主机servs.zts.local的IP。</span></div><div class="line"><span class="comment">;</span></div><div class="line"></div><div class="line"></div><div class="line">forum  IN  A   <span class="number">10</span>.<span class="number">29</span>.<span class="number">181</span>.<span class="number">61</span></div><div class="line"><span class="comment">;travel IN  A   10.29.181.8</span></div><div class="line"><span class="comment">;       IN  A   10.29.181.9</span></div><div class="line"><span class="comment">;</span></div><div class="line"><span class="comment">;如上面所示，也可以直接设定某一台主机(如forum.zts.local)的IP。</span></div><div class="line"><span class="comment">;同一台主机(如travel.zts.local)也可以设定多个IP。</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">; eureka cluster配置</span></div><div class="line">txt.<span class="keyword">shanghai </span>IN TXT <span class="string">"defaultZone.zts.local"</span></div><div class="line">txt.defaultZone IN TXT <span class="string">"10.29.181.56"</span> <span class="string">"10.29.181.57"</span> <span class="string">"10.29.181.58"</span> <span class="string">"10.29.181.60"</span></div><div class="line"></div><div class="line"><span class="comment">;通过查看Eureka的源码，它的实现是通过寻找txt.beijing-a.zts.local（txt.region.eureka-server-d-n-s-name）获取"beijing-a.zts.local" "beijing-b.zts.local"的zone：beijing-a和beijing-b，</span></div><div class="line"><span class="comment">;然后再去获取txt.beijing-a.zts.local和txt.beijing-b.zts.local中对应的ServiceUrls的数据，也就是IP地址: "10.29.181.61" "10.29.181.62"</span></div><div class="line"><span class="comment">;这样服务间就可以获取到固定端口下的不同IP的机器的注册中心服务地址，并相互注册</span></div><div class="line">txt.<span class="keyword">beijing </span>IN TXT <span class="string">"beijing-a.zts.local"</span> <span class="string">"beijing-b.zts.local"</span></div><div class="line">txt.<span class="keyword">beijing-a </span>IN TXT <span class="string">"10.29.181.61"</span> <span class="string">"10.29.181.62"</span></div><div class="line">txt.<span class="keyword">beijing-b </span>IN TXT <span class="string">"10.29.181.63"</span> <span class="string">"10.29.181.64"</span></div></pre></td></tr></table></figure></p>
+<p>对区域文件进行有效性检查：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">named-checkzone</span> 181<span class="selector-class">.29</span><span class="selector-class">.10</span><span class="selector-class">.in-addr</span><span class="selector-class">.arpa</span> 10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.zone</span></div></pre></td></tr></table></figure></p>
+<h4 id="b-创建反向域"><a href="#b-创建反向域" class="headerlink" title="b)创建反向域"></a>b)创建反向域</h4><p><code>[root@nrozntgbd2 ~]# vi /var/named/chroot/var/named/10.29.181.zone</code></p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">$ORIGIN <span class="number">181.29</span><span class="number">.10</span>.<span class="keyword">in</span><span class="params">-addr.arpa.</span></div><div class="line">$TTL <span class="number">86400</span></div><div class="line">;</div><div class="line">;在zone的配置文件中，它是以分号来作为批注语句标识符的。</div><div class="line">;修改这个配置文件时，要注意，名称最后面没有加句点的是主机名，最后面加了句点的是FQDN（除了$ORIGIN那里）。</div><div class="line">;$ORIGIN那里填域名。下面的@符号会引用这里填写的值。如果不填，则会引用主配置文件中zone语句后面的值。</div><div class="line">;$TTL表示timeto live值，表示当其它DNS查询到本zone的DNS记录时，这个记录能在它的DNS缓存中存在多久，单位为秒。</div><div class="line">@ <span class="keyword">IN</span> SOA dns1.zts.<span class="built_in">local</span>. roc.fly.qq.com. (</div><div class="line">        <span class="number">2018111902</span></div><div class="line">        <span class="number">1</span>H</div><div class="line">        <span class="number">5</span>m</div><div class="line">        <span class="number">2</span>D</div><div class="line">        <span class="number">6</span>H )</div><div class="line">;</div><div class="line">;SOA后面的两个参数分别是主DNS服务器主机名和管理者邮箱(xie@zts.<span class="built_in">local</span>)。因为@符号有特殊含义，所以写成这样。</div><div class="line">;括号内的第一个参数是序号，代表本配置文档的新旧，序号越大，表示越新。每次修改本文档后，都要将这个值改大。</div><div class="line">;第二个参数是刷新频率，表示slave隔多久会跟master比对一次配置档案，单位为秒。</div><div class="line">;第三个参数是失败重新尝试时间，单位为秒</div><div class="line">;第四个参数是失效时间，单位为秒。</div><div class="line">;在BIND9中，第五个参数表示其它DNS服务器能缓存negative answers的时间，单位为秒。</div><div class="line">;</div><div class="line"></div><div class="line">;<span class="number">61.181</span><span class="number">.29</span><span class="number">.10</span>.<span class="keyword">in</span><span class="params">-addr.arpa.</span> <span class="keyword">IN</span> PTR dns1.zts.<span class="built_in">local</span>.</div><div class="line">;<span class="number">62.181</span><span class="number">.29</span><span class="number">.10</span>.<span class="keyword">in</span><span class="params">-addr.arpa.</span> <span class="keyword">IN</span> PTR dns2.zts.<span class="built_in">local</span>.</div><div class="line">@  <span class="keyword">IN</span> NS  dns1.zts.<span class="built_in">local</span>.</div><div class="line">   <span class="keyword">IN</span> NS  dns2.zts.<span class="built_in">local</span>.</div><div class="line"><span class="number">61</span> <span class="keyword">IN</span> PTR dns1.zts.<span class="built_in">local</span>.</div><div class="line"><span class="number">62</span> <span class="keyword">IN</span> PTR dns2.zts.<span class="built_in">local</span>.</div></pre></td></tr></table></figure>
+<p>对区域文件进行有效性检查：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">named-checkzone zts<span class="selector-class">.local</span> /var/named/chroot/var/named/zts<span class="selector-class">.local</span><span class="selector-class">.zone</span></div></pre></td></tr></table></figure></p>
+<h3 id="8、启动-bind-chroot-服务"><a href="#8、启动-bind-chroot-服务" class="headerlink" title="8、启动 bind-chroot 服务"></a>8、启动 bind-chroot 服务</h3><p>启动named，日志可以在<code>/var/log/messages</code>下查看<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@nrozntgbd2 <span class="keyword">named</span>]# service <span class="keyword">named</span> restart</div><div class="line">Stopping <span class="keyword">named</span>: .                                          [  OK  ]</div><div class="line">Starting <span class="keyword">named</span>:                                            [  OK  ]</div><div class="line">[root@nrozntgbd2 <span class="keyword">named</span>]# vim /var/<span class="built_in">log</span>/messages</div></pre></td></tr></table></figure></p>
+<p><strong>设置开机启动</strong><br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># centos 6</span></div><div class="line">chkconfig named <span class="keyword">on</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># centos 7</span></div><div class="line">[root<span class="symbol">@nrozntgbd2</span> ~]<span class="meta"># /usr/libexec/setup-named-chroot.sh /var/named/chroot on</span></div><div class="line">[root<span class="symbol">@nrozntgbd2</span> ~]<span class="meta"># systemctl stop named</span></div><div class="line">[root<span class="symbol">@nrozntgbd2</span> ~]<span class="meta"># systemctl disable named</span></div><div class="line">[root<span class="symbol">@nrozntgbd2</span> ~]<span class="meta"># systemctl start named-chroot</span></div><div class="line">[root<span class="symbol">@nrozntgbd2</span> ~]<span class="meta"># systemctl enable named-chroot</span></div><div class="line">ln -s <span class="string">'/usr/lib/systemd/system/named-chroot.service'</span> <span class="string">'/etc/systemd/system/multi-user.target.wants/named-chroot.service'</span></div></pre></td></tr></table></figure>
+<h3 id="9、搭建从DNS服务器"><a href="#9、搭建从DNS服务器" class="headerlink" title="9、搭建从DNS服务器"></a>9、搭建从DNS服务器</h3><h4 id="a-安装从DNS服务器"><a href="#a-安装从DNS服务器" class="headerlink" title="a)安装从DNS服务器"></a>a)安装从DNS服务器</h4><ul>
+<li><p>1.<strong>重复步骤1-5</strong></p>
+</li>
+<li><p>2.编辑配置文件/var/named/chroot/etc/named.conf，找到listen-on这一行，改为：</p>
+</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">listen-<span class="keyword">on</span> port <span class="number">53</span> &#123; any; &#125;; <span class="comment">#any是匹配所有的意思</span></div></pre></td></tr></table></figure>
+<ul>
+<li>3.找到allow-query这一行，改为：</li>
+</ul>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">allow-query     &#123; any<span class="comment">; &#125;;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><p>4.在/var/named/chroot/etc/named.conf中增加区域配置</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">zone <span class="string">"zts.local"</span> &#123;</div><div class="line">    type slave;</div><div class="line">    file <span class="string">"zts.local.zone"</span>; ###将同步后的文件放置在哪里，这里是/var/named/</div><div class="line">    masters &#123; <span class="number">10.29</span><span class="number">.181</span><span class="number">.61</span>; &#125;;         ###指定主服务器的ip地址</div><div class="line">&#125;;</div><div class="line"></div><div class="line">zone <span class="string">"181.29.10.in-addr.arpa"</span> IN &#123;</div><div class="line">        type slave;</div><div class="line">        file <span class="string">"10.29.181.zone"</span>;</div><div class="line">        masters &#123; <span class="number">10.29</span><span class="number">.181</span><span class="number">.61</span>; &#125;;         ###指定主服务器的ip地址</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>5.修改权限(建议同时修改主、从DNS服务器)</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chown <span class="keyword">named</span>:<span class="keyword">named</span> /var/<span class="keyword">named</span>/chroot/var/<span class="keyword">named</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="b-修改主DNS服务器配置"><a href="#b-修改主DNS服务器配置" class="headerlink" title="b)修改主DNS服务器配置"></a>b)修改主DNS服务器配置</h4><p>修改<code>/var/named/chroot/etc/named.conf</code>，并验证：<code>named-checkconf named.conf</code></p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">zone <span class="string">"zts.local"</span> &#123;</div><div class="line">    type master;</div><div class="line">    file <span class="string">"zts.local.zone"</span>;</div><div class="line">    allow-transfer &#123; <span class="number">10.29</span><span class="number">.181</span><span class="number">.62</span>; &#125;;               <span class="comment">//指定这个域的从DNS服务器的IP</span></div><div class="line">    allow-query &#123; any; &#125;;                           <span class="comment">//允许来自任意IP对这个域的解析请求</span></div><div class="line">    notify yes;</div><div class="line">    also-notify  &#123; <span class="number">10.29</span><span class="number">.181</span><span class="number">.62</span>; &#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">zone <span class="string">"181.29.10.in-addr.arpa"</span> IN &#123;</div><div class="line">        type master;</div><div class="line">        file <span class="string">"10.29.181.zone"</span>;</div><div class="line">        allow-transfer &#123; <span class="number">10.29</span><span class="number">.181</span><span class="number">.62</span>; &#125;;              <span class="comment">//指定这个域的从DNS服务器的IP</span></div><div class="line">        allow-query &#123; any; &#125;;                           <span class="comment">//允许来自任意IP对这个域的解析请求</span></div><div class="line">        notify yes;</div><div class="line">        also-notify  &#123; <span class="number">10.29</span><span class="number">.181</span><span class="number">.62</span>; &#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h4 id="c-重启主、从DNS服务器"><a href="#c-重启主、从DNS服务器" class="headerlink" title="c)重启主、从DNS服务器"></a>c)重启主、从DNS服务器</h4><ul>
+<li><p>1.重启主服务器：<figure class="highlight plain"><figcaption><span>named restart```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- 2.重启从服务器：```service named restart</div></pre></td></tr></table></figure></p>
+</li>
+<li><p>3.若报错，可检查日志文件<code>vim /var/log/messages</code>，这里我们检查下从服务器同步日志</p>
+</li>
+</ul>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: adjusted limit on open files from <span class="number">100000</span> to <span class="number">1048576</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: found <span class="number">8</span> CPUs, using <span class="number">8</span> worker threads</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: using <span class="meta">up</span> to <span class="number">4096</span> sockets</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: loading configuration from <span class="string">'/etc/named.conf'</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: reading built-<span class="keyword">in</span> trusted keys from file <span class="string">'/etc/named.iscdlv.key'</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: using <span class="meta">default</span> UDP/IPv4 port range: [<span class="number">1024</span>, <span class="number">65535</span>]</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: using <span class="meta">default</span> UDP/IPv6 port range: [<span class="number">1024</span>, <span class="number">65535</span>]</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: listening on IPv4 interface lo, <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>#<span class="number">53</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: listening on IPv4 interface eth3, <span class="number">10.29</span><span class="meta">.181</span><span class="meta">.62</span>#<span class="number">53</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: listening on IPv6 interface lo, ::<span class="number">1</span>#<span class="number">53</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: generating session key for dynamic DNS</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: sizing zone task pool based on <span class="number">7</span> zones</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: set <span class="meta">up</span> managed keys zone for view _<span class="meta">default</span>, file <span class="string">'/var/named/dynamic/managed-keys.bind'</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: Warning: <span class="string">'empty-zones-enable/disable-empty-zone'</span> <span class="keyword">not</span> set: disabling RFC <span class="number">1918</span> empty zones</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: automatic empty zone: <span class="number">127.</span><span class="keyword">IN</span>-ADDR.ARPA</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: automatic empty zone: <span class="number">254.169</span>.IN-ADDR.ARPA</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: automatic empty zone: <span class="number">2.0</span><span class="meta">.192</span>.IN-ADDR.ARPA</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: automatic empty zone: <span class="number">100.51</span><span class="meta">.198</span>.IN-ADDR.ARPA</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: automatic empty zone: <span class="number">113.0</span><span class="meta">.203</span>.IN-ADDR.ARPA</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: automatic empty zone: <span class="number">255.255</span><span class="meta">.255</span><span class="meta">.255</span>.IN-ADDR.ARPA</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: automatic empty zone: <span class="number">0.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span>.IP6.ARPA</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: automatic empty zone: D.F.IP6.ARPA</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: automatic empty zone: <span class="number">8.</span>E.F.IP6.ARPA</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: automatic empty zone: <span class="number">9.</span>E.F.IP6.ARPA</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: automatic empty zone: A.E.F.IP6.ARPA</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: automatic empty zone: B.E.F.IP6.ARPA</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: automatic empty zone: <span class="number">8.</span>B.D<span class="meta">.0</span><span class="meta">.1</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.2</span>.IP6.ARPA</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: command channel listening on <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>#<span class="number">953</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: command channel listening on ::<span class="number">1</span>#<span class="number">953</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: zone <span class="number">0.</span><span class="keyword">in</span>-addr.arpa/<span class="keyword">IN</span>: loaded serial <span class="number">0</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: zone <span class="number">1.0</span><span class="meta">.0</span><span class="meta">.127</span>.in-addr.arpa/<span class="keyword">IN</span>: loaded serial <span class="number">0</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: zone <span class="number">1.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span><span class="meta">.0</span>.ip6.arpa/<span class="keyword">IN</span>: loaded serial <span class="number">0</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: zone zts.local/<span class="keyword">IN</span>: loaded serial <span class="number">2018111901</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: zone localhost.localdomain/<span class="keyword">IN</span>: loaded serial <span class="number">0</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: zone localhost/<span class="keyword">IN</span>: loaded serial <span class="number">0</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: managed-keys-zone ./<span class="keyword">IN</span>: loaded serial <span class="number">2</span></div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: running</div><div class="line">Nov <span class="number">19</span> <span class="number">21</span>:<span class="number">06</span>:<span class="number">40</span> nrozntgbd3 named[<span class="number">90312</span>]: zone zts.local/<span class="keyword">IN</span>: sending notifies (serial <span class="number">2018111901</span>)</div></pre></td></tr></table></figure>
+<ul>
+<li>4.检查从服务器<code>/var/named/chroot/var/named/zts.local.zone</code>、<code>/var/named/chroot/var/named/10.29.181.zone</code>文件是否生成。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="selector-attr">[root@nrozntgbd3 named]</span># <span class="selector-tag">ls</span> <span class="selector-tag">-alh</span></div><div class="line"><span class="selector-tag">total</span> 48<span class="selector-tag">K</span></div><div class="line"><span class="selector-tag">drwxr-xr-x</span> 5 <span class="selector-tag">named</span> <span class="selector-tag">named</span> 4<span class="selector-class">.0K</span> <span class="selector-tag">Nov</span> 19 21<span class="selector-pseudo">:06</span> .</div><div class="line"><span class="selector-tag">drwxr-x---</span> 6 <span class="selector-tag">root</span>  <span class="selector-tag">named</span> 4<span class="selector-class">.0K</span> <span class="selector-tag">Nov</span> 19 20<span class="selector-pseudo">:48</span> ..</div><div class="line"><span class="selector-tag">drwxrwxrwx</span> 2 <span class="selector-tag">root</span>  <span class="selector-tag">root</span>  4<span class="selector-class">.0K</span> <span class="selector-tag">Nov</span> 19 20<span class="selector-pseudo">:48</span> <span class="selector-tag">data</span></div><div class="line"><span class="selector-tag">drwxrwxrwx</span> 2 <span class="selector-tag">root</span>  <span class="selector-tag">root</span>  4<span class="selector-class">.0K</span> <span class="selector-tag">Nov</span> 19 20<span class="selector-pseudo">:58</span> <span class="selector-tag">dynamic</span></div><div class="line"><span class="selector-tag">-rw-r--r--</span> 1 <span class="selector-tag">root</span>  <span class="selector-tag">root</span>    56 <span class="selector-tag">Nov</span> 19 20<span class="selector-pseudo">:48</span> <span class="selector-tag">my</span><span class="selector-class">.external</span><span class="selector-class">.zone</span><span class="selector-class">.db</span></div><div class="line"><span class="selector-tag">-rw-r--r--</span> 1 <span class="selector-tag">root</span>  <span class="selector-tag">root</span>    56 <span class="selector-tag">Nov</span> 19 20<span class="selector-pseudo">:48</span> <span class="selector-tag">my</span><span class="selector-class">.internal</span><span class="selector-class">.zone</span><span class="selector-class">.db</span></div><div class="line"><span class="selector-tag">-rw-r--r--</span> 1 <span class="selector-tag">root</span>  <span class="selector-tag">root</span>  3<span class="selector-class">.3K</span> <span class="selector-tag">Nov</span> 19 20<span class="selector-pseudo">:48</span> <span class="selector-tag">named</span><span class="selector-class">.ca</span></div><div class="line"><span class="selector-tag">-rw-r--r--</span> 1 <span class="selector-tag">root</span>  <span class="selector-tag">root</span>   152 <span class="selector-tag">Nov</span> 19 20<span class="selector-pseudo">:48</span> <span class="selector-tag">named</span><span class="selector-class">.empty</span></div><div class="line"><span class="selector-tag">-rw-r--r--</span> 1 <span class="selector-tag">root</span>  <span class="selector-tag">root</span>   152 <span class="selector-tag">Nov</span> 19 20<span class="selector-pseudo">:48</span> <span class="selector-tag">named</span><span class="selector-class">.localhost</span></div><div class="line"><span class="selector-tag">-rw-r--r--</span> 1 <span class="selector-tag">root</span>  <span class="selector-tag">root</span>   168 <span class="selector-tag">Nov</span> 19 20<span class="selector-pseudo">:48</span> <span class="selector-tag">named</span><span class="selector-class">.loopback</span></div><div class="line"><span class="selector-tag">drwxr-xr-x</span> 2 <span class="selector-tag">root</span>  <span class="selector-tag">root</span>  4<span class="selector-class">.0K</span> <span class="selector-tag">Nov</span> 19 20<span class="selector-pseudo">:48</span> <span class="selector-tag">slaves</span></div><div class="line"><span class="selector-tag">-rw-r--r--</span> 1 <span class="selector-tag">named</span> <span class="selector-tag">named</span>  660 <span class="selector-tag">Nov</span> 19 21<span class="selector-pseudo">:12</span> <span class="selector-tag">zts</span><span class="selector-class">.local</span><span class="selector-class">.zone</span> (&lt;<span class="selector-tag">------</span>看，已经自动生成了)</div></pre></td></tr></table></figure>
+<h3 id="9、测试"><a href="#9、测试" class="headerlink" title="9、测试"></a>9、测试</h3><p>登录10.29.181.62，修改DNS服务器地址<code>vim /etc/resolv.conf</code>(这种方式是临时的，重启网卡后，就刷新掉了)：</p>
+<p><code>[root@nrozntgbd3 roc]# vim /etc/resolv.conf</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#search</span> <span class="selector-tag">xx</span><span class="selector-class">.zts</span><span class="selector-class">.com</span></div><div class="line"><span class="selector-tag">nameserver</span>      10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>建议使用修改网卡的dns的方式：vim /etc/sysconfig/network-scripts/ifcfg-eth0，这种方式会永久设定dns</p>
+</blockquote>
+<p><strong>使用dig测试</strong></p>
+<p>注意查看<code>;; ANSWER SECTION:</code>输出</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="selector-attr">[root@nrozntgbd3 roc]</span># <span class="selector-tag">dig</span> <span class="selector-tag">-t</span> <span class="selector-tag">A</span> <span class="selector-tag">forum</span><span class="selector-class">.zts</span><span class="selector-class">.local</span> @<span class="keyword">10</span>.<span class="keyword">29</span>.<span class="keyword">181</span>.<span class="keyword">61</span></div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; <span class="selector-tag">DiG</span> 9<span class="selector-class">.8</span><span class="selector-class">.2rc1-RedHat-9</span><span class="selector-class">.8</span><span class="selector-class">.2-0</span><span class="selector-class">.68</span><span class="selector-class">.rc1</span><span class="selector-class">.el6_10</span><span class="selector-class">.1</span> &lt;&lt;&gt;&gt; <span class="selector-tag">-t</span> <span class="selector-tag">A</span> <span class="selector-tag">forum</span><span class="selector-class">.zts</span><span class="selector-class">.local</span> @<span class="keyword">10</span>.<span class="keyword">29</span>.<span class="keyword">181</span>.<span class="keyword">61</span></div><div class="line">;; <span class="selector-tag">global</span> <span class="selector-tag">options</span>: +<span class="selector-tag">cmd</span></div><div class="line">;; <span class="selector-tag">Got</span> <span class="selector-tag">answer</span>:</div><div class="line">;; <span class="selector-tag">-</span>&gt;&gt;<span class="selector-tag">HEADER</span>&lt;&lt;<span class="selector-tag">-</span> <span class="selector-tag">opcode</span>: <span class="selector-tag">QUERY</span>, <span class="selector-tag">status</span>: <span class="selector-tag">NOERROR</span>, <span class="selector-tag">id</span>: 35607</div><div class="line">;; <span class="selector-tag">flags</span>: <span class="selector-tag">qr</span> <span class="selector-tag">aa</span> <span class="selector-tag">rd</span> <span class="selector-tag">ra</span>; <span class="selector-tag">QUERY</span>: 1, <span class="selector-tag">ANSWER</span>: 1, <span class="selector-tag">AUTHORITY</span>: 2, <span class="selector-tag">ADDITIONAL</span>: 2</div><div class="line"></div><div class="line">;; <span class="selector-tag">QUESTION</span> <span class="selector-tag">SECTION</span>:</div><div class="line">;<span class="selector-tag">forum</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.		<span class="selector-tag">IN</span>	<span class="selector-tag">A</span></div><div class="line"></div><div class="line">;; <span class="selector-tag">ANSWER</span> <span class="selector-tag">SECTION</span>:</div><div class="line"><span class="selector-tag">forum</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.	86400	<span class="selector-tag">IN</span>	<span class="selector-tag">A</span>	10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span> (&lt;<span class="selector-tag">-------</span>看这个输出)</div><div class="line"></div><div class="line">;; <span class="selector-tag">AUTHORITY</span> <span class="selector-tag">SECTION</span>:</div><div class="line"><span class="selector-tag">zts</span><span class="selector-class">.local</span>.		86400	<span class="selector-tag">IN</span>	<span class="selector-tag">NS</span>	<span class="selector-tag">dns1</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.</div><div class="line"><span class="selector-tag">zts</span><span class="selector-class">.local</span>.		86400	<span class="selector-tag">IN</span>	<span class="selector-tag">NS</span>	<span class="selector-tag">dns2</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.</div><div class="line"></div><div class="line">;; <span class="selector-tag">ADDITIONAL</span> <span class="selector-tag">SECTION</span>:</div><div class="line"><span class="selector-tag">dns1</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.		86400	<span class="selector-tag">IN</span>	<span class="selector-tag">A</span>	10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span></div><div class="line"><span class="selector-tag">dns2</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.		86400	<span class="selector-tag">IN</span>	<span class="selector-tag">A</span>	10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.62</span></div><div class="line"></div><div class="line">;; <span class="selector-tag">Query</span> <span class="selector-tag">time</span>: 0 <span class="selector-tag">msec</span></div><div class="line">;; <span class="selector-tag">SERVER</span>: 10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span><span class="selector-id">#53</span>(10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span>)</div><div class="line">;; <span class="selector-tag">WHEN</span>: <span class="selector-tag">Mon</span> <span class="selector-tag">Nov</span> 19 20<span class="selector-pseudo">:24</span><span class="selector-pseudo">:11</span> 2018</div><div class="line">;; <span class="selector-tag">MSG</span> <span class="selector-tag">SIZE</span>  <span class="selector-tag">rcvd</span>: 119</div><div class="line"></div><div class="line"><span class="selector-attr">[root@nrozntgbd3 roc]</span># <span class="selector-tag">dig</span> <span class="selector-tag">-t</span> <span class="selector-tag">TXT</span> <span class="selector-tag">txt</span><span class="selector-class">.shanghai</span><span class="selector-class">.zts</span><span class="selector-class">.local</span></div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; <span class="selector-tag">DiG</span> 9<span class="selector-class">.8</span><span class="selector-class">.2rc1-RedHat-9</span><span class="selector-class">.8</span><span class="selector-class">.2-0</span><span class="selector-class">.68</span><span class="selector-class">.rc1</span><span class="selector-class">.el6_10</span><span class="selector-class">.1</span> &lt;&lt;&gt;&gt; <span class="selector-tag">-t</span> <span class="selector-tag">TXT</span> <span class="selector-tag">txt</span><span class="selector-class">.shanghai</span><span class="selector-class">.zts</span><span class="selector-class">.local</span></div><div class="line">;; <span class="selector-tag">global</span> <span class="selector-tag">options</span>: +<span class="selector-tag">cmd</span></div><div class="line">;; <span class="selector-tag">Got</span> <span class="selector-tag">answer</span>:</div><div class="line">;; <span class="selector-tag">-</span>&gt;&gt;<span class="selector-tag">HEADER</span>&lt;&lt;<span class="selector-tag">-</span> <span class="selector-tag">opcode</span>: <span class="selector-tag">QUERY</span>, <span class="selector-tag">status</span>: <span class="selector-tag">NOERROR</span>, <span class="selector-tag">id</span>: 19185</div><div class="line">;; <span class="selector-tag">flags</span>: <span class="selector-tag">qr</span> <span class="selector-tag">aa</span> <span class="selector-tag">rd</span> <span class="selector-tag">ra</span>; <span class="selector-tag">QUERY</span>: 1, <span class="selector-tag">ANSWER</span>: 1, <span class="selector-tag">AUTHORITY</span>: 2, <span class="selector-tag">ADDITIONAL</span>: 2</div><div class="line"></div><div class="line">;; <span class="selector-tag">QUESTION</span> <span class="selector-tag">SECTION</span>:</div><div class="line">;<span class="selector-tag">txt</span><span class="selector-class">.shanghai</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.		<span class="selector-tag">IN</span>	<span class="selector-tag">TXT</span></div><div class="line"></div><div class="line">;; <span class="selector-tag">ANSWER</span> <span class="selector-tag">SECTION</span>:</div><div class="line"><span class="selector-tag">txt</span><span class="selector-class">.shanghai</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.	86400	<span class="selector-tag">IN</span>	<span class="selector-tag">TXT</span>	"<span class="selector-tag">defaultZone</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>"  (&lt;<span class="selector-tag">-------</span>看这个输出)</div><div class="line"></div><div class="line">;; <span class="selector-tag">AUTHORITY</span> <span class="selector-tag">SECTION</span>:</div><div class="line"><span class="selector-tag">zts</span><span class="selector-class">.local</span>.		86400	<span class="selector-tag">IN</span>	<span class="selector-tag">NS</span>	<span class="selector-tag">dns2</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.</div><div class="line"><span class="selector-tag">zts</span><span class="selector-class">.local</span>.		86400	<span class="selector-tag">IN</span>	<span class="selector-tag">NS</span>	<span class="selector-tag">dns1</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.</div><div class="line"></div><div class="line">;; <span class="selector-tag">ADDITIONAL</span> <span class="selector-tag">SECTION</span>:</div><div class="line"><span class="selector-tag">dns1</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.		86400	<span class="selector-tag">IN</span>	<span class="selector-tag">A</span>	10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span></div><div class="line"><span class="selector-tag">dns2</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.		86400	<span class="selector-tag">IN</span>	<span class="selector-tag">A</span>	10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.62</span></div><div class="line"></div><div class="line">;; <span class="selector-tag">Query</span> <span class="selector-tag">time</span>: 0 <span class="selector-tag">msec</span></div><div class="line">;; <span class="selector-tag">SERVER</span>: 10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span><span class="selector-id">#53</span>(10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span>)</div><div class="line">;; <span class="selector-tag">WHEN</span>: <span class="selector-tag">Mon</span> <span class="selector-tag">Nov</span> 19 20<span class="selector-pseudo">:24</span><span class="selector-pseudo">:22</span> 2018</div><div class="line">;; <span class="selector-tag">MSG</span> <span class="selector-tag">SIZE</span>  <span class="selector-tag">rcvd</span>: 144</div></pre></td></tr></table></figure>
+<p><strong>使用nslookup测试</strong></p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[root@nrozntgbd3 named]<span class="comment"># nslookup </span></div><div class="line">&gt; <span class="keyword">set</span> queryType=TXT</div><div class="line">&gt; txt.shanghai.zts.<span class="keyword">local</span></div><div class="line">Server:		<span class="number">10.29</span><span class="number">.181</span><span class="number">.61</span></div><div class="line">Address:	<span class="number">10.29</span><span class="number">.181</span><span class="number">.61</span><span class="comment">#53</span></div><div class="line"></div><div class="line">txt.shanghai.zts.<span class="keyword">local</span>	<span class="built_in">text</span> = <span class="string">"defaultZone.zts.local"</span></div><div class="line">&gt; txt.beijing.zts.<span class="keyword">local</span></div><div class="line">Server:		<span class="number">10.29</span><span class="number">.181</span><span class="number">.61</span></div><div class="line">Address:	<span class="number">10.29</span><span class="number">.181</span><span class="number">.61</span><span class="comment">#53</span></div><div class="line"></div><div class="line">txt.beijing.zts.<span class="keyword">local</span>	<span class="built_in">text</span> = <span class="string">"beijing-a.zts.local"</span> <span class="string">"beijing-b.zts.local"</span></div></pre></td></tr></table></figure>
+<p><strong>测试反向代理</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="selector-attr">[root@nrozntgbd3 roc]</span># <span class="selector-tag">dig</span> <span class="selector-tag">-x</span> 10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span> @<span class="keyword">10</span>.<span class="keyword">29</span>.<span class="keyword">181</span>.<span class="keyword">61</span></div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; <span class="selector-tag">DiG</span> 9<span class="selector-class">.8</span><span class="selector-class">.2rc1-RedHat-9</span><span class="selector-class">.8</span><span class="selector-class">.2-0</span><span class="selector-class">.68</span><span class="selector-class">.rc1</span><span class="selector-class">.el6_10</span><span class="selector-class">.1</span> &lt;&lt;&gt;&gt; <span class="selector-tag">-x</span> 10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span> @<span class="keyword">10</span>.<span class="keyword">29</span>.<span class="keyword">181</span>.<span class="keyword">61</span></div><div class="line">;; <span class="selector-tag">global</span> <span class="selector-tag">options</span>: +<span class="selector-tag">cmd</span></div><div class="line">;; <span class="selector-tag">Got</span> <span class="selector-tag">answer</span>:</div><div class="line">;; <span class="selector-tag">-</span>&gt;&gt;<span class="selector-tag">HEADER</span>&lt;&lt;<span class="selector-tag">-</span> <span class="selector-tag">opcode</span>: <span class="selector-tag">QUERY</span>, <span class="selector-tag">status</span>: <span class="selector-tag">NOERROR</span>, <span class="selector-tag">id</span>: 55778</div><div class="line">;; <span class="selector-tag">flags</span>: <span class="selector-tag">qr</span> <span class="selector-tag">aa</span> <span class="selector-tag">rd</span> <span class="selector-tag">ra</span>; <span class="selector-tag">QUERY</span>: 1, <span class="selector-tag">ANSWER</span>: 1, <span class="selector-tag">AUTHORITY</span>: 2, <span class="selector-tag">ADDITIONAL</span>: 2</div><div class="line"></div><div class="line">;; <span class="selector-tag">QUESTION</span> <span class="selector-tag">SECTION</span>:</div><div class="line">;61<span class="selector-class">.181</span><span class="selector-class">.29</span><span class="selector-class">.10</span><span class="selector-class">.in-addr</span><span class="selector-class">.arpa</span>.	<span class="selector-tag">IN</span>	<span class="selector-tag">PTR</span></div><div class="line"></div><div class="line">;; <span class="selector-tag">ANSWER</span> <span class="selector-tag">SECTION</span>:</div><div class="line">61<span class="selector-class">.181</span><span class="selector-class">.29</span><span class="selector-class">.10</span><span class="selector-class">.in-addr</span><span class="selector-class">.arpa</span>. 86400 <span class="selector-tag">IN</span>	<span class="selector-tag">PTR</span>	<span class="selector-tag">dns1</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.</div><div class="line"></div><div class="line">;; <span class="selector-tag">AUTHORITY</span> <span class="selector-tag">SECTION</span>:</div><div class="line">181<span class="selector-class">.29</span><span class="selector-class">.10</span><span class="selector-class">.in-addr</span><span class="selector-class">.arpa</span>.	86400	<span class="selector-tag">IN</span>	<span class="selector-tag">NS</span>	<span class="selector-tag">dns1</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.</div><div class="line">181<span class="selector-class">.29</span><span class="selector-class">.10</span><span class="selector-class">.in-addr</span><span class="selector-class">.arpa</span>.	86400	<span class="selector-tag">IN</span>	<span class="selector-tag">NS</span>	<span class="selector-tag">dns2</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.</div><div class="line"></div><div class="line">;; <span class="selector-tag">ADDITIONAL</span> <span class="selector-tag">SECTION</span>:</div><div class="line"><span class="selector-tag">dns1</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.		86400	<span class="selector-tag">IN</span>	<span class="selector-tag">A</span>	10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span></div><div class="line"><span class="selector-tag">dns2</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>.		86400	<span class="selector-tag">IN</span>	<span class="selector-tag">A</span>	10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.62</span></div><div class="line"></div><div class="line">;; <span class="selector-tag">Query</span> <span class="selector-tag">time</span>: 0 <span class="selector-tag">msec</span></div><div class="line">;; <span class="selector-tag">SERVER</span>: 10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span><span class="selector-id">#53</span>(10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span>)</div><div class="line">;; <span class="selector-tag">WHEN</span>: <span class="selector-tag">Mon</span> <span class="selector-tag">Nov</span> 19 20<span class="selector-pseudo">:27</span><span class="selector-pseudo">:42</span> 2018</div><div class="line">;; <span class="selector-tag">MSG</span> <span class="selector-tag">SIZE</span>  <span class="selector-tag">rcvd</span>: 136</div></pre></td></tr></table></figure>
+<p><strong>解析内部、外部域名</strong></p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">[root@nrozntgbd3 roc]<span class="meta"># nslookup forum.zts.local </span></div><div class="line"><span class="symbol">Server:</span>		<span class="number">10.29</span><span class="number">.181</span><span class="number">.61</span></div><div class="line"><span class="symbol">Address:</span>	<span class="number">10.29</span><span class="number">.181</span><span class="number">.61</span><span class="meta">#53</span></div><div class="line"></div><div class="line"><span class="symbol">Name:</span>	forum.zts.local</div><div class="line"><span class="symbol">Address:</span> <span class="number">10.29</span><span class="number">.181</span><span class="number">.61</span></div><div class="line"></div><div class="line">[root@nrozntgbd3 roc]<span class="meta"># nslookup www.baidu.com</span></div><div class="line"><span class="symbol">Server:</span>		<span class="number">10.29</span><span class="number">.181</span><span class="number">.61</span></div><div class="line"><span class="symbol">Address:</span>	<span class="number">10.29</span><span class="number">.181</span><span class="number">.61</span><span class="meta">#53</span></div><div class="line"></div><div class="line">Non-authoritative answer:</div><div class="line">www.baidu.com	canonical name = www.a.shifen.com.</div><div class="line"><span class="symbol">Name:</span>	www.a.shifen.com</div><div class="line"><span class="symbol">Address:</span> <span class="number">115.239</span><span class="number">.211</span><span class="number">.112</span></div><div class="line"><span class="symbol">Name:</span>	www.a.shifen.com</div><div class="line"><span class="symbol">Address:</span> <span class="number">115.239</span><span class="number">.210</span><span class="number">.27</span></div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www.linuxprobe.com/centos7-chroot-bind-dns.html://www.linuxprobe.com/centos7-chroot-bind-dns.html" target="_blank" rel="external">在 CentOS7.0 上搭建DNS服务器</a></li>
+<li><a href="https://www.liuliya.com/archive/761.html" target="_blank" rel="external">Centos7上搭建DNS服务</a></li>
+<li><a href="https://blog.csdn.net/huluedeai/article/details/50674286" target="_blank" rel="external">Linux命令学习之nslookup</a></li>
+<li><a href="http://blog.51cto.com/vinsent/1967876" target="_blank" rel="external">搭建一个互联网DNS服务器架构</a></li>
+<li><a href="https://blog.csdn.net/yelllowcong/article/details/78823520" target="_blank" rel="external">CentOS之DNS服务器安装-yellowcong</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://raw.githubusercontent.com/roc-wong/images/master/WX20170219-233910@2x.png" alt="roc.wong 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://raw.githubusercontent.com/roc-wong/images/master/WX20170219-233931@2x.png" alt="roc.wong 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    roc.wong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://roc-wong.github.io/blog/2018/11/Centos搭建DNS主从服务器集群.html" title="CentOS 搭建DNS主从服务器集群">https://roc-wong.github.io/blog/2018/11/Centos搭建DNS主从服务器集群.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/Shell/" rel="tag"># Shell</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2018/02/bash-support-vim-Bash-IDE.html" rel="next" title="bash-support.vim-Bash-IDE">
+                <i class="fa fa-chevron-left"></i> bash-support.vim-Bash-IDE
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/roc-wong/images/master/eagle.png"
+                alt="roc.wong" />
+            
+              <p class="site-author-name" itemprop="name">roc.wong</p>
+              <p class="site-description motion-element" itemprop="description">roc wong的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/roc-wong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:roc.fly@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.caosh.me/" title="书豪" target="_blank">书豪</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本环境"><span class="nav-number">1.</span> <span class="nav-text">基本环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建主从DNS服务器集群"><span class="nav-number">2.</span> <span class="nav-text">搭建主从DNS服务器集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、安装Bind-Chroot-DNS-服务器"><span class="nav-number">2.1.</span> <span class="nav-text">1、安装Bind Chroot DNS 服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、拷贝bind相关文件-准备bind-chroot-环境"><span class="nav-number">2.2.</span> <span class="nav-text">2、拷贝bind相关文件,准备bind chroot 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、在bind-chroot-的目录中创建相关文件"><span class="nav-number">2.3.</span> <span class="nav-text">3、在bind chroot 的目录中创建相关文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、-将-Bind-锁定文件设置为可写"><span class="nav-number">2.4.</span> <span class="nav-text">4、 将 Bind 锁定文件设置为可写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、-将-etc-named-conf-拷贝到-bind-chroot目录"><span class="nav-number">2.5.</span> <span class="nav-text">5、 将 /etc/named.conf 拷贝到 bind chroot目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、-在-etc-named-conf中对-bind-进行配置"><span class="nav-number">2.6.</span> <span class="nav-text">6、 在/etc/named.conf中对 bind 进行配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、-为-zts-local-域名创建转发域与反向域文件"><span class="nav-number">2.7.</span> <span class="nav-text">7、 为 zts.local 域名创建转发域与反向域文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-创建转发域"><span class="nav-number">2.7.1.</span> <span class="nav-text">a)创建转发域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-创建反向域"><span class="nav-number">2.7.2.</span> <span class="nav-text">b)创建反向域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、启动-bind-chroot-服务"><span class="nav-number">2.8.</span> <span class="nav-text">8、启动 bind-chroot 服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、搭建从DNS服务器"><span class="nav-number">2.9.</span> <span class="nav-text">9、搭建从DNS服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-安装从DNS服务器"><span class="nav-number">2.9.1.</span> <span class="nav-text">a)安装从DNS服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-修改主DNS服务器配置"><span class="nav-number">2.9.2.</span> <span class="nav-text">b)修改主DNS服务器配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-重启主、从DNS服务器"><span class="nav-number">2.9.3.</span> <span class="nav-text">c)重启主、从DNS服务器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、测试"><span class="nav-number">2.10.</span> <span class="nav-text">9、测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">roc.wong</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">236k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点总阅读次数">3:56</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" rel="external nofollow" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: 'CentOS 搭建DNS主从服务器集群',
+            owner: 'roc-wong',
+            repo: 'roc-wong.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e84e5ce3e3065e15d8be0172b6f2599c2e2522ce',
+            
+                client_id: '721c48a2f226eea6742e'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9wG3UUpArW7udQ8Bx11ESyIV-gzGzoHsz", "h3uHORely9LqKkhIjd5zFtjy");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
