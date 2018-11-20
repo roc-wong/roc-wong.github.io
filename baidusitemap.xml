@@ -503,26 +503,6 @@
 
     
   <url>
-    <loc>https://roc-wong.github.io/blog/2017/03/Maven-pom.xml.html</loc>
-    <lastmod>2017-03-10T15:18:00.000Z</lastmod>
-    <data>
-        <display>
-        <title>Maven pom.xml</title>
-        <pubTime>2017-03-01T15:53:48.000Z</pubTime>
-        
-        <tag>Maven</tag>
-         
-         
-           
-             
-              <breadCrumb title="Maven" url="https://roc-wong.github.io/categories/Maven/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://roc-wong.github.io/blog/2017/03/markdown-syntax.html</loc>
     <lastmod>2017-03-10T15:18:00.000Z</lastmod>
     <data>
@@ -558,6 +538,26 @@
            
              
               <breadCrumb title="IDE" url="https://roc-wong.github.io/categories/IDE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://roc-wong.github.io/blog/2017/03/Maven-pom.xml.html</loc>
+    <lastmod>2017-03-10T15:18:00.000Z</lastmod>
+    <data>
+        <display>
+        <title>Maven pom.xml</title>
+        <pubTime>2017-03-01T15:53:48.000Z</pubTime>
+        
+        <tag>Maven</tag>
+         
+         
+           
+             
+              <breadCrumb title="Maven" url="https://roc-wong.github.io/categories/Maven/"/>
           
         </display>
     </data>
