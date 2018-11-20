@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="lQaW1XXg0qmIeHa2Or2-cQGRIUAZOA7CobMcsBYoPRc" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="roc's blog,roc的博客,roc wong的博客,fly high的博客" />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="fly high" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="roc wong的博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="book">
+<meta property="og:url" content="https://roc-wong.github.io/book/index.html">
+<meta property="og:site_name" content="fly high">
+<meta property="og:description" content="roc wong的博客">
+<meta property="og:updated_time" content="2018-01-06T11:38:48.588Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="book">
+<meta name="twitter:description" content="roc wong的博客">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://roc-wong.github.io/book/"/>
+
+
+
+
+
+  <title>eureka-dns-cluster | fly high</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-92195689-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?72781f60d8736c40565a23a9e62eaebb";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fly high</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">九万里风鹏正举</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />日程表</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />公益404</a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://roc-wong.github.io/blog/2018/11/eureka-dns-cluster.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="roc.wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/roc-wong/images/master/eagle.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fly high">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">eureka-dns-cluster</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-20T21:34:38+08:00">2018-11-20</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringCloud/" itemprop="url" rel="index">
+                    <span itemprop="name">SpringCloud</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/11/eureka-dns-cluster.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2018/11/eureka-dns-cluster.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/blog/2018/11/eureka-dns-cluster.html" class="leancloud_visitors" data-flag-title="eureka-dns-cluster">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">16k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">0:16</span>
+              
+            </div>
+          
+
+          <!--
+          
+              <div class="post-description">
+                  基于DNS服务器搭建Eureka动态集群，由DNS服务器负责维护Eureka serverUrl，弹性伸缩对eureka client端无影响。
+              </div>
+          
+          -->
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Netflix-Eureka集群配置"><a href="#Netflix-Eureka集群配置" class="headerlink" title="Netflix Eureka集群配置"></a>Netflix Eureka集群配置</h2><p>Spring Cloud Netflix Eureka集群配置方式主要用两种：Static servers list config和dns，本文主要介绍基于DNS的方式搭建Eureka集群。</p>
+<h3 id="Static-servers-list-config"><a href="#Static-servers-list-config" class="headerlink" title="Static servers list config"></a>Static servers list config</h3><p>client启动后从config中获取region和zone以及serviceUrl，进行服务注册、发现，这种静态集群模式无法动态扩容，一旦新增节点，只能挨个修改server和client端的配置文件，大致配置如下：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">  server:</span></div><div class="line"><span class="attr">    enable-self-preservation:</span> <span class="literal">false</span></div><div class="line"><span class="attr">  instance:</span></div><div class="line"><span class="attr">    prefer-ip-address:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    instance-id:</span> $&#123;spring.cloud.client.ip-address&#125;:$&#123;spring.application.name&#125;:$&#123;server.port&#125;</div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    fetch-registry:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    service-url:</span></div><div class="line"><span class="attr">      defaultZone:</span> http://<span class="number">10.25</span><span class="number">.102</span><span class="number">.174</span>:<span class="number">8082</span>/eureka/,http://<span class="number">10.25</span><span class="number">.102</span><span class="number">.174</span>:<span class="number">8083</span>/eureka/</div></pre></td></tr></table></figure></p>
+<h3 id="DNS-configuration"><a href="#DNS-configuration" class="headerlink" title="DNS configuration"></a>DNS configuration</h3><p>基于DNS的Eureka Cluster架构图如下：</p>
+<p><img src="https://raw.githubusercontent.com/roc-wong/images/master/eureka/eureka-dns-cluster-architecture-diagram.png" alt="eureka-dns-cluster-architecture-diagram"></p>
+<p><img src="https://raw.githubusercontent.com/roc-wong/images/master/eureka/eureka-client-invoke-process.png" alt="eureka-client-invoke-process"></p>
+<p>简单来说就是使用DNS服务器管理Eureka Server的地址，弹性伸缩对客户端没有影响。</p>
+<p>大致流程如下：</p>
+<ol>
+<li>客户端开启DNS方式获取serviceUrl：<code>use-dns-for-fetching-service-urls: true</code>；</li>
+<li>根据<code>client.region</code>配置的区域region，查询DNS区域配置文件中该区域下的所有可用区zone；</li>
+<li>循环所有可用区zone，获取可用区配置的eureka-server地址；</li>
+<li>拼接成完整的serviceUrl并加入serviceUrls列表中，serviceUrl格式为：<code>&quot;http://&quot; + ec2Url + &quot;:&quot; + clientConfig.getEurekaServerPort() + &quot;/&quot; + clientConfig.getEurekaServerURLContext() + &quot;/&quot;;</code>。</li>
+</ol>
+<p><strong>只要解决DNS服务器配置就可以达到动态集群的效果，关于如何搭建DNS服务器集群，请移步另一篇文章：<a href="https://roc-wong.github.io/blog/2018/11/Centos%E6%90%AD%E5%BB%BADNS%E4%B8%BB%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4.html">CentOS 搭建DNS主从服务器集群</a>，文中详细介绍了如何在区域配置文件中配置TXT记录，本文不在赘述。</strong></p>
+<h4 id="1-DNS-区域文件配置TXT记录"><a href="#1-DNS-区域文件配置TXT记录" class="headerlink" title="1.DNS 区域文件配置TXT记录"></a>1.DNS 区域文件配置TXT记录</h4><p><a href="https://roc-wong.github.io/blog/2018/11/Centos%E6%90%AD%E5%BB%BADNS%E4%B8%BB%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4.html#a-%E5%88%9B%E5%BB%BA%E8%BD%AC%E5%8F%91%E5%9F%9F">zts.local.zone</a>区域配置文件中有关eureka的配置：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">; <span class="selector-tag">eureka</span> <span class="selector-tag">cluster</span>配置</div><div class="line"><span class="selector-tag">txt</span><span class="selector-class">.shanghai</span> <span class="selector-tag">IN</span> <span class="selector-tag">TXT</span> "<span class="selector-tag">defaultZone</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>"</div><div class="line"><span class="selector-tag">txt</span><span class="selector-class">.defaultZone</span> <span class="selector-tag">IN</span> <span class="selector-tag">TXT</span> "10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.56</span>" "10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.57</span>" "10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.58</span>" "10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.60</span>"</div><div class="line"></div><div class="line">;通过查看<span class="selector-tag">Eureka</span>的源码，它的实现是通过寻找<span class="selector-tag">txt</span><span class="selector-class">.beijing-a</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>（<span class="selector-tag">txt</span><span class="selector-class">.region</span><span class="selector-class">.eureka-server-d-n-s-name</span>）获取"<span class="selector-tag">beijing-a</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>" "<span class="selector-tag">beijing-b</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>"的<span class="selector-tag">zone</span>：<span class="selector-tag">beijing-a</span>和<span class="selector-tag">beijing-b</span>，</div><div class="line">;然后再去获取<span class="selector-tag">txt</span><span class="selector-class">.beijing-a</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>和<span class="selector-tag">txt</span><span class="selector-class">.beijing-b</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>中对应的<span class="selector-tag">ServiceUrls</span>的数据，也就是<span class="selector-tag">IP</span>地址: "10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span>" "10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.62</span>"</div><div class="line">;这样服务间就可以获取到固定端口下的不同<span class="selector-tag">IP</span>的机器的注册中心服务地址，并相互注册</div><div class="line"><span class="selector-tag">txt</span><span class="selector-class">.beijing</span> <span class="selector-tag">IN</span> <span class="selector-tag">TXT</span> "<span class="selector-tag">beijing-a</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>" "<span class="selector-tag">beijing-b</span><span class="selector-class">.zts</span><span class="selector-class">.local</span>"</div><div class="line"><span class="selector-tag">txt</span><span class="selector-class">.beijing-a</span> <span class="selector-tag">IN</span> <span class="selector-tag">TXT</span> "10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.61</span>" "10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.62</span>"</div><div class="line"><span class="selector-tag">txt</span><span class="selector-class">.beijing-b</span> <span class="selector-tag">IN</span> <span class="selector-tag">TXT</span> "10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.63</span>" "10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.64</span>"</div></pre></td></tr></table></figure>
+<h4 id="2-Eureka-Server-Client端配置"><a href="#2-Eureka-Server-Client端配置" class="headerlink" title="2.Eureka Server/Client端配置"></a>2.Eureka Server/Client端配置</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">---</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> eureka-server</div><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">8081</span></div><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">  server:</span></div><div class="line"><span class="attr">    enable-self-preservation:</span> <span class="literal">false</span></div><div class="line"><span class="attr">  instance:</span></div><div class="line"><span class="attr">    prefer-ip-address:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    instance-id:</span> $&#123;spring.cloud.client.ip-address&#125;:$&#123;spring.application.name&#125;:$&#123;server.port&#125;</div><div class="line"><span class="attr">  client:</span></div><div class="line">    <span class="comment">## 是否将自己注册到eureka</span></div><div class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">true</span></div><div class="line">    <span class="comment">## 是否获取注册信息到本地</span></div><div class="line"><span class="attr">    fetch-registry:</span> <span class="literal">true</span></div><div class="line">    <span class="comment">## 开启DNS方式获取serviceUrl,默认为false</span></div><div class="line"><span class="attr">    use-dns-for-fetching-service-urls:</span> <span class="literal">true</span></div><div class="line">    <span class="comment">## DNS域名,获取其他信息将以该域名为根域名</span></div><div class="line"><span class="attr">    eureka-server-d-n-s-name:</span> zts.local</div><div class="line">    <span class="comment">## 当前应用所在区域,默认为us-east-1</span></div><div class="line"><span class="attr">    region:</span> beijing</div><div class="line">    <span class="comment">## 配置中心的eureka目录</span></div><div class="line"><span class="attr">    eureka-server-u-r-l-context:</span> eureka</div><div class="line">    <span class="comment">## 映射其他eurekaServer的端口，这里注意采用这种方式 server.port和这个端口最好一致</span></div><div class="line">    <span class="comment">## 因为dns是控制地址的变化，端口不变，所以不像前面的哪些配置方式可以自己定义url和port。</span></div><div class="line">    <span class="comment">## 所以每个IP都是用的相同的port进行注册中心服务的部署</span></div><div class="line"><span class="attr">    eureka-server-port:</span> <span class="number">8081</span></div><div class="line">    <span class="comment">## 获取serviceUrl时候是否优先获取相同zone的列表(如果获取为空则获取所在region第一个zone),如果为false则优先获取不在相同zone的列表</span></div><div class="line"><span class="attr">    prefer-same-zone-eureka:</span> <span class="literal">true</span></div></pre></td></tr></table></figure>
+<h4 id="3-测试"><a href="#3-测试" class="headerlink" title="3.测试"></a>3.测试</h4><blockquote>
+<p>修改客户端DNS服务器配置为10.29.181.61，DNS服务器的域名为zts.local</p>
+</blockquote>
+<p>依次启动4台Eureka Server服务器，查看启动日志（删减版的日志），：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">14.962</span>  INFO <span class="number">49750</span> --- [           main] c<span class="selector-class">.n</span><span class="selector-class">.d</span><span class="selector-class">.s</span><span class="selector-class">.r</span><span class="selector-class">.aws</span><span class="selector-class">.ConfigClusterResolver</span>      : Resolving eureka endpoints via DNS: txt<span class="selector-class">.beijing</span><span class="selector-class">.zts</span><span class="selector-class">.local</span> (&lt;------注意这里)</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">15.012</span>  INFO <span class="number">49750</span> --- [           main] com<span class="selector-class">.netflix</span><span class="selector-class">.discovery</span><span class="selector-class">.DiscoveryClient</span>    : Disable delta property : false</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">15.262</span>  INFO <span class="number">49750</span> --- [           main] com<span class="selector-class">.netflix</span><span class="selector-class">.discovery</span><span class="selector-class">.DiscoveryClient</span>    : Discovery Client initialized at timestamp <span class="number">1542701835260</span> with <span class="attribute">initial</span> instances count: <span class="number">5</span></div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">15.326</span>  INFO <span class="number">49750</span> --- [           main] c<span class="selector-class">.n</span><span class="selector-class">.eureka</span><span class="selector-class">.DefaultEurekaServerContext</span>    : Initializing ...</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">15.559</span>  INFO <span class="number">49750</span> --- [           main] c<span class="selector-class">.n</span><span class="selector-class">.eureka</span><span class="selector-class">.cluster</span><span class="selector-class">.PeerEurekaNodes</span>       : Replica node URL:  http:<span class="comment">//10.29.181.62:8081/eureka/</span></div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">15.560</span>  INFO <span class="number">49750</span> --- [           main] c<span class="selector-class">.n</span><span class="selector-class">.eureka</span><span class="selector-class">.cluster</span><span class="selector-class">.PeerEurekaNodes</span>       : Replica node URL:  http:<span class="comment">//10.29.181.64:8081/eureka/</span></div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">15.560</span>  INFO <span class="number">49750</span> --- [           main] c<span class="selector-class">.n</span><span class="selector-class">.eureka</span><span class="selector-class">.cluster</span><span class="selector-class">.PeerEurekaNodes</span>       : Replica node URL:  http:<span class="comment">//10.29.181.61:8081/eureka/</span></div><div class="line"></div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.052</span>  INFO <span class="number">49750</span> --- [      Thread-<span class="number">14</span>] o<span class="selector-class">.s</span><span class="selector-class">.c</span><span class="selector-class">.n</span><span class="selector-class">.e</span><span class="selector-class">.server</span><span class="selector-class">.EurekaServerBootstrap</span>   : isAws returned false</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.053</span>  INFO <span class="number">49750</span> --- [      Thread-<span class="number">14</span>] o<span class="selector-class">.s</span><span class="selector-class">.c</span><span class="selector-class">.n</span><span class="selector-class">.e</span><span class="selector-class">.server</span><span class="selector-class">.EurekaServerBootstrap</span>   : Initialized server context</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.056</span>  INFO <span class="number">49750</span> --- [           main] c<span class="selector-class">.z</span><span class="selector-class">.e</span><span class="selector-class">.server</span><span class="selector-class">.EurekaServerApplication</span>     : Started EurekaServerApplication <span class="keyword">in</span> <span class="number">7.112</span> seconds (JVM running <span class="keyword">for</span> <span class="number">7.625</span>)</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.060</span>  INFO <span class="number">49750</span> --- [      Thread-<span class="number">14</span>] c<span class="selector-class">.n</span><span class="selector-class">.e</span><span class="selector-class">.registry</span><span class="selector-class">.AbstractInstanceRegistry</span>  : Registered instance EUREKA-SERVER/<span class="number">10.29</span>.<span class="number">181.61</span>:eureka-server:<span class="number">8081</span> with status UP (replication=true)</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.061</span>  INFO <span class="number">49750</span> --- [      Thread-<span class="number">14</span>] c<span class="selector-class">.n</span><span class="selector-class">.e</span><span class="selector-class">.registry</span><span class="selector-class">.AbstractInstanceRegistry</span>  : Registered instance EUREKA-SERVER/<span class="number">10.29</span>.<span class="number">181.62</span>:eureka-server:<span class="number">8081</span> with status UP (replication=true)</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.061</span>  INFO <span class="number">49750</span> --- [      Thread-<span class="number">14</span>] c<span class="selector-class">.n</span><span class="selector-class">.e</span><span class="selector-class">.registry</span><span class="selector-class">.AbstractInstanceRegistry</span>  : Registered instance EUREKA-SERVER/<span class="number">10.29</span>.<span class="number">181.64</span>:eureka-server:<span class="number">8081</span> with status UP (replication=true)</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.062</span>  INFO <span class="number">49750</span> --- [      Thread-<span class="number">14</span>] c<span class="selector-class">.n</span><span class="selector-class">.e</span><span class="selector-class">.registry</span><span class="selector-class">.AbstractInstanceRegistry</span>  : Registered instance EUREKA-SERVER/<span class="number">10.29</span>.<span class="number">181.63</span>:eureka-server:<span class="number">8081</span> with status UP (replication=true)</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.062</span>  INFO <span class="number">49750</span> --- [      Thread-<span class="number">14</span>] c<span class="selector-class">.n</span><span class="selector-class">.e</span><span class="selector-class">.registry</span><span class="selector-class">.AbstractInstanceRegistry</span>  : Registered instance ACCOUNT-CENTER/<span class="number">10.25</span>.<span class="number">102.174</span>:account-center:<span class="number">8891</span> with status UP (replication=true)</div><div class="line"></div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.062</span>  INFO <span class="number">49750</span> --- [      Thread-<span class="number">14</span>] c<span class="selector-class">.n</span><span class="selector-class">.e</span><span class="selector-class">.r</span><span class="selector-class">.PeerAwareInstanceRegistryImpl</span>    : Got <span class="number">5</span> instances from neighboring DS node</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.062</span>  INFO <span class="number">49750</span> --- [      Thread-<span class="number">14</span>] c<span class="selector-class">.n</span><span class="selector-class">.e</span><span class="selector-class">.r</span><span class="selector-class">.PeerAwareInstanceRegistryImpl</span>    : Renew threshold is: <span class="number">8</span></div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.062</span>  INFO <span class="number">49750</span> --- [      Thread-<span class="number">14</span>] c<span class="selector-class">.n</span><span class="selector-class">.e</span><span class="selector-class">.r</span><span class="selector-class">.PeerAwareInstanceRegistryImpl</span>    : Changing status to UP</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.070</span>  INFO <span class="number">49750</span> --- [nfoReplicator-<span class="number">0</span>] com<span class="selector-class">.netflix</span><span class="selector-class">.discovery</span><span class="selector-class">.DiscoveryClient</span>    : DiscoveryClient_EUREKA-SERVER/<span class="number">10.29</span>.<span class="number">181.63</span>:eureka-server:<span class="number">8081</span> - registration status: <span class="number">204</span></div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.070</span>  INFO <span class="number">49750</span> --- [      Thread-<span class="number">14</span>] e<span class="selector-class">.s</span><span class="selector-class">.EurekaServerInitializerConfiguration</span> : Started Eureka Server</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.310</span>  INFO <span class="number">49750</span> --- [nio-<span class="number">8081</span>-exec-<span class="number">1</span>] o<span class="selector-class">.a</span><span class="selector-class">.c</span><span class="selector-class">.c</span><span class="selector-class">.C</span>.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet <span class="string">'dispatcherServlet'</span></div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.310</span>  INFO <span class="number">49750</span> --- [nio-<span class="number">8081</span>-exec-<span class="number">1</span>] o<span class="selector-class">.s</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span><span class="selector-class">.DispatcherServlet</span>        : FrameworkServlet <span class="string">'dispatcherServlet'</span>: initialization started</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.327</span>  INFO <span class="number">49750</span> --- [nio-<span class="number">8081</span>-exec-<span class="number">1</span>] o<span class="selector-class">.s</span><span class="selector-class">.web</span><span class="selector-class">.servlet</span><span class="selector-class">.DispatcherServlet</span>        : FrameworkServlet <span class="string">'dispatcherServlet'</span>: initialization completed <span class="keyword">in</span> <span class="number">17</span> ms</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">16.578</span>  INFO <span class="number">49750</span> --- [nio-<span class="number">8081</span>-exec-<span class="number">1</span>] c<span class="selector-class">.n</span><span class="selector-class">.e</span><span class="selector-class">.registry</span><span class="selector-class">.AbstractInstanceRegistry</span>  : Registered instance EUREKA-SERVER/<span class="number">10.29</span>.<span class="number">181.63</span>:eureka-server:<span class="number">8081</span> with status UP (replication=true)</div><div class="line"><span class="number">2018</span>-<span class="number">11</span>-<span class="number">20</span> <span class="number">16</span>:<span class="number">17</span>:<span class="number">17.457</span>  INFO <span class="number">49750</span> --- [nio-<span class="number">8081</span>-exec-<span class="number">2</span>] c<span class="selector-class">.n</span><span class="selector-class">.e</span><span class="selector-class">.registry</span><span class="selector-class">.AbstractInstanceRegistry</span>  : Registered instance EUREKA-SERVER/<span class="number">10.29</span>.<span class="number">181.63</span>:eureka-server:<span class="number">8081</span> with status UP (replication=true)</div></pre></td></tr></table></figure>
+<p><strong>Eureka Client端</strong></p>
+<p>Account服务配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="attr">logging:</span></div><div class="line"><span class="attr">  level:</span></div><div class="line">    org.springframework.boot: info</div><div class="line">    org.springframework.cloud: debug</div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> account-center</div><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">8891</span></div><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">  server:</span></div><div class="line"><span class="attr">    enable-self-preservation:</span> <span class="literal">false</span></div><div class="line"><span class="attr">  instance:</span></div><div class="line"><span class="attr">    prefer-ip-address:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    instance-id:</span> $&#123;spring.cloud.client.ip-address&#125;:$&#123;spring.application.name&#125;:$&#123;server.port&#125;</div><div class="line"><span class="attr">    metadata-map:</span></div><div class="line"><span class="attr">      configPath:</span> $&#123;server.servlet.context-path&#125;</div><div class="line"><span class="attr">    home-page-url-path:</span> $&#123;server.servlet.context-path&#125;</div><div class="line">    <span class="comment">## 服务过期时间配置,超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除</span></div><div class="line"><span class="attr">    lease-expiration-duration-in-seconds:</span> <span class="number">10</span></div><div class="line">    <span class="comment">## 服务刷新时间配置，每隔这个时间会主动心跳一次</span></div><div class="line"><span class="attr">    lease-renewal-interval-in-seconds:</span> <span class="number">5</span></div><div class="line"><span class="attr">  client:</span></div><div class="line">    <span class="comment">## 是否将自己注册到eureka</span></div><div class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">true</span></div><div class="line">    <span class="comment">## 是否获取注册信息到本地</span></div><div class="line"><span class="attr">    fetch-registry:</span> <span class="literal">true</span></div><div class="line">    <span class="comment">## 开启DNS方式获取serviceUrl,默认为false</span></div><div class="line"><span class="attr">    use-dns-for-fetching-service-urls:</span> <span class="literal">true</span></div><div class="line">    <span class="comment">## DNS域名,获取其他信息将以该域名为根域名</span></div><div class="line"><span class="attr">    eureka-server-d-n-s-name:</span> zts.local</div><div class="line">    <span class="comment">## 当前应用所在区域,默认为us-east-1</span></div><div class="line"><span class="attr">    region:</span> beijing</div><div class="line">    <span class="comment">## 配置中心的eureka目录</span></div><div class="line"><span class="attr">    eureka-server-u-r-l-context:</span> eureka</div><div class="line">    <span class="comment">## 映射其他eurekaServer的端口，这里注意采用这种方式 server.port和这个端口最好一致</span></div><div class="line">    <span class="comment">## 因为dns是控制地址的变化，端口不变，所以不像前面的哪些配置方式可以自己定义url和port。</span></div><div class="line">    <span class="comment">## 所以每个IP都是用的相同的port进行注册中心服务的部署</span></div><div class="line"><span class="attr">    eureka-server-port:</span> <span class="number">8081</span></div><div class="line">    <span class="comment">## 获取serviceUrl时候是否优先获取相同zone的列表(如果获取为空则获取所在region第一个zone),如果为false则优先获取不在相同zone的列表</span></div><div class="line"><span class="attr">    prefer-same-zone-eureka:</span> <span class="literal">true</span></div></pre></td></tr></table></figure>
+<p>Account启动日志：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">2018<span class="selector-tag">-11-20</span> 16<span class="selector-pseudo">:11</span><span class="selector-pseudo">:05.373</span>  <span class="selector-tag">INFO</span> 5824 <span class="selector-tag">---</span> <span class="selector-attr">[  restartedMain]</span> <span class="selector-tag">c</span><span class="selector-class">.n</span><span class="selector-class">.d</span><span class="selector-class">.s</span><span class="selector-class">.r</span><span class="selector-class">.aws</span><span class="selector-class">.ConfigClusterResolver</span>      : <span class="selector-tag">Resolving</span> <span class="selector-tag">eureka</span> <span class="selector-tag">endpoints</span> <span class="selector-tag">via</span> <span class="selector-tag">DNS</span>: <span class="selector-tag">txt</span><span class="selector-class">.beijing</span><span class="selector-class">.zts</span><span class="selector-class">.local</span> (&lt;<span class="selector-tag">------</span>看这里)</div><div class="line">2018<span class="selector-tag">-11-20</span> 16<span class="selector-pseudo">:11</span><span class="selector-pseudo">:05.529</span>  <span class="selector-tag">INFO</span> 5824 <span class="selector-tag">---</span> <span class="selector-attr">[  restartedMain]</span> <span class="selector-tag">com</span><span class="selector-class">.netflix</span><span class="selector-class">.discovery</span><span class="selector-class">.DiscoveryClient</span>    : <span class="selector-tag">Disable</span> <span class="selector-tag">delta</span> <span class="selector-tag">property</span> : <span class="selector-tag">false</span></div><div class="line">2018<span class="selector-tag">-11-20</span> 16<span class="selector-pseudo">:11</span><span class="selector-pseudo">:05.529</span>  <span class="selector-tag">INFO</span> 5824 <span class="selector-tag">---</span> <span class="selector-attr">[  restartedMain]</span> <span class="selector-tag">com</span><span class="selector-class">.netflix</span><span class="selector-class">.discovery</span><span class="selector-class">.DiscoveryClient</span>    : <span class="selector-tag">Single</span> <span class="selector-tag">vip</span> <span class="selector-tag">registry</span> <span class="selector-tag">refresh</span> <span class="selector-tag">property</span> : <span class="selector-tag">null</span></div><div class="line">2018<span class="selector-tag">-11-20</span> 16<span class="selector-pseudo">:11</span><span class="selector-pseudo">:05.529</span>  <span class="selector-tag">INFO</span> 5824 <span class="selector-tag">---</span> <span class="selector-attr">[  restartedMain]</span> <span class="selector-tag">com</span><span class="selector-class">.netflix</span><span class="selector-class">.discovery</span><span class="selector-class">.DiscoveryClient</span>    : <span class="selector-tag">Force</span> <span class="selector-tag">full</span> <span class="selector-tag">registry</span> <span class="selector-tag">fetch</span> : <span class="selector-tag">false</span></div><div class="line">2018<span class="selector-tag">-11-20</span> 16<span class="selector-pseudo">:11</span><span class="selector-pseudo">:05.529</span>  <span class="selector-tag">INFO</span> 5824 <span class="selector-tag">---</span> <span class="selector-attr">[  restartedMain]</span> <span class="selector-tag">com</span><span class="selector-class">.netflix</span><span class="selector-class">.discovery</span><span class="selector-class">.DiscoveryClient</span>    : <span class="selector-tag">Application</span> <span class="selector-tag">is</span> <span class="selector-tag">null</span> : <span class="selector-tag">false</span></div><div class="line">201</div></pre></td></tr></table></figure>
+<p>打开Eureka console，查看注册效果：<br><img src="https://raw.githubusercontent.com/roc-wong/images/master/eureka/eureka%E9%9B%86%E7%BE%A4%E5%90%AF%E5%8A%A8%E6%95%88%E6%9E%9C.png" alt="查看效果"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><h3 id="1-com-netflix-discovery-endpoint-EndpointUtils-getServiceUrlsFromDNS"><a href="#1-com-netflix-discovery-endpoint-EndpointUtils-getServiceUrlsFromDNS" class="headerlink" title="1.com.netflix.discovery.endpoint.EndpointUtils.getServiceUrlsFromDNS"></a>1.com.netflix.discovery.endpoint.EndpointUtils.getServiceUrlsFromDNS</h3><p>版本：eureka-client:1.9.3 </p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">    * Get the list of all eureka service urls for the eureka client to talk to.</div><div class="line">    *</div><div class="line">    * @param clientConfig the clientConfig to use</div><div class="line">    * @param zone the zone in which the client resides</div><div class="line">    * @param randomizer a randomizer to randomized returned urls, if loading from dns</div><div class="line">    *</div><div class="line">    * @return The list of all eureka service urls for the eureka client to talk to.</div><div class="line">    */</div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> List&lt;<span class="keyword">String</span>&gt; getDiscoveryServiceUrls(EurekaClientConfig clientConfig, <span class="keyword">String</span> zone, ServiceUrlRandomizer randomizer) &#123;</div><div class="line">       <span class="built_in">boolean</span> shouldUseDns = clientConfig.shouldUseDnsForFetchingServiceUrls();</div><div class="line">       <span class="keyword">if</span> (shouldUseDns) &#123;</div><div class="line">           <span class="keyword">return</span> getServiceUrlsFromDNS(clientConfig, zone, clientConfig.shouldPreferSameZoneEureka(), randomizer);</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> getServiceUrlsFromConfig(clientConfig, zone, clientConfig.shouldPreferSameZoneEureka());</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="comment">/**</span></div><div class="line">    * Get the list of all eureka service urls from DNS for the eureka client to</div><div class="line">    * talk to. The client picks up the service url from its zone and then fails over to</div><div class="line">    * other zones randomly. If there are multiple servers in the same zone, the client once</div><div class="line">    * again picks one randomly. This way the traffic will be distributed in the case of failures.</div><div class="line">    *</div><div class="line">    * @param clientConfig the clientConfig to use</div><div class="line">    * @param instanceZone The zone in which the client resides.</div><div class="line">    * @param preferSameZone true if we have to prefer the same zone as the client, false otherwise.</div><div class="line">    * @param randomizer a randomizer to randomized returned urls</div><div class="line">    *</div><div class="line">    * @return The list of all eureka service urls for the eureka client to talk to.</div><div class="line">    */</div><div class="line">   <span class="keyword">public</span> <span class="keyword">static</span> List&lt;<span class="keyword">String</span>&gt; getServiceUrlsFromDNS(EurekaClientConfig clientConfig, <span class="keyword">String</span> instanceZone, <span class="built_in">boolean</span> preferSameZone, ServiceUrlRandomizer randomizer) &#123;</div><div class="line">       <span class="keyword">String</span> region = getRegion(clientConfig);</div><div class="line">       <span class="comment">// Get zone-specific DNS names for the given region so that we can get a</span></div><div class="line">       <span class="comment">// list of available zones</span></div><div class="line">       Map&lt;<span class="keyword">String</span>, List&lt;<span class="keyword">String</span>&gt;&gt; zoneDnsNamesMap = getZoneBasedDiscoveryUrlsFromRegion(clientConfig, region);</div><div class="line">       Set&lt;<span class="keyword">String</span>&gt; availableZones = zoneDnsNamesMap.keySet();</div><div class="line">       List&lt;<span class="keyword">String</span>&gt; zones = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;(availableZones);</div><div class="line">       <span class="keyword">if</span> (zones.isEmpty()) &#123;</div><div class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"No available zones configured for the instanceZone "</span> + instanceZone);</div><div class="line">       &#125;</div><div class="line">       <span class="built_in">int</span> zoneIndex = <span class="number">0</span>;</div><div class="line">       <span class="built_in">boolean</span> zoneFound = <span class="keyword">false</span>;</div><div class="line">       <span class="keyword">for</span> (<span class="keyword">String</span> zone : zones) &#123;</div><div class="line">           logger.debug(<span class="string">"Checking if the instance zone &#123;&#125; is the same as the zone from DNS &#123;&#125;"</span>, instanceZone, zone);</div><div class="line">           <span class="keyword">if</span> (preferSameZone) &#123;</div><div class="line">               <span class="keyword">if</span> (instanceZone.equalsIgnoreCase(zone)) &#123;</div><div class="line">                   zoneFound = <span class="keyword">true</span>;</div><div class="line">               &#125;</div><div class="line">           &#125; <span class="keyword">else</span> &#123;</div><div class="line">               <span class="keyword">if</span> (!instanceZone.equalsIgnoreCase(zone)) &#123;</div><div class="line">                   zoneFound = <span class="keyword">true</span>;</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">if</span> (zoneFound) &#123;</div><div class="line">               logger.debug(<span class="string">"The zone index from the list &#123;&#125; that matches the instance zone &#123;&#125; is &#123;&#125;"</span>,</div><div class="line">                       zones, instanceZone, zoneIndex);</div><div class="line">               <span class="keyword">break</span>;</div><div class="line">           &#125;</div><div class="line">           zoneIndex++;</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">if</span> (zoneIndex &gt;= zones.<span class="built_in">size</span>()) &#123;</div><div class="line">           <span class="keyword">if</span> (logger.isWarnEnabled()) &#123;</div><div class="line">               logger.warn(<span class="string">"No match for the zone &#123;&#125; in the list of available zones &#123;&#125;"</span>,</div><div class="line">                       instanceZone, zones.toArray());</div><div class="line">           &#125;</div><div class="line">       &#125; <span class="keyword">else</span> &#123;</div><div class="line">           <span class="comment">// Rearrange the zones with the instance zone first</span></div><div class="line">           <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; zoneIndex; i++) &#123;</div><div class="line">               <span class="keyword">String</span> zone = zones.remove(<span class="number">0</span>);</div><div class="line">               zones.<span class="built_in">add</span>(zone);</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="comment">// Now get the eureka urls for all the zones in the order and return it</span></div><div class="line">       List&lt;<span class="keyword">String</span>&gt; serviceUrls = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;();</div><div class="line">       <span class="keyword">for</span> (<span class="keyword">String</span> zone : zones) &#123;</div><div class="line">           <span class="keyword">for</span> (<span class="keyword">String</span> zoneCname : zoneDnsNamesMap.<span class="built_in">get</span>(zone)) &#123;</div><div class="line">               List&lt;<span class="keyword">String</span>&gt; ec2Urls = <span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;(getEC2DiscoveryUrlsFromZone(zoneCname, DiscoveryUrlType.CNAME));</div><div class="line">               <span class="comment">// Rearrange the list to distribute the load in case of multiple servers</span></div><div class="line">               <span class="keyword">if</span> (ec2Urls.<span class="built_in">size</span>() &gt; <span class="number">1</span>) &#123;</div><div class="line">                   randomizer.randomize(ec2Urls);</div><div class="line">               &#125;</div><div class="line">               <span class="keyword">for</span> (<span class="keyword">String</span> ec2Url : ec2Urls) &#123;</div><div class="line">                   StringBuilder sb = <span class="keyword">new</span> StringBuilder()</div><div class="line">                           .<span class="built_in">append</span>(<span class="string">"http://"</span>)</div><div class="line">                           .<span class="built_in">append</span>(ec2Url)</div><div class="line">                           .<span class="built_in">append</span>(<span class="string">":"</span>)</div><div class="line">                           .<span class="built_in">append</span>(clientConfig.getEurekaServerPort());</div><div class="line">                   <span class="keyword">if</span> (clientConfig.getEurekaServerURLContext() != <span class="keyword">null</span>) &#123;</div><div class="line">                       <span class="keyword">if</span> (!clientConfig.getEurekaServerURLContext().startsWith(<span class="string">"/"</span>)) &#123;</div><div class="line">                           sb.<span class="built_in">append</span>(<span class="string">"/"</span>);</div><div class="line">                       &#125;</div><div class="line">                       sb.<span class="built_in">append</span>(clientConfig.getEurekaServerURLContext());</div><div class="line">                       <span class="keyword">if</span> (!clientConfig.getEurekaServerURLContext().endsWith(<span class="string">"/"</span>)) &#123;</div><div class="line">                           sb.<span class="built_in">append</span>(<span class="string">"/"</span>);</div><div class="line">                       &#125;</div><div class="line">                   &#125; <span class="keyword">else</span> &#123;</div><div class="line">                       sb.<span class="built_in">append</span>(<span class="string">"/"</span>);</div><div class="line">                   &#125;</div><div class="line">                   <span class="keyword">String</span> serviceUrl = sb.toString();</div><div class="line">                   logger.debug(<span class="string">"The EC2 url is &#123;&#125;"</span>, serviceUrl);</div><div class="line">                   serviceUrls.<span class="built_in">add</span>(serviceUrl);</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">       <span class="comment">// Rearrange the fail over server list to distribute the load</span></div><div class="line">       <span class="keyword">String</span> primaryServiceUrl = serviceUrls.remove(<span class="number">0</span>);</div><div class="line">       randomizer.randomize(serviceUrls);</div><div class="line">       serviceUrls.<span class="built_in">add</span>(<span class="number">0</span>, primaryServiceUrl);</div><div class="line"></div><div class="line">       <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</div><div class="line">           logger.debug(<span class="string">"This client will talk to the following serviceUrls in order : &#123;&#125; "</span>,</div><div class="line">                   (<span class="keyword">Object</span>) serviceUrls.toArray());</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> serviceUrls;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h3 id="2-dns-config配置参考文章"><a href="#2-dns-config配置参考文章" class="headerlink" title="2. dns config配置参考文章"></a>2. dns config配置参考文章</h3><ul>
+<li><a href="https://www.todaysoftmag.com/article/1429/micro-service-discovery-using-netflix-eureka" target="_blank" rel="external">micro-service-discovery-using-netflix-eureka</a></li>
+<li><a href="http://www.cnblogs.com/relinson/p/eureka_ha_use_dns.html" target="_blank" rel="external">eureka集群基于DNS配置方式</a> (给予我了不少灵感)</li>
+<li><a href="https://blog.csdn.net/ankeway/article/details/79745810" target="_blank" rel="external">Spring Cloud Eureka 集群使用DNS方式进行服务分区</a>(– 简单介绍了windows dns搭建)</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://raw.githubusercontent.com/roc-wong/images/master/WX20170219-233910@2x.png" alt="roc.wong 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://raw.githubusercontent.com/roc-wong/images/master/WX20170219-233931@2x.png" alt="roc.wong 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    roc.wong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://roc-wong.github.io/blog/2018/11/eureka-dns-cluster.html" title="eureka-dns-cluster">https://roc-wong.github.io/blog/2018/11/eureka-dns-cluster.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SpringCloud/" rel="tag"># SpringCloud</a>
+          
+            <a href="/tags/eureka/" rel="tag"># eureka</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2018/11/Centos搭建DNS主从服务器集群.html" rel="next" title="CentOS 搭建DNS主从服务器集群">
+                <i class="fa fa-chevron-left"></i> CentOS 搭建DNS主从服务器集群
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/roc-wong/images/master/eagle.png"
+                alt="roc.wong" />
+            
+              <p class="site-author-name" itemprop="name">roc.wong</p>
+              <p class="site-description motion-element" itemprop="description">roc wong的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/roc-wong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:roc.fly@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.caosh.me/" title="书豪" target="_blank">书豪</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Eureka集群配置"><span class="nav-number">1.</span> <span class="nav-text">Netflix Eureka集群配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Static-servers-list-config"><span class="nav-number">1.1.</span> <span class="nav-text">Static servers list config</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-configuration"><span class="nav-number">1.2.</span> <span class="nav-text">DNS configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-DNS-区域文件配置TXT记录"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.DNS 区域文件配置TXT记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Eureka-Server-Client端配置"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.Eureka Server/Client端配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-测试"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-com-netflix-discovery-endpoint-EndpointUtils-getServiceUrlsFromDNS"><span class="nav-number">2.1.</span> <span class="nav-text">1.com.netflix.discovery.endpoint.EndpointUtils.getServiceUrlsFromDNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-dns-config配置参考文章"><span class="nav-number">2.2.</span> <span class="nav-text">2. dns config配置参考文章</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">roc.wong</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">252k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点总阅读次数">4:12</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" rel="external nofollow" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: 'eureka-dns-cluster',
+            owner: 'roc-wong',
+            repo: 'roc-wong.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e84e5ce3e3065e15d8be0172b6f2599c2e2522ce',
+            
+                client_id: '721c48a2f226eea6742e'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9wG3UUpArW7udQ8Bx11ESyIV-gzGzoHsz", "h3uHORely9LqKkhIjd5zFtjy");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
