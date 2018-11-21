@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://roc-wong.github.io/"/>
-  <updated>2018-11-20T13:47:07.700Z</updated>
+  <updated>2018-11-21T01:54:02.200Z</updated>
   <id>https://roc-wong.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>eureka-dns-cluster</title>
+    <title>eureka dns cluster</title>
     <link href="https://roc-wong.github.io/blog/2018/11/eureka-dns-cluster.html"/>
     <id>https://roc-wong.github.io/blog/2018/11/eureka-dns-cluster.html</id>
     <published>2018-11-20T13:34:38.000Z</published>
-    <updated>2018-11-20T13:47:07.700Z</updated>
+    <updated>2018-11-21T01:54:02.200Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Netflix-Eureka集群配置"><a href="#Netflix-Eureka集群配置" class="headerlink" title="Netflix Eureka集群配置"></a>Netflix Eureka集群配置</h2><p>Spring Cloud Netflix Eureka集群配置方式主要用两种：Static servers list config和dns，本文主要介绍基于DNS的方式搭建Eureka集群。</p>
 <h3 id="Static-servers-list-config"><a href="#Static-servers-list-config" class="headerlink" title="Static servers list config"></a>Static servers list config</h3><p>client启动后从config中获取region和zone以及serviceUrl，进行服务注册、发现，这种静态集群模式无法动态扩容，一旦新增节点，只能挨个修改server和client端的配置文件，大致配置如下：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">  server:</span></div><div class="line"><span class="attr">    enable-self-preservation:</span> <span class="literal">false</span></div><div class="line"><span class="attr">  instance:</span></div><div class="line"><span class="attr">    prefer-ip-address:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    instance-id:</span> $&#123;spring.cloud.client.ip-address&#125;:$&#123;spring.application.name&#125;:$&#123;server.port&#125;</div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    fetch-registry:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    service-url:</span></div><div class="line"><span class="attr">      defaultZone:</span> http://<span class="number">10.25</span><span class="number">.102</span><span class="number">.174</span>:<span class="number">8082</span>/eureka/,http://<span class="number">10.25</span><span class="number">.102</span><span class="number">.174</span>:<span class="number">8083</span>/eureka/</div></pre></td></tr></table></figure></p>
@@ -67,10 +67,12 @@
     
       <category term="SpringCloud" scheme="https://roc-wong.github.io/categories/SpringCloud/"/>
     
+      <category term="MicroServices" scheme="https://roc-wong.github.io/categories/SpringCloud/MicroServices/"/>
+    
     
       <category term="SpringCloud" scheme="https://roc-wong.github.io/tags/SpringCloud/"/>
     
-      <category term="eureka" scheme="https://roc-wong.github.io/tags/eureka/"/>
+      <category term="Eureka" scheme="https://roc-wong.github.io/tags/Eureka/"/>
     
   </entry>
   
@@ -189,7 +191,7 @@
     <link href="https://roc-wong.github.io/blog/2018/02/bash-support-vim-Bash-IDE.html"/>
     <id>https://roc-wong.github.io/blog/2018/02/bash-support-vim-Bash-IDE.html</id>
     <published>2018-02-12T07:10:46.000Z</published>
-    <updated>2018-11-17T14:55:55.169Z</updated>
+    <updated>2018-11-21T01:56:13.006Z</updated>
     
     <content type="html"><![CDATA[<p>IDE（集成开发环境）就是这样一个软件，它为了最大化程序员生产效率，提供了很多编程所需的设施和组件。 IDE 将所有开发工作集中到一个程序中，使得程序员可以编写、修改、编译、部署以及调试程序。</p>
 <p>在这篇文章中，我们会介绍如何通过使用 bash-support vim 插件将 Vim 编辑器安装和配置 为一个编写 Bash 脚本的 IDE。</p>
@@ -369,8 +371,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;如何让系统在汹涌澎湃的流量面前谈笑风生？我们的策略是不要让系统超负荷工作。如果现有的系统扛不住业务目标怎么办？加机器！机器不够怎么办？业务降级，服务限流！&lt;/p&gt;
-&lt;p&gt;正所谓「他强任他强，清风拂山岗；他横任他横，明月照大江」，降级和限流是系统可用性保障中必不可少的神兵利器，丢卒保车，以暂停边缘业务为代价保障核心业务的资源，以系统不被突发流量压挂为第一要务。&lt;/p&gt;
+      微服务限流方案，基于edis实现流速控制
     
     </summary>
     
@@ -386,7 +387,7 @@
     <link href="https://roc-wong.github.io/blog/2018/01/%E6%9E%81%E5%85%89%E6%8E%A8%E9%80%81java-sdk-V3-2-15%E5%A0%B5%E5%A1%9EBUG.html"/>
     <id>https://roc-wong.github.io/blog/2018/01/极光推送java-sdk-V3-2-15堵塞BUG.html</id>
     <published>2018-01-11T01:36:56.000Z</published>
-    <updated>2018-11-18T07:44:00.694Z</updated>
+    <updated>2018-11-21T01:57:41.780Z</updated>
     
     <content type="html"><![CDATA[<h2 id="案发现场"><a href="#案发现场" class="headerlink" title="案发现场"></a>案发现场</h2><ul>
 <li>从RabbitMQ Server端获取消息的线程运行正常，读到数据后放到本地的BlockQueue中，等待消费者线程消费。</li>
@@ -461,7 +462,7 @@
     <link href="https://roc-wong.github.io/blog/2017/08/NotePad-regular-expression.html"/>
     <id>https://roc-wong.github.io/blog/2017/08/NotePad-regular-expression.html</id>
     <published>2017-08-04T12:26:41.000Z</published>
-    <updated>2018-01-11T02:04:31.348Z</updated>
+    <updated>2018-11-21T01:57:56.199Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>低头前行了这么久，我只是在找一个抬头的机会</p>
@@ -717,7 +718,7 @@
     <link href="https://roc-wong.github.io/blog/2017/08/svn-sqliteS10-disk-IO-error.html"/>
     <id>https://roc-wong.github.io/blog/2017/08/svn-sqliteS10-disk-IO-error.html</id>
     <published>2017-08-04T12:23:50.000Z</published>
-    <updated>2018-01-11T02:04:11.800Z</updated>
+    <updated>2018-11-21T01:57:50.817Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>低头前行，莫问前程。</p>
@@ -752,7 +753,7 @@
     <link href="https://roc-wong.github.io/blog/2017/07/deadlock-found-when-trying-to-get-lock.html"/>
     <id>https://roc-wong.github.io/blog/2017/07/deadlock-found-when-trying-to-get-lock.html</id>
     <published>2017-07-24T04:33:22.000Z</published>
-    <updated>2018-11-18T07:44:11.277Z</updated>
+    <updated>2018-11-21T01:58:05.523Z</updated>
     
     <content type="html"><![CDATA[<p>mysql锁机制分为表级锁和行级锁：</p>
 <p>共享锁又称为读锁，简称S锁，顾名思义，共享锁就是多个事务对于同一数据可以共享一把锁，都能访问到数据，但是只能读不能修改。</p>
@@ -799,7 +800,7 @@
     <link href="https://roc-wong.github.io/blog/2017/07/micro-services.html"/>
     <id>https://roc-wong.github.io/blog/2017/07/micro-services.html</id>
     <published>2017-07-21T12:11:00.000Z</published>
-    <updated>2018-01-11T02:04:37.659Z</updated>
+    <updated>2018-11-21T01:58:23.991Z</updated>
     
     <content type="html"><![CDATA[<p>微服务是一种架构风格，一个大型复杂软件应用由一个或多个微服务组成。系统中的各个微服务可被独立部署，各个微服务之间是松耦合的。每个微服务仅关注于完成一件任务并很好地完成该任务。在所有情况下，每个任务代表着一个小的业务能力。</p>
 <a id="more"></a>
@@ -956,7 +957,7 @@
     <link href="https://roc-wong.github.io/blog/2017/04/maven-war-plugin.html"/>
     <id>https://roc-wong.github.io/blog/2017/04/maven-war-plugin.html</id>
     <published>2017-04-25T14:06:59.000Z</published>
-    <updated>2018-01-11T02:04:43.692Z</updated>
+    <updated>2018-11-21T01:58:32.233Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Apache-Maven-WAR-Plugin"><a href="#Apache-Maven-WAR-Plugin" class="headerlink" title="Apache Maven WAR Plugin"></a>Apache Maven WAR Plugin</h2><p>The WAR Plugin is responsible for collecting all artifact dependencies, classes and resources of the web application and packaging them into a web application archive.</p>
 <p>“打包“这个词听起来比较土，比较正式的说法应该是”构建项目软件包“，具体说就是将项目中的各种文件，比如源代码、编译生成的字节码、配置文件、文档，按照规范的格式生成归档，最常见的当然就是JAR包和WAR包了，复杂点的例子是Maven官方下载页面的分发包，它有自定义的格式，方便用户直接解压后就在命令行使用。作为一款”打包工具“，Maven自然有义务帮助用户创建各种各样的包，规范的JAR包和WAR包自然不再话下，略微复杂的自定义打包格式也必须支持，本文就介绍一些常用的打包案例以及相关的实现方式，除了前面提到的一些包以外，你还能看到如何生成源码包、Javadoc包、以及从命令行可直接运行的CLI包。</p>
@@ -1003,7 +1004,7 @@
     <link href="https://roc-wong.github.io/blog/2017/04/maven-paranamer-plugin.html"/>
     <id>https://roc-wong.github.io/blog/2017/04/maven-paranamer-plugin.html</id>
     <published>2017-04-25T13:16:55.000Z</published>
-    <updated>2018-01-11T02:04:00.134Z</updated>
+    <updated>2018-11-21T01:58:41.336Z</updated>
     
     <content type="html"><![CDATA[<h2 id="What-is-it"><a href="#What-is-it" class="headerlink" title="What is it?"></a>What is it?</h2><p>It is a library that allows the parameter names of non-private methods and constructors to be accessed at runtime. Normally this information is dropped by the compiler. In effect, methods like doSometing(mypkg.Person toMe) currently look like doSomething(mypackage.Person ???) to people using Java’s reflection to inspect methods.</p>
 <p>项目主页：<a href="https://github.com/paul-hammant/paranamer" target="_blank" rel="external">https://github.com/paul-hammant/paranamer</a></p>
@@ -1045,7 +1046,7 @@
     <link href="https://roc-wong.github.io/blog/2017/03/Shell%E8%84%9A%E6%9C%AC%E8%B0%83%E8%AF%95%E6%8A%80%E6%9C%AF.html"/>
     <id>https://roc-wong.github.io/blog/2017/03/Shell脚本调试技术.html</id>
     <published>2017-03-26T14:13:40.000Z</published>
-    <updated>2018-01-11T02:03:56.365Z</updated>
+    <updated>2018-11-21T01:58:56.120Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>shell编程在unix/linux世界中使用得非常广泛，熟练掌握shell编程也是成为一名优秀的unix/linux开发者和系统管理员的必经之路。脚本调试的主要工作就是发现引发脚本错误的原因以及在脚本源代码中定位发生错误的行，常用的手段包括分析输出的错误信息，通过在脚本中加入调试语句，输出调试信息来辅助诊断错误，利用调试工具等。但与其它高级语言相比，shell解释器缺乏相应的调试机制和调试工具的支持，其输出的错误信息又往往很不明确，初学者在调试脚本时，除了知道用echo语句输出一些信息外，别无它法，而仅仅依赖于大量的加入echo语句来诊断错误，确实令人不胜其繁，故常见初学者抱怨shell脚本太难调试了。本文将系统地介绍一些重要的shell脚本调试技术，希望能对shell的初学者有所裨益。</p>
 <a id="more"></a>
@@ -1170,7 +1171,7 @@
     <link href="https://roc-wong.github.io/blog/2017/03/shell-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%96%B9%E6%B3%95.html"/>
     <id>https://roc-wong.github.io/blog/2017/03/shell-函数返回字符串的方法.html</id>
     <published>2017-03-26T13:53:37.000Z</published>
-    <updated>2017-03-26T14:09:07.000Z</updated>
+    <updated>2018-11-21T01:59:29.582Z</updated>
     
     <content type="html"><![CDATA[<p>shell的函数只能返回整数值，如果想让函数返回字符串，一般有两种方法：将返回值赋值给一个字符串变量、输出返回值，在函数调用处为变量赋值。</p>
 <a id="more"></a>
@@ -1243,7 +1244,7 @@
     <link href="https://roc-wong.github.io/blog/2017/03/shell-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB.html"/>
     <id>https://roc-wong.github.io/blog/2017/03/shell-文件包含.html</id>
     <published>2017-03-26T13:46:15.000Z</published>
-    <updated>2018-01-11T02:03:52.085Z</updated>
+    <updated>2018-11-21T01:59:24.668Z</updated>
     
     <content type="html"><![CDATA[<p>像其他语言一样，Shell 也可以包含外部脚本，将外部脚本的内容合并到当前脚本。</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>.   . ./subscript.<span class="keyword">sh</span> (常用)     </div><div class="line"><span class="number">2</span>.   <span class="keyword">source</span> ./subscript.<span class="keyword">sh</span></div></pre></td></tr></table></figure>
@@ -1272,7 +1273,7 @@
     <link href="https://roc-wong.github.io/blog/2017/03/shell-%E8%8E%B7%E5%8F%96%E6%AD%A3%E5%9C%A8%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84.html"/>
     <id>https://roc-wong.github.io/blog/2017/03/shell-获取正在执行脚本的绝对路径.html</id>
     <published>2017-03-26T13:25:23.000Z</published>
-    <updated>2017-03-26T13:45:13.000Z</updated>
+    <updated>2018-11-21T01:59:09.474Z</updated>
     
     <content type="html"><![CDATA[<p>今天在写脚本的时候，想获取下当前执行脚本的绝对路径，试了试pwd，发现并不是正确的路径。找资料后发现 pwd 命令的作用是“print name of current/working directory-当前的工作目录”。 试了试$0，发现也不对，$0是Bash环境下的特殊变量，其真实含义是：</p>
 <a id="more"></a>
@@ -1312,7 +1313,7 @@
     <link href="https://roc-wong.github.io/blog/2017/03/svn-status.html"/>
     <id>https://roc-wong.github.io/blog/2017/03/svn-status.html</id>
     <published>2017-03-26T13:07:54.000Z</published>
-    <updated>2018-01-11T02:04:49.595Z</updated>
+    <updated>2018-11-21T01:58:45.424Z</updated>
     
     <content type="html"><![CDATA[<h2 id="名称"><a href="#名称" class="headerlink" title="名称"></a>名称</h2><p>svn status (stat, st) — 打印工作副本文件和目录的状态。</p>
 <h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>svn status [PATH…]</p>
@@ -1392,7 +1393,7 @@
     <link href="https://roc-wong.github.io/blog/2017/03/%E8%82%A1%E7%A5%A8%E4%BC%B0%E5%80%BC.html"/>
     <id>https://roc-wong.github.io/blog/2017/03/股票估值.html</id>
     <published>2017-03-15T15:13:19.000Z</published>
-    <updated>2018-01-11T02:03:48.216Z</updated>
+    <updated>2018-11-21T01:59:41.859Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>格雷厄姆认为：“稳健投资者的基本原理是不会随着年代的更替而改变的，但是这些原理的应用，则必须随着金融机制和金融环境所发生的重大变化而作出相应的调整。”</p>
@@ -1462,7 +1463,7 @@
     <link href="https://roc-wong.github.io/blog/2017/03/%E5%9B%BD%E5%80%BA%E9%80%86%E5%9B%9E%E8%B4%AD.html"/>
     <id>https://roc-wong.github.io/blog/2017/03/国债逆回购.html</id>
     <published>2017-03-14T15:41:13.000Z</published>
-    <updated>2018-01-11T02:03:42.538Z</updated>
+    <updated>2018-11-21T01:59:51.560Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>Thinking will not overcome fear but action will.<br>空想终日惶恐，行动方可无惧。</p>
