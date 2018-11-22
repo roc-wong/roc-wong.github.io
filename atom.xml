@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://roc-wong.github.io/"/>
-  <updated>2018-11-21T02:18:42.950Z</updated>
+  <updated>2018-11-22T01:44:57.541Z</updated>
   <id>https://roc-wong.github.io/</id>
   
   <author>
@@ -14,6 +14,213 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RocketMQ at a glance</title>
+    <link href="https://roc-wong.github.io/blog/2018/11/RocketMQ-at-a-glance.html"/>
+    <id>https://roc-wong.github.io/blog/2018/11/RocketMQ-at-a-glance.html</id>
+    <published>2018-11-22T01:40:09.000Z</published>
+    <updated>2018-11-22T01:44:57.541Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><h3 id="1-1-Prerequisite"><a href="#1-1-Prerequisite" class="headerlink" title="1.1 Prerequisite"></a>1.1 Prerequisite</h3><p>64位操作系统，建议使用Linux / Unix /</p>
+<ul>
+<li>CentOs 7.3 +</li>
+<li>64bit JDK 1.8 +</li>
+<li>Maven 3.2.x +</li>
+</ul>
+<h3 id="1-2-Download-amp-Build-from-Release"><a href="#1-2-Download-amp-Build-from-Release" class="headerlink" title="1.2 Download &amp; Build from Release"></a>1.2 Download &amp; Build from Release</h3><p>Click <a href="https://www.apache.org/dyn/closer.cgi?path=rocketmq/4.3.0/rocketmq-all-4.3.0-source-release.zip" target="_blank" rel="external">here</a> to download the 4.3.0 source release. Also you could download a binary release from <a href="http://rocketmq.apache.org/release_notes/release-notes-4.3.0/" target="_blank" rel="external">here</a>.</p>
+<p>Build from source release:<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; unzip rocketmq-<span class="keyword">all</span>-<span class="number">4.3</span>.<span class="number">0</span>-<span class="keyword">source</span>-release.zip</div><div class="line">&gt; <span class="keyword">cd</span> rocketmq-<span class="keyword">all</span>-<span class="number">4.3</span>.<span class="number">0</span>/</div><div class="line">&gt; mvn -Prelease-<span class="keyword">all</span> -DskipTests clean install -U</div><div class="line">&gt; <span class="keyword">cd</span> distribution/target/apache-rocketmq</div></pre></td></tr></table></figure></p>
+<h3 id="1-3-Start-Name-Server"><a href="#1-3-Start-Name-Server" class="headerlink" title="1.3 Start Name Server"></a>1.3 Start Name Server</h3><p>Name Server 默认配置Xmx=4G，调整以适合部署：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">vi</span> /bin/runserver.sh</div><div class="line"></div><div class="line">JAVA_OPT=<span class="string">"<span class="variable">$&#123;JAVA_OPT&#125;</span> -server -Xms4g -Xmx4g -Xmn2g -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m"</span></div></pre></td></tr></table></figure>
+<p>调整为<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">JAVA_OPT</span>=<span class="string">"$&#123;JAVA_OPT&#125; -server -Xms1g -Xmx1g -Xmn512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m"</span></div></pre></td></tr></table></figure></p>
+<p><strong>启动Name Server</strong><br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">nohup sh bin/mqnamesrv &gt; <span class="meta-keyword">/dev/</span>null <span class="number">2</span>&gt;<span class="variable">&amp;1</span> &amp;</div><div class="line"></div><div class="line">tail -f ~<span class="meta-keyword">/logs/</span>rocketmqlogs/namesrv.log</div></pre></td></tr></table></figure></p>
+<h3 id="1-4-Start-Broker"><a href="#1-4-Start-Broker" class="headerlink" title="1.4 Start Broker"></a>1.4 Start Broker</h3><p>调整java opt：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">vi</span> /bin/runbroker.sh</div><div class="line"></div><div class="line">JAVA_OPT=<span class="string">"<span class="variable">$&#123;JAVA_OPT&#125;</span> -server -Xms8g -Xmx8g -Xmn4g"</span></div></pre></td></tr></table></figure>
+<p>调整为：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">JAVA_OPT</span>=<span class="string">"$&#123;JAVA_OPT&#125; -server -Xms2g -Xmx2g -Xmn1g"</span></div></pre></td></tr></table></figure></p>
+<p>启动Broker</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">nohup sh bin/mqbroker -n localhost:<span class="number">9876</span> &gt; <span class="meta-keyword">/dev/</span>null <span class="number">2</span>&gt;<span class="variable">&amp;1</span> &amp;</div><div class="line"></div><div class="line">tail -f ~<span class="meta-keyword">/logs/</span>rocketmqlogs/broker.log</div></pre></td></tr></table></figure>
+<p>或指定配置文件启动</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup <span class="keyword">sh</span> mqbroker -c <span class="variable">$ROCKETMQ_HOME</span>/<span class="keyword">conf</span>/broker.<span class="keyword">conf</span> &gt; /dev/null 2&gt;&amp;1 &amp;</div></pre></td></tr></table></figure>
+<h3 id="1-5-查看进程"><a href="#1-5-查看进程" class="headerlink" title="1.5 查看进程"></a>1.5 查看进程</h3><figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root<span class="symbol">@node1</span> apache-rocketmq]<span class="meta"># jps</span></div><div class="line"><span class="number">2374</span> BrokerStartup</div><div class="line"><span class="number">2350</span> NamesrvStartup</div></pre></td></tr></table></figure>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[root@node1 apache-rocketmq]<span class="comment"># netstat -ntlp</span></div><div class="line">Active Internet connections (only servers)</div><div class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name          </div><div class="line">tcp       <span class="number"> 0 </span>    <span class="number"> 0 </span>127.0.0.1:25            0.0.0.0:*               LISTEN      1508/master         </div><div class="line">tcp6      <span class="number"> 0 </span>    <span class="number"> 0 </span>:::9876                 :::*                    LISTEN      2350/java                    </div><div class="line">tcp6      <span class="number"> 0 </span>    <span class="number"> 0 </span>::1:25                  :::*                    LISTEN      1508/master         </div><div class="line">tcp6      <span class="number"> 0 </span>    <span class="number"> 0 </span>:::10909                :::*                    LISTEN      2374/java           </div><div class="line">tcp6      <span class="number"> 0 </span>    <span class="number"> 0 </span>:::10911                :::*                    LISTEN      2374/java           </div><div class="line">tcp6      <span class="number"> 0 </span>    <span class="number"> 0 </span>:::10912                :::*                    LISTEN      2374/java</div></pre></td></tr></table></figure>
+<h3 id="1-6-Send-amp-Receive-Messages"><a href="#1-6-Send-amp-Receive-Messages" class="headerlink" title="1.6 Send &amp; Receive Messages"></a>1.6 Send &amp; Receive Messages</h3><p>RocketMQ提供命令行工具便于快速测试：</p>
+<p>Before sending/receiving messages, we need to tell clients the location of name servers. RocketMQ provides multiple ways to achieve this. For simplicity, we use environment variable NAMESRV_ADDR</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; export NAMESRV_ADDR=localhost:<span class="number">9876</span></div><div class="line">&gt; <span class="keyword">sh </span><span class="keyword">bin/tools.sh </span><span class="keyword">org.apache.rocketmq.example.quickstart.Producer</span></div><div class="line"> SendResult [sendStatus=SEND_OK, msgId= ...</div><div class="line"></div><div class="line">&gt; <span class="keyword">sh </span><span class="keyword">bin/tools.sh </span><span class="keyword">org.apache.rocketmq.example.quickstart.Consumer</span></div><div class="line"> ConsumeMessageThread_%d Receive New Messages: [MessageExt...</div></pre></td></tr></table></figure>
+<h3 id="1-7-Shutdown-Servers"><a href="#1-7-Shutdown-Servers" class="headerlink" title="1.7 Shutdown Servers"></a>1.7 Shutdown Servers</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="keyword">sh </span><span class="keyword">bin/mqshutdown </span><span class="keyword">broker</span></div><div class="line">The mqbroker(<span class="number">2374</span>) is running...</div><div class="line">Send <span class="keyword">shutdown </span>request to mqbroker(<span class="number">2374</span>) OK</div><div class="line"></div><div class="line">&gt; <span class="keyword">sh </span><span class="keyword">bin/mqshutdown </span>namesrv</div><div class="line">The mqnamesrv(<span class="number">2350</span>) is running...</div><div class="line">Send <span class="keyword">shutdown </span>request to mqnamesrv(<span class="number">2350</span>) OK</div></pre></td></tr></table></figure>
+<h2 id="2-部署方案"><a href="#2-部署方案" class="headerlink" title="2. 部署方案"></a>2. 部署方案</h2><p>RocketMQ集群由NameServer和Broker两种角色组成，NameServer是无状态的可以横向部署多台达到消除单点的目的；Broker分多master、多master多slave同步、多master多slave异步这三种部署方案，一般生产环境都使用的是多master多slave异步这种方案，关于这三种方案的优缺点对比如下：</p>
+<h3 id="2-1-多Master模式（2m-noslave）"><a href="#2-1-多Master模式（2m-noslave）" class="headerlink" title="2.1 多Master模式（2m-noslave）"></a>2.1 多Master模式（2m-noslave）</h3><p>一个集群无Slave，全是Master，例如2个Master或者3个Master</p>
+<p>优点：配置简单，单个Master宕机或重启维护对应用无影响，在磁盘配置为RAID10时，即使机器宕机不可恢复情况下，由于RAID10磁盘非常可靠，消息也不会丢（异步刷盘丢失少量消息，同步刷盘一条不丢）。性能最高。</p>
+<p>缺点：单台机器宕机期间，这台机器上未被消费的消息在机器恢复之前不可订阅，消息实时性会受到受到影响。</p>
+<h3 id="2-2-多Master多Slave模式，异步复制（2m-2s-async）"><a href="#2-2-多Master多Slave模式，异步复制（2m-2s-async）" class="headerlink" title="2.2 多Master多Slave模式，异步复制（2m-2s-async）"></a>2.2 多Master多Slave模式，异步复制（2m-2s-async）</h3><p>每个Master配置一个Slave，有多对Master-Slave，HA采用异步复制方式，主备有短暂消息延迟，毫秒级。</p>
+<p>优点：即使磁盘损坏，消息丢失的非常少，且消息实时性不会受影响，因为Master宕机后，消费者仍然可以从Slave消费，此过程对应用透明。不需要人工干预。性能同多Master模式几乎一样。</p>
+<p>缺点：Master宕机，磁盘损坏情况，会丢失少量消息。</p>
+<h3 id="2-3-多Master多Slave模式，同步双写（2m-2s-sync）"><a href="#2-3-多Master多Slave模式，同步双写（2m-2s-sync）" class="headerlink" title="2.3 多Master多Slave模式，同步双写（2m-2s-sync）"></a>2.3 多Master多Slave模式，同步双写（2m-2s-sync）</h3><p>每个Master配置一个Slave，有多对Master-Slave，HA采用同步双写方式，主备都写成功，向应用返回成功。</p>
+<p>优点：数据与服务都无单点，Master宕机情况下，消息无延迟，服务可用性与数据可用性都非常高</p>
+<p>缺点：性能比异步复制模式略低，大约低10%左右，发送单个消息的RT会略高。目前主宕机后，备机不能自动切换为主机，后续会支持自动切换功能。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">部署方式</th>
+<th style="text-align:center">优点</th>
+<th style="text-align:center">缺点</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">单个Master模式</td>
+<td style="text-align:center">一旦Broker重启或者宕机时，会导致整个服务不可用，不建议线上环境使用；</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">多个Master模式</td>
+<td style="text-align:center">配置简单，单个Master宕机或重启维护对应用无影响，在磁盘配置为RAID10时，即使机器宕机不可恢复情况下，由于RAID10磁盘非常可靠，消息也不会丢（异步刷盘丢失少量消息，同步刷盘一条不丢），性能最高。</td>
+<td style="text-align:center">单台机器宕机期间，这台机器上未被消费的消息在机器恢复之前不可订阅，消息实时性会收到影响。</td>
+<td style="text-align:center">当使用多master无slave的集群搭建方式时，master的brokerRole配置必须为ASYNC_MASTER。如果配置为SYNC_MASTER，则producer发送消息时，返回值的SendStatus会一直是SLAVE_NOT_AVAILABLE。</td>
+</tr>
+<tr>
+<td style="text-align:center">多Master多Slave模式——异步复制</td>
+<td style="text-align:center">即使磁盘损坏，消息丢失的非常少，但消息实时性不会受影响，因为Master宕机后，消费者仍然可以从Slave消费，此过程对应用透明，不需要人工干预，性能同多Master模式几乎一样。</td>
+<td style="text-align:center">Master宕机，磁盘损坏情况，会丢失少量信息。</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">多Master多Slave模式——同步双写</td>
+<td style="text-align:center">数据与服务都无单点，Master宕机情况下，消息无延迟，服务可用性与数据可用性都非常高；</td>
+<td style="text-align:center">性能比异步复制模式稍低，大约低10%左右，发送单个消息的RT会稍高，目前主宕机后，备机不能自动切换为主机，后续会支持自动切换功能。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-常用命令"><a href="#3-常用命令" class="headerlink" title="3. 常用命令"></a>3. 常用命令</h2><h3 id="3-1-shmqadmin"><a href="#3-1-shmqadmin" class="headerlink" title="3.1 shmqadmin"></a>3.1 shmqadmin</h3><p>RocketMQ提供有控制台及一系列控制台命令，用于管理员对主题，集群，broker等信息的管理；</p>
+<p>首先进入RocketMQ工程，进入/RocketMQ/bin，在该目录下有个mqadmin脚本。</p>
+<p>查看帮助，在mqadmin下可以查看有哪些命令：<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">shmqadmin</span></div></pre></td></tr></table></figure></p>
+<p>查看具体命令的使用:<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">sh</span> mqadmin <span class="keyword">help</span> 命令名称</div></pre></td></tr></table></figure></p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 例如，查看updateTopic的使用</div><div class="line">sh mqadmin helpupdateTopic</div></pre></td></tr></table></figure>
+<h3 id="3-2-创建Topic"><a href="#3-2-创建Topic" class="headerlink" title="3.2 创建Topic"></a>3.2 创建Topic</h3><p>详见：<a href="https://blog.csdn.net/zhu_tianwei/article/details/40951301" target="_blank" rel="external">https://blog.csdn.net/zhu_tianwei/article/details/40951301</a></p>
+<h2 id="4-RocketMQ-Console"><a href="#4-RocketMQ-Console" class="headerlink" title="4. RocketMQ Console"></a>4. RocketMQ Console</h2><h3 id="4-1-Prerequisite"><a href="#4-1-Prerequisite" class="headerlink" title="4.1 Prerequisite"></a>4.1 Prerequisite</h3><p>Console下载地址：<a href="https://github.com/apache/rocketmq-externals/tree/master/rocketmq-console" target="_blank" rel="external">https://github.com/apache/rocketmq-externals/tree/master/rocketmq-console</a></p>
+<ul>
+<li>require java 1.7</li>
+<li>maven 3.2 + </li>
+</ul>
+<h3 id="4-2-Build-and-Run"><a href="#4-2-Build-and-Run" class="headerlink" title="4.2 Build and Run"></a>4.2 Build and Run</h3><p>修改rocketmq-console/src/main/resources/application.properties:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">server.port=<span class="number">8999</span></div><div class="line"></div><div class="line">rocketmq<span class="selector-class">.config</span><span class="selector-class">.namesrvAddr</span>=<span class="number">10.29</span>.<span class="number">181.16</span>:<span class="number">9876</span></div></pre></td></tr></table></figure>
+<p>进入rocketmq-console目录，执行：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mvn spring-boot:run</div><div class="line"></div><div class="line">or</div><div class="line"></div><div class="line">mvn clean package -Dmaven<span class="selector-class">.test</span><span class="selector-class">.skip</span>=true</div><div class="line">java -jar target/rocketmq-console-ng-<span class="number">1.0</span>.<span class="number">0</span><span class="selector-class">.jar</span></div><div class="line">Tips</div></pre></td></tr></table></figure>
+<blockquote>
+<p>if you download package slow,you can change maven’s mirror(maven’s settings.xml)<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span>        </div><div class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="5-FAQ"><a href="#5-FAQ" class="headerlink" title="5. FAQ"></a>5. FAQ</h2><h3 id="5-1-broker启动报错-runbroker-sh-line-62-126674-Killed-JAVA-JAVA-OPT"><a href="#5-1-broker启动报错-runbroker-sh-line-62-126674-Killed-JAVA-JAVA-OPT" class="headerlink" title="5.1 broker启动报错/runbroker.sh: line 62: 126674 Killed $JAVA ${JAVA_OPT} $@"></a>5.1 broker启动报错<code>/runbroker.sh: line 62: 126674 Killed $JAVA ${JAVA_OPT} $@</code></h3><p>runbroker.sh 默认参数：Xms=8G，机器可用内存无法支配时会产生该问题，全部改小即可解决。</p>
+<h3 id="5-2-com-alibaba-rocketmq-client-exception-MQClientException-No-route-info-of-this-topic-TopicTest1"><a href="#5-2-com-alibaba-rocketmq-client-exception-MQClientException-No-route-info-of-this-topic-TopicTest1" class="headerlink" title="5.2 com.alibaba.rocketmq.client.exception.MQClientException: No route info of this topic, TopicTest1"></a>5.2 <code>com.alibaba.rocketmq.client.exception.MQClientException: No route info of this topic, TopicTest1</code></h3><p>启动broker时，指定autoCreateTopicEnable=true，建议线上关闭<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup sh mqbroker -n <span class="string">localhost:</span><span class="number">9876</span> autoCreateTopicEnable=<span class="literal">true</span> &gt; <span class="regexp">/dev/</span><span class="literal">null</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp;</div></pre></td></tr></table></figure></p>
+<p>或在配置文件中设置<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup <span class="keyword">sh</span> mqbroker -c <span class="variable">$ROCKETMQ_HOME</span>/<span class="keyword">conf</span>/broker.<span class="keyword">conf</span> &gt; /dev/null 2&gt;&amp;1 &amp;</div></pre></td></tr></table></figure></p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="attr">brokerClusterName</span> = DefaultCluster</div><div class="line"><span class="attr">brokerName</span> = broker-a</div><div class="line"><span class="attr">brokerId</span> = <span class="number">0</span></div><div class="line"><span class="attr">brokerIP1</span> = <span class="number">10.29</span>.<span class="number">181.16</span></div><div class="line"><span class="attr">deleteWhen</span> = <span class="number">04</span></div><div class="line"><span class="attr">fileReservedTime</span> = <span class="number">48</span></div><div class="line"><span class="attr">brokerRole</span> = ASYNC_MASTER</div><div class="line"><span class="attr">flushDiskType</span> = ASYNC_FLUSH</div><div class="line"></div><div class="line"><span class="comment"># NameServer地址列表，多个nameServer地址用分号隔开</span></div><div class="line"><span class="attr">namesrvAddr</span> = <span class="number">10.29</span>.<span class="number">181.16</span>:<span class="number">9876</span></div><div class="line"></div><div class="line"><span class="attr">autoCreateTopicEnable</span> = <span class="literal">true</span></div></pre></td></tr></table></figure>
+<h3 id="5-3-org-apache-rocketmq-remoting-exception-RemotingConnectException-connect-to-lt-172-19-0-1-10909-gt-failed"><a href="#5-3-org-apache-rocketmq-remoting-exception-RemotingConnectException-connect-to-lt-172-19-0-1-10909-gt-failed" class="headerlink" title="5.3 org.apache.rocketmq.remoting.exception.RemotingConnectException: connect to &lt;172.19.0.1:10909&gt; failed"></a>5.3 <code>org.apache.rocketmq.remoting.exception.RemotingConnectException: connect to &lt;172.19.0.1:10909&gt; failed</code></h3><p>10.29.181.15服务器上有多个网卡，172.19.0.1 为docker0的虚拟网卡的IP，但是启动RocketMQ时并没有设置这个IP地址。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> Docker 服务启动后默认会创建一个 docker0 网桥（其上有一个 docker0 内部接口），它在内核层连通了其他的物理或虚拟网卡，这就将所有容器和本地主机都放到同一个物理网络。</div><div class="line"></div><div class="line">　　Docker 默认指定了 docker0 接口 的 <span class="built_in">IP</span> 地址和子网掩码，让主机和容器之间可以通过网桥相互通信，它还给出了 MTU（接口允许接收的最大传输单元），通常是 <span class="number">1500</span> <span class="keyword">Bytes，或宿主主机网络路由上支持的默认值。这些值都可以在服务启动的时候进行配置。</span></div><div class="line"></div><div class="line">可以用编辑/etc/docker/daemon.json文件，添加内容 <span class="string">"bip"</span>: <span class="string">"ip/netmask"</span> [ 切勿与宿主机同网段 ]</div></pre></td></tr></table></figure>
+<p><a href="http://rocketmq.apache.org/docs/rmq-deployment/" target="_blank" rel="external">RocketMQ 官方broker配置</a>：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数名</th>
+<th style="text-align:center">默认值</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">brokerIP1</td>
+<td style="text-align:center">本机IP</td>
+<td style="text-align:center">本机ip地址，默认系统自动识别，但是某些多网卡机器会存在识别错误的情况，这种情况下可以人工配置</td>
+</tr>
+</tbody>
+</table>
+<p>解决办法：</p>
+<ol>
+<li>把不需要的网卡全部禁用，只留下有效的网卡，这样Broker不会生成奇怪的代理地址。</li>
+<li>在<code>broker.properties</code>中设置<code>brokerIP1=10.29.181.16</code></li>
+</ol>
+<h3 id="5-4-No-route-info-of-this-topic"><a href="#5-4-No-route-info-of-this-topic" class="headerlink" title="5.4  No route info of this topic"></a>5.4  <code>No route info of this topic</code></h3><p>产生<code>No route info of this topic</code>异常原因可能有如下几种：</p>
+<ul>
+<li>1&gt; Broker禁止自动创建Topic，且用户没有通过手工方式创建Topic。</li>
+</ul>
+<p>启动borker时指定<code>autoCreateTopicEnable=true</code></p>
+<ul>
+<li>2&gt; Broker未连接到Name Server</li>
+</ul>
+<p>查看broker的启动日志：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">2018<span class="selector-tag">-09-13</span> 16<span class="selector-pseudo">:21</span><span class="selector-pseudo">:35</span> <span class="selector-tag">INFO</span> <span class="selector-tag">BrokerControllerScheduledThread1</span> <span class="selector-tag">-</span> <span class="selector-tag">register</span> <span class="selector-tag">broker</span> <span class="selector-tag">to</span> <span class="selector-tag">name</span> <span class="selector-tag">server</span> 10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.16</span><span class="selector-pseudo">:9876</span> <span class="selector-tag">OK</span></div><div class="line">2018<span class="selector-tag">-09-13</span> 16<span class="selector-pseudo">:22</span><span class="selector-pseudo">:05</span> <span class="selector-tag">INFO</span> <span class="selector-tag">BrokerControllerScheduledThread1</span> <span class="selector-tag">-</span> <span class="selector-tag">register</span> <span class="selector-tag">broker</span> <span class="selector-tag">to</span> <span class="selector-tag">name</span> <span class="selector-tag">server</span> 10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.16</span><span class="selector-pseudo">:9876</span> <span class="selector-tag">OK</span></div></pre></td></tr></table></figure></p>
+<p>说明broker已经成功连接到Name Server.</p>
+<p>或执行<code>sh mqadmin clusterList -n localhost:9876</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#Cluster</span> <span class="selector-tag">Name</span>     <span class="selector-id">#Broker</span> <span class="selector-tag">Name</span>            <span class="selector-id">#BID</span>  <span class="selector-id">#Addr</span>                  <span class="selector-id">#Version</span>                <span class="selector-id">#InTPS</span>(<span class="selector-tag">LOAD</span>)       <span class="selector-id">#OutTPS</span>(<span class="selector-tag">LOAD</span>) <span class="selector-id">#PCWait</span>(<span class="selector-tag">ms</span>) <span class="selector-id">#Hour</span> <span class="selector-id">#SPACE</span></div><div class="line"><span class="selector-tag">DefaultCluster</span>    <span class="selector-tag">DEFAULT_BROKER</span>          0     10<span class="selector-class">.29</span><span class="selector-class">.181</span><span class="selector-class">.16</span><span class="selector-pseudo">:10911</span>  <span class="selector-tag">V4_2_0_SNAPSHOT</span>          0<span class="selector-class">.00</span>(0,0<span class="selector-tag">ms</span>)         0<span class="selector-class">.00</span>(0,0<span class="selector-tag">ms</span>)          0 422168<span class="selector-class">.55</span> <span class="selector-tag">-1</span><span class="selector-class">.0000</span></div></pre></td></tr></table></figure>
+<ul>
+<li>3&gt; Producer未连接到Name Server </li>
+</ul>
+<p>关闭防火墙：<code>systemctl stop firewalld.service</code>，再做重试。</p>
+<h3 id="5-5-The-producer-service-state-not-OK-CREATE-JUST"><a href="#5-5-The-producer-service-state-not-OK-CREATE-JUST" class="headerlink" title="5.5 The producer service state not OK, CREATE_JUST"></a>5.5 <code>The producer service state not OK, CREATE_JUST</code></h3><p>检查是否调用：<code>producer.start();</code></p>
+<h2 id="6-术语"><a href="#6-术语" class="headerlink" title="6 术语"></a>6 术语</h2><h3 id="6-1-Disk-Flush（磁盘刷新-同步操作）"><a href="#6-1-Disk-Flush（磁盘刷新-同步操作）" class="headerlink" title="6.1 Disk Flush（磁盘刷新/同步操作）"></a>6.1 Disk Flush（磁盘刷新/同步操作）</h3><p>将内存的数据落地，存储在磁盘中，RocketMQ提供了以下两种模式：</p>
+<ul>
+<li>SYNC_FLUSH（同步刷盘）：生产者发送的每一条消息都在保存到磁盘成功后才返回告诉生产者成功。这种方式不会存在消息丢失的问题，但是有很大的磁盘IO开销，性能有一定影响。</li>
+<li>ASYNC_FLUSH（异步刷盘）：生产者发送的每一条消息并不是立即保存到磁盘，而是暂时缓存起来，然后就返回生产者成功。随后再异步的将缓存数据保存到磁盘，有两种情况：1是定期将缓存中更新的数据进行刷盘，2是当缓存中更新的数据条数达到某一设定值后进行刷盘。这种方式会存在消息丢失（在还未来得及同步到磁盘的时候宕机），但是性能很好。默认是这种模式。</li>
+</ul>
+<h3 id="6-2-Broker-Replication（Broker间数据同步-复制）"><a href="#6-2-Broker-Replication（Broker间数据同步-复制）" class="headerlink" title="6.2 Broker Replication（Broker间数据同步/复制）"></a>6.2 Broker Replication（Broker间数据同步/复制）</h3><p>集群环境下需要部署多个Broker，Broker分为两种角色：一种是master，即可以写也可以读，其brokerId=0，只能有一个；另外一种是slave，只允许读，其brokerId为非0。一个master与多个slave通过指定相同的brokerName被归为一个broker set（broker集）。通常生产环境中，我们至少需要2个broker set。Broker Replication只的就是slave获取或者是复制master的数据。</p>
+<ul>
+<li>Sync Broker：生产者发送的每一条消息都至少同步复制到一个slave后才返回告诉生产者成功，即“同步双写”。</li>
+<li>Async Broker：生产者发送的每一条消息只要写入master就返回告诉生产者成功。然后再“异步复制”到slave。</li>
+</ul>
+<p>推荐的几种Broker集群方式：（官网提供了下面几种集群方式的配置文件供参考，在$ROCKETMQ_HOME/target/apache-rocketmq-all/conf目录下）</p>
+<ul>
+<li>2m-2s-sync：两主两从同步双写（两个master，两个slave，数据同步双写到master和slave）</li>
+<li>2m-2s-async：两主两从异步复制（两个master，两个slave，master数据通过异步复制到slave）</li>
+<li>2m-noslave：两主（只有两个master，没有slave）</li>
+</ul>
+<blockquote>
+<p>注意：<br>1、上述“2”只是说作为一个集群的最低配置数量，可以根据实际情况扩展。<br>2、所有的刷盘（Dish Flush）操作全部默认为：ASYNC_FLUSH（异步刷盘）。</p>
+</blockquote>
+<p>Name Server集群：Name Server集群比较简单，只要部署多个实例就行了，多个实例间不需要进行数据共享，只要保证一个实例存活就可以正常运转。</p>
+<h3 id="6-3-核心概念"><a href="#6-3-核心概念" class="headerlink" title="6.3 核心概念"></a>6.3 核心概念</h3><ul>
+<li><p>生产者（Producer）：消息发送方，将业务系统中产生的消息发送到brokers（brokers可以理解为消息代理，生产者和消费者之间是通过brokers进行消息的通信），rocketmq提供了以下消息发送方式：同步、异步、单向。</p>
+</li>
+<li><p>生产者组（Producer Group）：相同角色的生产者被归为同一组，比如通常情况下一个服务会部署多个实例，这多个实例就是一个组，生产者分组的作用只体现在消息回查的时候，即如果一个生产者组中的一个生产者实例发送一个事务消息到broker后挂掉了，那么broker会回查此实例所在组的其他实例，从而进行消息的提交或回滚操作。</p>
+</li>
+<li><p>消费者（Consumer）：消息消费方，从brokers拉取消息。站在用户的角度，有以下两种消费者。</p>
+<ul>
+<li>主动消费者（PullConsumer）：从brokers拉取消息并消费。</li>
+<li>被动消费者（PushConsumer）：内部也是通过pull方式获取消息，只是进行了扩展和封装，并给用户预留了一个回调接口去实现，当消息到底的时候会执行用户自定义的回调接口。</li>
+</ul>
+</li>
+<li><p>消费者组（Consumer Group）：和生产者组类似。其作用体现在实现消费者的负载均衡和容错，有了消费者组变得异常容易。需要注意的是：同一个消费者组的每个消费者实例订阅的主题必须相同。</p>
+</li>
+<li><p>主题（Topic）：主题就是消息传递的类型。一个生产者实例可以发送消息到多个主题，多个生产者实例也可以发送消息到同一个主题。同样的，对于消费者端来说，一个消费者组可以订阅多个主题的消息，一个主题的消息也可以被多个消费者组订阅。</p>
+</li>
+<li><p>消息（Message）：消息就像是你传递信息的信封。每个消息必须指定一个主题，就好比每个信封上都必须写明收件人。</p>
+</li>
+<li><p>消息队列（Message Queues）：在主题内部，逻辑划分了多个子主题，每个子主题被称为消息队列。这个概念在实现最大并发数、故障切换等功能上有巨大的作用。</p>
+</li>
+<li><p>标签（Tag）：标签，可以被认为是子主题。通常用于区分同一个主题下的不同作用或者说不同业务的消息。同时也是避免主题定义过多引起性能问题，通常情况下一个生产者组只向一个主题发送消息，其中不同业务的消息通过标签或者说子主题来区分。</p>
+</li>
+<li><p>消息代理（Broker）：消息代理是RockerMQ中很重要的角色。它接收生产者发送的消息，进行消息存储，为消费者拉取消息服务。它还存储消息消耗相关的元数据，包括消费群体，消费进度偏移和主题/队列信息。</p>
+</li>
+<li><p>命名服务（Name Server）：命名服务作为路由信息提供程序。生产者/消费者进行主题查找、消息代理查找、读取/写入消息都需要通过命名服务获取路由信息。</p>
+</li>
+<li><p>消息顺序（Message Order）：当我们使用DefaultMQPushConsumer时，我们可以选择使用“orderly”还是“concurrently”。</p>
+<ul>
+<li>orderly：消费消息的有序化意味着消息被生产者按照每个消息队列发送的顺序消费。如果您正在处理全局顺序为强制的场景，请确保您使用的主题只有一个消息队列。注意：如果指定了消费顺序，则消息消费的最大并发性是消费组订阅的消息队列数。</li>
+<li>concurrently：当同时消费时，消息消费的最大并发仅限于为每个消费客户端指定的线程池。注意：此模式不再保证消息顺序。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      Apache RocketMQ™ is an open source distributed messaging and streaming data platform.
+    
+    </summary>
+    
+      <category term="RocketMQ" scheme="https://roc-wong.github.io/categories/RocketMQ/"/>
+    
+    
+      <category term="RocketMQ" scheme="https://roc-wong.github.io/tags/RocketMQ/"/>
+    
+  </entry>
   
   <entry>
     <title>eureka dns cluster</title>
@@ -1455,260 +1662,6 @@
     
     
       <category term="人生感悟" scheme="https://roc-wong.github.io/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>国债逆回购</title>
-    <link href="https://roc-wong.github.io/blog/2017/03/%E5%9B%BD%E5%80%BA%E9%80%86%E5%9B%9E%E8%B4%AD.html"/>
-    <id>https://roc-wong.github.io/blog/2017/03/国债逆回购.html</id>
-    <published>2017-03-14T15:41:13.000Z</published>
-    <updated>2018-11-21T02:16:42.278Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>Thinking will not overcome fear but action will.<br>空想终日惶恐，行动方可无惧。</p>
-</blockquote>
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>国债逆回购，就是将资金通过国债回购市场拆出，其实就是一种短期贷款，即你把钱借给别人，获得固定利息;而别人用国债作抵押，到期还本付息。<br>国债逆回购业务是能为投资者提高闲置资金增值能力的金融品种，它具有安全性高、流通性强、收益理想等特点，等同于国债。</p>
-<a id="more"></a>
-<h2 id="债券回购交易的实质是？"><a href="#债券回购交易的实质是？" class="headerlink" title="债券回购交易的实质是？"></a>债券回购交易的实质是？</h2><p>逆回购就是客户放弃一定时间内的资金使用权，在约定时间内按成交时确定的利率获取利息收入的一种投资品种。</p>
-<hr>
-<p>债券回购是指交易双方进行的以债券为权利质押的一种短期资金融通业务。资金融入方（正回购方）在将债券质押给资金融出方（逆回购方）以融入资金的同时，双方约定在将来某一日期由正回购方按约定回购利率计算的金额向逆回购方买回相等数量的同品种债券的交易行为。债券回购的最长期限为1年，利率由双方协商确定。</p>
-<hr>
-<p>这当中卖方的目的在于获得高于银行存款利息收入，而买方的目的在于获得资金的使用权。一笔回购交易涉及二次交易契约行为，即开始时的初始交易及回购期满时的回购交易。买卖双方的具体操作程序如下：债券回购交易申报中，融资方（债券持有者）按“买入”予以申报，融券方（资金持有者）按“卖出”予以申报。到期反向成交时，无须再行申报，由交易所电脑系统自动产生一条反向成交记录，登记结算机构据此进行资金和债券的清算与交割。</p>
-<hr>
-<p>国债逆回购本质上就是一个机构借钱给另一个机构（银行，保险等）。原本国家规定是机构间的拆借，不允许个人参与，不知道什么时候开始个人也可以参加了。什么时候机构需要临时借钱？目前来看一般是每季度末1－2天，银行需要借钱美化信贷指标；大蓝筹发行前一日。</p>
-<h2 id="是否有风险？"><a href="#是否有风险？" class="headerlink" title="是否有风险？"></a>是否有风险？</h2><p>与股票交易不同，债券回购在成交之后不再承担价格波动的风险，收益率的高低在成交时确定。因此基本无价格波动风险。</p>
-<h2 id="适合哪些人买？"><a href="#适合哪些人买？" class="headerlink" title="适合哪些人买？"></a>适合哪些人买？</h2><ol>
-<li>有理财需求的人</li>
-<li>钱放银行拿死利息的人</li>
-<li>炒股的人</li>
-<li>做生意的流动资金</li>
-<li>家中的闲置资金</li>
-</ol>
-<h2 id="申报规则"><a href="#申报规则" class="headerlink" title="申报规则"></a>申报规则</h2><p>上海回购交易的申报数量必须为100手（10万资金）的整数倍，单笔数量不超过1万手（1000万资金）；回购价格为每百元资金到期的年收益率，最小变动单位为0.005元。</p>
-<p>深圳回购交易的申报数量必须为1手的整数倍（1000元），回购价格为每百元资金到期的年收益率，最小变动单位为0.001元。</p>
-<h2 id="回购买入的最佳时间是？"><a href="#回购买入的最佳时间是？" class="headerlink" title="回购买入的最佳时间是？"></a>回购买入的最佳时间是？</h2><ol>
-<li>一般2点半之后临近收盘下单量往往会大增，从而导致价格走低。</li>
-<li>一般星期四、月末、季度末、年末，市场资金面紧张价格通常很高。</li>
-<li>重要节假日前两天，1日回购品种价格通常较高。</li>
-<li>周五3日品种一般比1日品种总收益高。</li>
-<li>如果其间有节假日，长期品种一般比短期品种总收益高。</li>
-<li>单日内一般9：30-10：00、14：00-14：30收益率最高。</li>
-</ol>
-<blockquote>
-<p>从以往的规律和盘面表现看，每日下午2时30分之前利率较高; 每周四相比平日利率要高;节假日前利率尤其高。</p>
-</blockquote>
-<h2 id="投资品种"><a href="#投资品种" class="headerlink" title="投资品种"></a>投资品种</h2><p>投资者要进行回购只能做沪市2040**、深1318***的新国债回购，共18个品种。</p>
-<blockquote>
-<p>上交所回购品种</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">品种</th>
-<th style="text-align:right">代码</th>
-<th style="text-align:center">简称</th>
-<th style="text-align:center">到账时间</th>
-<th style="text-align:center">可用时间</th>
-<th style="text-align:center">手续费比例</th>
-<th style="text-align:center">每10万元交易手续费(元)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1天国债回购</td>
-<td style="text-align:right">204001</td>
-<td style="text-align:center">GC001</td>
-<td style="text-align:center">T + 1</td>
-<td style="text-align:center">T + 2</td>
-<td style="text-align:center">成交金额的0.001%</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">2天国债回购</td>
-<td style="text-align:right">204002</td>
-<td style="text-align:center">GC002</td>
-<td style="text-align:center">T + 2</td>
-<td style="text-align:center">T + 3</td>
-<td style="text-align:center">成交金额的0.002%</td>
-<td style="text-align:center">2</td>
-</tr>
-<tr>
-<td style="text-align:center">3天国债回购</td>
-<td style="text-align:right">204003</td>
-<td style="text-align:center">GC003</td>
-<td style="text-align:center">T + 3</td>
-<td style="text-align:center">T + 4</td>
-<td style="text-align:center">成交金额的0.003%</td>
-<td style="text-align:center">3</td>
-</tr>
-<tr>
-<td style="text-align:center">4天国债回购</td>
-<td style="text-align:right">204004</td>
-<td style="text-align:center">GC004</td>
-<td style="text-align:center">T + 4</td>
-<td style="text-align:center">T + 5</td>
-<td style="text-align:center">成交金额的0.004%</td>
-<td style="text-align:center">4</td>
-</tr>
-<tr>
-<td style="text-align:center">7天国债回购</td>
-<td style="text-align:right">204007</td>
-<td style="text-align:center">GC007</td>
-<td style="text-align:center">T + 7</td>
-<td style="text-align:center">T + 8</td>
-<td style="text-align:center">成交金额的0.005%</td>
-<td style="text-align:center">5</td>
-</tr>
-<tr>
-<td style="text-align:center">14天国债回购</td>
-<td style="text-align:right">204014</td>
-<td style="text-align:center">GC014</td>
-<td style="text-align:center">T + 14</td>
-<td style="text-align:center">T + 15</td>
-<td style="text-align:center">成交金额的0.010%</td>
-<td style="text-align:center">10</td>
-</tr>
-<tr>
-<td style="text-align:center">28天国债回购</td>
-<td style="text-align:right">204028</td>
-<td style="text-align:center">GC028</td>
-<td style="text-align:center">T + 28</td>
-<td style="text-align:center">T + 29</td>
-<td style="text-align:center">成交金额的0.020%</td>
-<td style="text-align:center">20</td>
-</tr>
-<tr>
-<td style="text-align:center">91天国债回购</td>
-<td style="text-align:right">204091</td>
-<td style="text-align:center">GC091</td>
-<td style="text-align:center">T + 91</td>
-<td style="text-align:center">T + 92</td>
-<td style="text-align:center">成交金额的0.030%</td>
-<td style="text-align:center">30</td>
-</tr>
-<tr>
-<td style="text-align:center">182天国债回购</td>
-<td style="text-align:right">204182</td>
-<td style="text-align:center">GC182</td>
-<td style="text-align:center">T + 182</td>
-<td style="text-align:center">T + 183</td>
-<td style="text-align:center">成交金额的0.030%</td>
-<td style="text-align:center">30</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>深交所回购品种</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">品种</th>
-<th style="text-align:right">代码</th>
-<th style="text-align:center">简称</th>
-<th style="text-align:center">到账时间</th>
-<th style="text-align:center">可用时间</th>
-<th style="text-align:center">手续费比例</th>
-<th style="text-align:center">每10万元交易手续费(元)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1天国债回购</td>
-<td style="text-align:right">131810</td>
-<td style="text-align:center">R-00l</td>
-<td style="text-align:center">T + 1</td>
-<td style="text-align:center">T + 2</td>
-<td style="text-align:center">成交金额的0.001%</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">2天国债回购</td>
-<td style="text-align:right">1318ll</td>
-<td style="text-align:center">R-002</td>
-<td style="text-align:center">T + 2</td>
-<td style="text-align:center">T + 3</td>
-<td style="text-align:center">成交金额的0.002%</td>
-<td style="text-align:center">2</td>
-</tr>
-<tr>
-<td style="text-align:center">3天国债回购</td>
-<td style="text-align:right">131800</td>
-<td style="text-align:center">R-003</td>
-<td style="text-align:center">T + 3</td>
-<td style="text-align:center">T + 4</td>
-<td style="text-align:center">成交金额的0.003%</td>
-<td style="text-align:center">3</td>
-</tr>
-<tr>
-<td style="text-align:center">4天国债回购</td>
-<td style="text-align:right">131809</td>
-<td style="text-align:center">R-004</td>
-<td style="text-align:center">T + 4</td>
-<td style="text-align:center">T + 5</td>
-<td style="text-align:center">成交金额的0.004%</td>
-<td style="text-align:center">4</td>
-</tr>
-<tr>
-<td style="text-align:center">7天国债回购</td>
-<td style="text-align:right">131801</td>
-<td style="text-align:center">R-007</td>
-<td style="text-align:center">T + 7</td>
-<td style="text-align:center">T + 8</td>
-<td style="text-align:center">成交金额的0.005%</td>
-<td style="text-align:center">5</td>
-</tr>
-<tr>
-<td style="text-align:center">14天国债回购</td>
-<td style="text-align:right">131802</td>
-<td style="text-align:center">R-014</td>
-<td style="text-align:center">T + 14</td>
-<td style="text-align:center">T + 15</td>
-<td style="text-align:center">成交金额的0.010%</td>
-<td style="text-align:center">10</td>
-</tr>
-<tr>
-<td style="text-align:center">28天国债回购</td>
-<td style="text-align:right">131803</td>
-<td style="text-align:center">R-028</td>
-<td style="text-align:center">T + 28</td>
-<td style="text-align:center">T + 29</td>
-<td style="text-align:center">成交金额的0.020%</td>
-<td style="text-align:center">20</td>
-</tr>
-<tr>
-<td style="text-align:center">91天国债回购</td>
-<td style="text-align:right">131805</td>
-<td style="text-align:center">R-091</td>
-<td style="text-align:center">T + 91</td>
-<td style="text-align:center">T + 92</td>
-<td style="text-align:center">成交金额的0.030%</td>
-<td style="text-align:center">30</td>
-</tr>
-<tr>
-<td style="text-align:center">182天国债回购</td>
-<td style="text-align:right">131806</td>
-<td style="text-align:center">R-182</td>
-<td style="text-align:center">T + 182</td>
-<td style="text-align:center">T + 183</td>
-<td style="text-align:center">成交金额的0.030%</td>
-<td style="text-align:center">30</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-    
-    <summary type="html">
-    
-      国债逆回购，就是将资金通过国债回购市场拆出，其实就是一种短期贷款，即你把钱借给别人，获得固定利息;而别人用国债作抵押，到期还本付息。
-    
-    </summary>
-    
-      <category term="证券" scheme="https://roc-wong.github.io/categories/%E8%AF%81%E5%88%B8/"/>
-    
-    
-      <category term="证券" scheme="https://roc-wong.github.io/tags/%E8%AF%81%E5%88%B8/"/>
     
   </entry>
   
